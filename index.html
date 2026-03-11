@@ -331,9 +331,12 @@
       margin-bottom: 28px;
     }
 
+    /* Inner section boxes – match Client Intake Summary exactly */
     .summary-panel {
+      font-family: var(--font-body);
       background: var(--gray-50);
       border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--gold);
       border-radius: var(--radius-sm);
       padding: 20px 22px;
     }
@@ -355,18 +358,23 @@
       border-bottom: 2px solid var(--gold);
     }
 
-    .summary-panel-content,
-    .summary-section-box {
+    .summary-panel-content {
+      font-family: var(--font-body);
       font-size: 14px;
       color: var(--gray-800);
       line-height: 1.6;
     }
 
     .summary-section-box {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--gray-800);
+      line-height: 1.6;
       background: var(--gray-50);
       border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--gold);
       border-radius: var(--radius-sm);
-      padding: 16px 20px;
+      padding: 20px 22px;
     }
 
     .summary-section { margin-bottom: 24px; }
@@ -685,17 +693,19 @@
       cursor: not-allowed;
     }
 
-    /* ==================== FORM ELEMENTS (match Client Intake Summary panels) ==================== */
+    /* ==================== FORM ELEMENTS (match Client Intake Summary – same design system) ==================== */
     .form-group {
-      margin-bottom: 26px;
+      margin-bottom: 22px;
     }
+
+    .form-group:last-child { margin-bottom: 0; }
 
     .form-label {
       display: block;
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 700;
-      color: #2f3d50;
+      color: var(--gray-500);
       margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -703,16 +713,16 @@
 
     .form-input {
       width: 100%;
-      padding: 16px 20px;
+      padding: 14px 18px;
       border: 1px solid var(--gray-200);
       border-radius: var(--radius-sm);
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       color: var(--gray-800);
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      background: var(--gray-50);
-      line-height: 1.5;
+      background: var(--white);
+      line-height: 1.6;
     }
 
     .form-input:focus {
@@ -723,7 +733,7 @@
 
     .form-input::placeholder {
       color: var(--gray-400);
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .form-input:disabled {
@@ -740,31 +750,32 @@
 
     .form-select {
       width: 100%;
-      padding: 16px 20px;
+      padding: 14px 18px;
       padding-right: 44px;
       border: 1px solid var(--gray-200);
       border-radius: var(--radius-sm);
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       color: var(--gray-800);
-      background: var(--gray-50);
+      background: var(--white);
       cursor: pointer;
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 20px center;
+      background-position: right 18px center;
     }
 
     .form-select-multiple {
-      padding: 16px 20px;
-      padding-right: 20px;
-      background: var(--gray-50);
+      padding: 14px 18px;
+      padding-right: 18px;
+      background: var(--white);
       border: 1px solid var(--gray-200);
       border-radius: var(--radius-sm);
       background-image: none;
       min-height: 140px;
-      font-size: 15px;
+      font-family: var(--font-body);
+      font-size: 14px;
       color: var(--gray-800);
     }
 
@@ -786,17 +797,17 @@
 
     .form-textarea {
       width: 100%;
-      padding: 16px 20px;
+      padding: 14px 18px;
       border: 1px solid var(--gray-200);
       border-radius: var(--radius-sm);
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       color: var(--gray-800);
-      background: var(--gray-50);
+      background: var(--white);
       min-height: 120px;
       resize: vertical;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .form-textarea:focus {
@@ -809,12 +820,12 @@
       display: flex;
       align-items: flex-start;
       gap: 16px;
-      padding: 22px 24px;
+      padding: 20px 22px;
       background: var(--gray-50);
-      border-radius: 8px;
-      margin-bottom: 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 18px;
       border: 1px solid var(--gray-200);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      border-left: 4px solid var(--gold);
     }
 
     .form-checkbox {
@@ -827,15 +838,18 @@
 
     .form-checkbox-content strong {
       display: block;
-      font-size: 15px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
       color: var(--gray-800);
       margin-bottom: 4px;
     }
 
     .form-checkbox-content span {
+      font-family: var(--font-body);
       font-size: 14px;
-      color: var(--gray-600);
-      line-height: 1.55;
+      color: var(--gray-800);
+      line-height: 1.6;
     }
 
     /* ==================== INTAKE WIZARD STEPS ==================== */
