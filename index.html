@@ -121,12 +121,11 @@
     }
 
     .progress-steps {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 720px;
       margin: 0 auto;
-      flex-wrap: wrap;
     }
 
     .progress-step {
@@ -837,6 +836,10 @@
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
       margin-bottom: 36px;
+    }
+
+    .documentation-integrity-cards {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .oversight-card {
@@ -1683,7 +1686,7 @@
       <div class="card">
         <div class="card-header">
           <h1>Client Login</h1>
-          <p>Secure access to your C.A.R.E. portal</p>
+          <p>Secure access to your Reconcile C.A.R.E. portal</p>
         </div>
         <div class="card-body">
           <div class="info-box info-box-orange">
@@ -1705,9 +1708,56 @@
           
           <div style="text-align: center; color: var(--gray-400); margin-bottom: 16px; font-size: 13px;">— or —</div>
           
-          <button class="btn btn-orange btn-block btn-lg" onclick="goToScreen('screen-intake-1')">
+          <button class="btn btn-orange btn-block btn-lg" onclick="goToScreen('screen-client-authorization')">
             Continue as New Client →
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 2B: REQUIRED AUTHORIZATIONS ==================== -->
+  <div class="screen" id="screen-client-authorization" data-step="2">
+    <div class="container container-narrow">
+      <div class="card">
+        <div class="card-header">
+          <h1>Required Authorizations</h1>
+          <p>You must accept both authorizations to continue</p>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">1. Consent to receive services from Reconcile Care Management Services (RCMS)</label>
+            <div style="display: flex; gap: 24px; margin-top: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="auth-rcms-services" value="yes" id="auth-rcms-yes" checked onchange="checkAuthorizations()">
+                <span>Yes</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="auth-rcms-services" value="no" id="auth-rcms-no" onchange="checkAuthorizations()">
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">2. Consent for RCMS to release collected PHI/PII to your attorney</label>
+            <div style="display: flex; gap: 24px; margin-top: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="auth-phi-release" value="yes" id="auth-phi-yes" checked onchange="checkAuthorizations()">
+                <span>Yes</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="auth-phi-release" value="no" id="auth-phi-no" onchange="checkAuthorizations()">
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+          <div id="auth-contact-message" style="display: none; background: var(--gray-50); border-left: 4px solid var(--error); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 20px; font-size: 14px; color: var(--gray-800);">
+            Please contact your legal representative.
+          </div>
+          <div style="display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline" onclick="goToScreen('screen-client-login')">← Back</button>
+            <button type="button" class="btn btn-primary btn-lg" id="btn-continue-to-intake" disabled onclick="goToScreen('screen-intake-1')">Continue to Intake →</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2732,44 +2782,6 @@
             </div>
           </div>
 
-          <div class="section-header mt-8">
-            <div class="section-title">The 10-Vs of Care Management™</div>
-            <div class="section-subtitle">Our proprietary framework guiding every RN assessment</div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 36px;">
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V1:</strong> Verify Identity
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V2:</strong> Validate Injury
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V3:</strong> Verify Providers
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V4:</strong> Validate Treatment
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V5:</strong> Verify Compliance
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V6:</strong> Validate Progress
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V7:</strong> Verify Documentation
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V8:</strong> Validate Barriers
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V9:</strong> Verify Communication
-            </div>
-            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">V10:</strong> Validate Outcomes
-            </div>
-          </div>
-
           <div class="text-center">
             <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-care-plan')">
               View Sample RN Care Plan →
@@ -2978,7 +2990,7 @@
             </div>
           </div>
 
-          <div class="oversight-grid">
+          <div class="oversight-grid documentation-integrity-cards">
             <div class="oversight-card">
               <div class="oversight-icon">📝</div>
               <div class="oversight-title">Structured Intake</div>
@@ -3114,6 +3126,12 @@
           </div>
 
           <div class="resource-grid">
+            <div class="resource-card" id="resource-attorney-pdf">
+              <div class="resource-icon">📄</div>
+              <div class="resource-title">Attorney Overview (PDF)</div>
+              <div class="resource-desc">Platform overview and clinical methodology</div>
+              <a href="#" class="resource-badge" id="attorney-pdf-link" data-pdf-placeholder="Set href to attorney PDF path when file is available" style="text-decoration: none; color: inherit;">Download PDF</a>
+            </div>
             <div class="resource-card">
               <div class="resource-icon">📘</div>
               <div class="resource-title">Attorney Onboarding Guide</div>
@@ -3237,7 +3255,7 @@
 
       <p class="text-center text-sm mt-8" style="color: var(--gray-100);">
         © Reconcile Care Management Services<br>
-        <span style="font-size: 11px;">4Ps of Wellness™ | 10-Vs of Care Management™ | 7 Rights of Injury Management™</span>
+        <span style="font-size: 11px;">4Ps of Wellness™ | 7 Rights of Injury Management™</span>
       </p>
     </div>
   </div>
@@ -3259,6 +3277,7 @@
     const screens = [
       { id: 'screen-intro', step: 1, label: 'Introduction' },
       { id: 'screen-client-login', step: 2, label: 'Client Login' },
+      { id: 'screen-client-authorization', step: 2, label: 'Authorizations' },
       { id: 'screen-intake-1', step: 3, label: 'Client Intake' },
       { id: 'screen-intake-2', step: 3, label: 'Client Intake' },
       { id: 'screen-intake-3', step: 3, label: 'Client Intake' },
@@ -3287,8 +3306,19 @@
       painLevel: '7'
     };
 
+    function checkAuthorizations() {
+      const rcmsYes = document.getElementById('auth-rcms-yes')?.checked;
+      const phiYes = document.getElementById('auth-phi-yes')?.checked;
+      const msg = document.getElementById('auth-contact-message');
+      const btn = document.getElementById('btn-continue-to-intake');
+      const bothAccepted = rcmsYes && phiYes;
+      if (msg) msg.style.display = bothAccepted ? 'none' : 'block';
+      if (btn) { btn.disabled = !bothAccepted; }
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
+      checkAuthorizations();
       checkForSavedProgress();
     });
 
@@ -3374,6 +3404,7 @@
       if (target) {
         target.classList.add('active');
         if (screenId === 'screen-intake-summary') populateIntakeSummary();
+        if (screenId === 'screen-client-authorization') checkAuthorizations();
         updateProgress();
         updateNav();
         window.scrollTo({ top: 0, behavior: 'smooth' });
