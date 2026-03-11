@@ -323,6 +323,8 @@
     margin-bottom: 48px;
   }
 
+  .section-header.spaced-above { margin-top: 48px; }
+
   .section-number {
     font-family: var(--sans);
     font-size: 0.68rem;
@@ -709,6 +711,38 @@
     color: var(--text-muted) !important;
     line-height: 1.7 !important;
     font-weight: 300 !important;
+  }
+
+  /* ── Next Clinical Tools: prominent linked actions ── */
+  a.tool-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  a.tool-card-link:hover {
+    border-color: var(--gold);
+    background: #faf8f4;
+  }
+
+  a.tool-card-link .tool-card-action-label {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+    display: block;
+  }
+
+  a.tool-card-link .tool-card-action-hint {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-top: 10px;
+    display: block;
   }
 
   /* ── Footer ── */
@@ -1362,6 +1396,23 @@
         <h3>Functional Capacity Index (FCI)</h3>
         <p>A clinical framework for evaluating how injury affects functional capacity and how those limitations influence case value, treatment strategy, and long-term outcomes.</p>
       </div>
+    </div>
+
+    <!-- Next Clinical Tools: linked actions -->
+    <div class="section-header spaced-above">
+      <h2 class="section-title">Next Clinical Tools</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <p>To continue evaluating clinical risk, recovery progression, and functional impact, attorneys can use the following tools.</p>
+    <div class="next-steps-tools">
+      <a href="#" class="tool-card tool-card-link" target="_blank" rel="noopener noreferrer">
+        <span class="tool-card-action-label">Run Reconcile C.A.R.E. Clinical Sequencing Auditor</span>
+        <span class="tool-card-action-hint">Opens in new tab →</span>
+      </a>
+      <a href="#" class="tool-card tool-card-link" target="_blank" rel="noopener noreferrer">
+        <span class="tool-card-action-label">Open Functional Capacity Index</span>
+        <span class="tool-card-action-hint">Opens in new tab →</span>
+      </a>
     </div>
   </div>
 
