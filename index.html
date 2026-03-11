@@ -184,12 +184,12 @@
       max-width: 560px;
     }
 
-    /* ==================== CARDS ==================== */
+    /* ==================== CARDS (sleek professional – matches Client Intake Summary) ==================== */
     .card {
       background: var(--white);
       border-radius: var(--radius-lg);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.06);
-      border: 1px solid var(--gray-200);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--gray-300);
       overflow: hidden;
     }
 
@@ -222,12 +222,7 @@
     }
 
     .card-body {
-      padding: 48px 52px;
-    }
-
-    .card-premium {
-      border: 1px solid var(--gray-300);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      padding: 44px 48px;
     }
 
     .section-header-premium {
@@ -327,7 +322,7 @@
       flex-wrap: wrap;
     }
 
-    .card-body-premium { padding: 44px 48px; }
+    .card-body-premium { padding: 44px 48px; } /* same as .card-body for consistency */
 
     .summary-grid {
       display: grid;
@@ -684,12 +679,12 @@
 
     .form-label {
       display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--gray-700);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-600);
       margin-bottom: 8px;
       text-transform: uppercase;
-      letter-spacing: 0.35px;
+      letter-spacing: 0.5px;
     }
 
     .form-input {
@@ -860,7 +855,7 @@
 
     /* ==================== INFO BOXES ==================== */
     .info-box {
-      background: var(--off-white);
+      background: var(--gray-50);
       border: 1px solid var(--gray-200);
       border-left: 4px solid var(--gold);
       padding: 24px 28px;
@@ -870,19 +865,21 @@
     }
 
     .info-box-orange {
-      background: var(--off-white);
+      background: var(--gray-50);
       border-left-color: var(--gold);
     }
 
     .info-box-success {
-      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      background: var(--gray-50);
       border-left-color: var(--success);
     }
 
     .info-box-title {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: 8px;
       display: flex;
       align-items: center;
@@ -890,12 +887,12 @@
     }
 
     .info-box-orange .info-box-title {
-      color: var(--gold-dark);
+      color: var(--navy);
     }
 
     .info-box-text {
-      font-size: 15px;
-      color: var(--gray-700);
+      font-size: 14px;
+      color: var(--gray-800);
       line-height: 1.6;
     }
 
@@ -1171,22 +1168,35 @@
       letter-spacing: 0.5px;
     }
 
-    /* ==================== SECTION HEADERS ==================== */
+    /* ==================== SECTION HEADERS (sleek – matches Client Intake Summary) ==================== */
     .section-header {
       margin-bottom: 22px;
     }
 
     .section-title {
       font-family: var(--font-display);
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 600;
       color: var(--navy);
       margin-bottom: 6px;
+      letter-spacing: 0.3px;
     }
 
     .section-subtitle {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
     }
 
     /* ==================== OVERSIGHT GRID ==================== */
@@ -1387,9 +1397,9 @@
     }
 
     .intro-message {
-      background: var(--off-white);
+      background: var(--gray-50);
       border-radius: var(--radius-md);
-      padding: 32px;
+      padding: 32px 36px;
       text-align: left;
       margin-bottom: 40px;
       border: 1px solid var(--gray-200);
@@ -1397,14 +1407,16 @@
 
     .intro-message h2 {
       font-family: var(--font-display);
-      font-size: 24px;
+      font-size: 22px;
+      font-weight: 600;
       color: var(--navy);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
     }
 
     .intro-message p {
-      font-size: 15px;
-      color: var(--gray-700);
+      font-size: 14px;
+      color: var(--gray-800);
       margin-bottom: 14px;
       line-height: 1.6;
     }
@@ -1447,7 +1459,7 @@
     .intro-flow-step-label {
       font-size: 13px;
       font-weight: 600;
-      color: var(--gray-700);
+      color: var(--gray-800);
     }
 
     .intro-flow-arrow {
