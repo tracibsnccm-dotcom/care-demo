@@ -45,6 +45,24 @@
       --radius-md: 10px;
       --radius-lg: 16px;
       --radius-xl: 24px;
+      /* Enterprise typography scale – single source of truth */
+      --text-page-title: 34px;
+      --text-card-title: 22px;
+      --text-section-title: 18px;
+      --text-section-label: 11px;
+      --text-body: 14px;
+      --text-body-lg: 16px;
+      --text-data: 14px;
+      --text-data-value: 16px;
+      --text-button: 16px;
+      --text-button-lg: 17px;
+      --weight-regular: 400;
+      --weight-medium: 500;
+      --weight-semibold: 600;
+      --weight-bold: 700;
+      --leading-tight: 1.2;
+      --leading-body: 1.6;
+      --leading-relaxed: 1.7;
     }
 
     * {
@@ -193,6 +211,7 @@
       overflow: hidden;
     }
 
+    /* Page shell: one strong primary card, navy header, white/light body */
     .card-header {
       background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
       color: var(--white);
@@ -201,28 +220,43 @@
 
     .card-header h1 {
       font-family: var(--font-display);
-      font-size: 34px;
-      font-weight: 600;
+      font-size: var(--text-page-title);
+      font-weight: var(--weight-semibold);
       margin-bottom: 8px;
-      line-height: 1.2;
+      line-height: var(--leading-tight);
     }
 
     .card-header p {
       opacity: 0.95;
-      font-size: 16px;
-      font-weight: 300;
+      font-size: var(--text-body-lg);
+      font-weight: var(--weight-regular);
     }
 
-    .card-header-orange {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    .card-header-sub {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .card-header-teal {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    .card-header-sub-name {
+      font-size: 17px;
+      font-weight: var(--weight-bold);
+      opacity: 1;
     }
+
+    .card-header-sub-meta {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      opacity: 0.85;
+    }
+
+    .card-header-meta { font-size: var(--text-body); opacity: 0.9; }
+    .medication-box { margin-bottom: 12px; }
 
     .card-body {
       padding: 44px 48px;
+      background: var(--white);
     }
 
     .section-header-premium {
@@ -322,7 +356,27 @@
       flex-wrap: wrap;
     }
 
-    .card-body-premium { padding: 44px 48px; } /* same as .card-body for consistency */
+    /* Authorization: formal checkpoint – premium section structure */
+    .auth-section-label {
+      font-size: var(--text-section-label);
+      font-weight: var(--weight-bold);
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .auth-section-block {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .auth-section-block .auth-statement { margin-bottom: 16px; }
+
+    .card-body-premium { padding: 44px 48px; }
 
     .summary-grid {
       display: grid;
@@ -378,6 +432,27 @@
     }
 
     .summary-section { margin-bottom: 24px; }
+
+    /* Shared content panel – use everywhere inside cards (matches Client Intake Summary) */
+    .content-panel {
+      font-family: var(--font-body);
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+    }
+
+    .content-panel-label {
+      font-size: var(--text-section-label);
+      font-weight: var(--weight-bold);
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gold);
+    }
 
     .summary-nextsteps {
       background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%);
@@ -587,15 +662,147 @@
     }
 
     .dashboard-stat-label {
-      font-size: 11px;
+      font-size: var(--text-section-label);
       line-height: 1.35;
       opacity: 0.95;
-      font-weight: 500;
+      font-weight: var(--weight-medium);
       text-transform: none;
       letter-spacing: 0.2px;
     }
 
-    /* ==================== BUTTONS ==================== */
+    /* Dashboard enterprise: case action panel, meta grid, clinical alerts */
+    .dashboard-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .case-action-panel {
+      background: var(--gray-50);
+      border: 2px solid var(--gold);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      margin-bottom: 8px;
+    }
+
+    .case-action-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .case-action-panel-title-wrap .content-panel-label { margin-bottom: 4px; }
+    .case-action-panel-client-name { font-size: 26px; font-weight: var(--weight-bold); color: var(--gold); }
+    .case-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .case-meta-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+
+    .case-meta-item .data-label { margin-bottom: 4px; }
+    .case-meta-item .data-value { font-size: var(--text-body); font-weight: var(--weight-semibold); }
+    .case-meta-item .data-value.mono { font-family: ui-monospace, monospace; }
+    .alert-inline {
+      background: var(--warning-light);
+      border-left: 3px solid var(--warning);
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #92400e;
+    }
+
+    .clinical-alerts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .clinical-alert-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 22px 24px;
+      border-left-width: 4px;
+      border-left-style: solid;
+    }
+
+    .clinical-alert-card.warning { border-left-color: var(--warning); }
+    .clinical-alert-card.error { border-left-color: var(--error); }
+    .clinical-alert-card.gold { border-left-color: var(--gold); }
+    .clinical-alert-card.navy {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      color: var(--white);
+      border-left-color: var(--navy-light);
+    }
+
+    .clinical-alert-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .clinical-alert-card-title-wrap { display: flex; align-items: center; gap: 8px; }
+    .clinical-alert-card-title { font-size: var(--text-body); font-weight: var(--weight-bold); color: var(--navy); }
+    .clinical-alert-card.navy .clinical-alert-card-title { color: var(--white); }
+    .clinical-alert-card-badge {
+      font-size: var(--text-section-label);
+      font-weight: var(--weight-bold);
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .clinical-alert-card-body { font-size: var(--text-body); color: var(--gray-700); line-height: var(--leading-body); }
+    .clinical-alert-card.navy .clinical-alert-card-body { color: rgba(255,255,255,0.95); }
+    .clinical-alert-card-meta { margin-top: 10px; font-size: 12px; opacity: 0.7; }
+    .alert-list-item { margin-bottom: 5px; }
+
+    .output-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .output-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .output-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .output-card-header {
+      background: var(--gold);
+      padding: 16px 20px;
+      color: var(--navy-dark);
+      font-size: 15px;
+      font-weight: var(--weight-bold);
+    }
+
+    .output-card-body { padding: 20px; }
+    .output-card-desc { font-size: var(--text-body); color: var(--gray-600); margin-bottom: 12px; }
+    .output-card-cta { font-size: 13px; color: var(--gold); font-weight: var(--weight-semibold); }
+    .output-card.accent-warning .output-card-header { background: var(--warning); color: var(--navy-dark); }
+
+    /* ==================== BUTTONS (enterprise: primary gold/navy, secondary outline) ==================== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -605,8 +812,8 @@
       border: none;
       border-radius: var(--radius-sm);
       font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 600;
+      font-size: var(--text-button);
+      font-weight: var(--weight-semibold);
       cursor: pointer;
       transition: all 0.25s ease;
       text-decoration: none;
@@ -619,29 +826,33 @@
 
     .btn-primary {
       background: var(--gold);
-      color: var(--white);
+      color: var(--navy-dark);
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-primary:hover {
-      background: var(--gold-dark);
+      background: var(--navy);
+      color: var(--white);
       box-shadow: var(--shadow-md);
     }
 
     .btn-orange {
       background: var(--gold);
-      color: var(--white);
+      color: var(--navy-dark);
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-orange:hover {
-      background: var(--gold-dark);
+      background: var(--navy);
+      color: var(--white);
       box-shadow: var(--shadow-md);
     }
 
     .btn-outline {
-      background: transparent;
+      background: var(--white);
       border: 2px solid var(--navy);
       color: var(--navy);
-      font-weight: 600;
+      font-weight: var(--weight-semibold);
     }
 
     .btn-outline:hover {
@@ -847,9 +1058,36 @@
 
     .form-checkbox-content span {
       font-family: var(--font-body);
-      font-size: 14px;
+      font-size: var(--text-body);
       color: var(--gray-800);
-      line-height: 1.6;
+      line-height: var(--leading-body);
+    }
+
+    /* Checkbox tile grid – enterprise form system for multi-select options */
+    .checkbox-tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-tile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid var(--gray-200);
+      font-size: var(--text-body);
+      font-family: var(--font-body);
+    }
+
+    .checkbox-tile input {
+      accent-color: var(--gold);
+      width: 18px;
+      height: 18px;
     }
 
     /* ==================== INTAKE WIZARD STEPS ==================== */
@@ -964,10 +1202,13 @@
     }
 
     .data-value {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: var(--text-data-value);
+      font-weight: var(--weight-semibold);
       color: var(--gray-800);
     }
+
+    .data-value-emphasis { font-size: 24px; color: var(--gold); }
+    .data-grid-cta { margin-bottom: 0; }
 
     /* ==================== BADGES ==================== */
     .badge {
@@ -1000,6 +1241,11 @@
       background: var(--gold);
       color: var(--white);
     }
+
+    .badge-lg { font-size: 13px; padding: 8px 18px; }
+    .badge-header { background: rgba(255,255,255,0.2); color: white; }
+    .care-plan-badge-wrap { text-align: right; }
+    .care-plan-reviewed { font-size: 12px; opacity: 0.8; margin-top: 4px; }
 
     /* ==================== TABLES ==================== */
     .table-container {
@@ -1234,13 +1480,27 @@
     }
 
     .section-label {
-      font-size: 11px;
-      font-weight: 700;
+      font-size: var(--text-section-label);
+      font-weight: var(--weight-bold);
       color: var(--gray-500);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 10px;
     }
+
+    .section-label-spaced { margin-top: 16px; margin-bottom: 8px; }
+    .form-select-inline { max-width: 220px; }
+    .form-hint { font-size: 13px; color: var(--gray-500); margin-bottom: 8px; }
+    .form-hint-mb10 { margin-bottom: 10px; }
+    .provider-panel {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 18px;
+      background: var(--white);
+    }
+
+    .provider-panel .summary-section-label { margin-bottom: 12px; }
 
     /* ==================== OVERSIGHT GRID ==================== */
     .oversight-grid {
@@ -1354,6 +1614,9 @@
       margin-top: 10px;
       text-transform: uppercase;
     }
+
+    .resource-card-link { text-decoration: none; color: inherit; display: block; }
+    .resource-badge-link { text-decoration: none; color: inherit; }
 
     /* ==================== TIMELINE ==================== */
     .timeline {
@@ -1902,6 +2165,13 @@
       color: var(--gray-800);
     }
 
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
       .form-row {
@@ -1991,9 +2261,26 @@
     .mt-8 { margin-top: 32px !important; }
     .text-center { text-align: center !important; }
     .text-muted { color: var(--gray-500) !important; }
-    .text-sm { font-size: 14px !important; }
+    .text-success { color: var(--success) !important; }
+    .text-warning { color: var(--warning) !important; }
+    .text-error { color: var(--error) !important; }
+    .table-row-clickable { cursor: pointer; }
+    .cell-mono { font-family: ui-monospace, monospace; font-size: 13px; }
+    .text-sm { font-size: var(--text-body) !important; }
     .text-xs { font-size: 12px !important; }
-    .font-bold { font-weight: 700 !important; }
+    .font-bold { font-weight: var(--weight-bold) !important; }
+    .list-body { margin: 0; padding-left: 20px; font-size: var(--text-body); color: var(--gray-800); line-height: var(--leading-relaxed); }
+    .list-body-nested { margin: 0 0 14px 20px; line-height: 1.8; }
+    .footer-muted { color: var(--gray-100) !important; }
+    .demo-divider { text-align: center; color: var(--gray-500); margin-bottom: 12px; font-size: 12px; }
+    .signature-input { font-family: var(--font-body); font-size: 18px; text-align: center; }
+    .faq-item { padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); margin-bottom: 16px; }
+    .faq-item:last-child { padding-bottom: 0; border-bottom: none; margin-bottom: 0; }
+    .faq-question { color: var(--navy); }
+    @media (max-width: 900px) {
+      .clinical-alerts-grid { grid-template-columns: 1fr; }
+      .output-cards-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -2082,7 +2369,7 @@
               <p>Many injured clients miss appointments or struggle to participate in therapy — and the default assumption is often that the injury must not be that severe or that the client is not following through.</p>
               <p>Reconcile C.A.R.E. corrects this assumption by documenting the actual barriers that interfere with care.</p>
               <p>Psychosocial barriers may include:</p>
-              <ul style="margin: 0 0 14px 20px; line-height: 1.8;">
+              <ul class="list-body-nested">
                 <li>loss of transportation</li>
                 <li>job loss or reduced hours</li>
                 <li>caregiving responsibilities</li>
@@ -2117,7 +2404,7 @@
                   <div class="intro-flow-step-label">Care Plan</div>
                 </div>
               </div>
-              <p style="margin-top: 16px; margin-bottom: 0;">This demonstration is intentionally structured so the attorney experiences the client intake first. The attorney portal only makes sense when you understand what the client sees, the questions they answer, and how those answers populate the dashboard you will review. The structured intake process creates the clinical documentation foundation for care coordination, recovery monitoring, and defensible case support. In this demonstration you will follow a fictional client through the intake process and then see how that information appears in the attorney dashboard. All information shown in this demonstration is fictional.</p>
+              <p class="mt-4 mb-0">This demonstration is intentionally structured so the attorney experiences the client intake first. The attorney portal only makes sense when you understand what the client sees, the questions they answer, and how those answers populate the dashboard you will review. The structured intake process creates the clinical documentation foundation for care coordination, recovery monitoring, and defensible case support. In this demonstration you will follow a fictional client through the intake process and then see how that information appears in the attorney dashboard. All information shown in this demonstration is fictional.</p>
             </div>
           </div>
 
@@ -2126,7 +2413,7 @@
           </div>
         </div>
       </div>
-      <p class="text-center text-sm mt-6" style="color: var(--gray-100);">
+      <p class="text-center text-sm mt-6 footer-muted">
         © Reconcile Care Management Services
       </p>
     </div>
@@ -2144,7 +2431,7 @@
           <div class="summary-section">
             <div class="summary-section-label">Demonstration Mode</div>
             <div class="summary-section-box">
-              <p style="margin: 0;">This is a simulated login screen. In the live system, clients enter their case number and PIN. For this demo, click below to proceed as a new client completing intake.</p>
+              <p class="mb-0">This is a simulated login screen. In the live system, clients enter their case number and PIN. For this demo, click below to proceed as a new client completing intake.</p>
             </div>
           </div>
 
@@ -2159,8 +2446,8 @@
                 <label class="form-label">PIN</label>
                 <input type="password" class="form-input" placeholder="4-digit PIN" disabled>
               </div>
-              <button class="btn btn-outline btn-block mb-4" disabled style="opacity: 0.4;">Sign In (Disabled for Demo)</button>
-              <div style="text-align: center; color: var(--gray-500); margin-bottom: 12px; font-size: 12px;">— or —</div>
+              <button class="btn btn-outline btn-block mb-4" disabled aria-disabled="true">Sign In (Disabled for Demo)</button>
+              <div class="demo-divider">— or —</div>
               <button class="btn btn-primary btn-block btn-lg" onclick="goToScreen('screen-client-authorization')">Continue as New Client →</button>
             </div>
           </div>
@@ -2181,13 +2468,13 @@
           <div class="summary-section">
             <div class="summary-section-label">Required Before Intake</div>
             <div class="summary-section-box">
-              <p style="margin: 0;">These authorizations are required before intake can proceed. Reconcile Care Management Services (RCMS) cannot collect or share your information without these permissions. This step protects your privacy, documentation integrity, and care coordination with your attorney.</p>
+              <p class="mb-0">These authorizations are required before intake can proceed. Reconcile Care Management Services (RCMS) cannot collect or share your information without these permissions. This step protects your privacy, documentation integrity, and care coordination with your attorney.</p>
             </div>
           </div>
 
           <div class="summary-section">
             <div class="summary-section-label">Authorization 1</div>
-            <div class="summary-section-box">
+            <div class="auth-section-block">
               <div class="auth-statement">Consent to receive services from Reconcile Care Management Services (RCMS)</div>
               <div class="auth-choices">
                 <label class="auth-choice auth-choice-yes">
@@ -2204,7 +2491,7 @@
 
           <div class="summary-section">
             <div class="summary-section-label">Authorization 2</div>
-            <div class="summary-section-box">
+            <div class="auth-section-block">
               <div class="auth-statement">Consent for RCMS to release collected PHI/PII to your attorney</div>
               <div class="auth-choices">
                 <label class="auth-choice auth-choice-yes">
@@ -2261,7 +2548,7 @@
           <div class="summary-section">
             <div class="summary-section-label">Demonstration Note</div>
             <div class="summary-section-box">
-              <p style="margin: 0;">This form contains fictional client data for demonstration. In the live system, clients enter their own information.</p>
+              <p class="mb-0">This form contains fictional client data for demonstration. In the live system, clients enter their own information.</p>
             </div>
           </div>
 
@@ -2371,30 +2658,30 @@
                 <label class="form-label">Brief Description</label>
                 <textarea class="form-textarea" id="intake-description">I was stopped at a red light on Congress Ave when another vehicle rear-ended my car at approximately 35 mph. The impact pushed my car into the intersection. I was wearing my seatbelt but my head hit the headrest forcefully.</textarea>
               </div>
-              <div class="summary-section-label" style="margin-top: 16px; margin-bottom: 8px;">Areas of Injury</div>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px;">
-                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-                  <input type="checkbox" name="intake-bodyarea" value="Neck" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Neck</span>
+              <div class="summary-section-label section-label-spaced">Areas of Injury</div>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="intake-bodyarea" value="Neck" checked> <span>Neck</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-                  <input type="checkbox" name="intake-bodyarea" value="Upper Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Upper Back</span>
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="intake-bodyarea" value="Upper Back" checked> <span>Upper Back</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-                  <input type="checkbox" name="intake-bodyarea" value="Lower Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Lower Back</span>
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="intake-bodyarea" value="Lower Back" checked> <span>Lower Back</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-                  <input type="checkbox" name="intake-bodyarea" value="Head" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Head</span>
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="intake-bodyarea" value="Head" checked> <span>Head</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-                  <input type="checkbox" name="intake-bodyarea" value="Left Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Left Shoulder</span>
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="intake-bodyarea" value="Left Shoulder"> <span>Left Shoulder</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-                  <input type="checkbox" name="intake-bodyarea" value="Right Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Right Shoulder</span>
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="intake-bodyarea" value="Right Shoulder"> <span>Right Shoulder</span>
                 </label>
               </div>
-              <div class="form-group" style="margin-bottom: 0;">
+              <div class="form-group mb-0">
                 <label class="form-label">Current Pain Level (1-10)</label>
-                <select class="form-select" style="max-width: 220px;" id="intake-painLevel">
+                <select class="form-select form-select-inline" id="intake-painLevel">
                   <option value="7" selected>7 — Severe</option>
                   <option value="6">6 — Moderate-Severe</option>
                   <option value="5">5 — Moderate</option>
@@ -2442,7 +2729,7 @@
             <div class="summary-section-box">
               <div class="form-group">
                 <label class="form-label">Pre-existing Medical Conditions</label>
-                <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">Select all that apply. Hold Ctrl/Cmd to select multiple.</p>
+                <p class="form-hint">Select all that apply. Hold Ctrl/Cmd to select multiple.</p>
                 <select class="form-select form-select-multiple" id="intake-conditions" multiple size="6">
               <option value="none">None</option>
               <option value="hypertension" selected>Hypertension</option>
@@ -2460,8 +2747,8 @@
 
           <div class="form-group">
             <label class="form-label">Current Medications</label>
-            <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 10px;">Add medications with dosage and frequency.</p>
-            <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px; background: var(--gray-50); margin-bottom: 12px;">
+            <p class="form-hint form-hint-mb10">Add medications with dosage and frequency.</p>
+            <div class="content-panel medication-box">
               <div class="medication-row">
                 <div>
                   <label class="form-label">Medication</label>
@@ -2597,15 +2884,15 @@
           <div class="summary-section">
             <div class="summary-section-label">Why We Ask This</div>
             <div class="summary-section-box">
-              <p style="margin: 0;">Understanding your care team allows us to coordinate documentation and ensure nothing falls through the cracks during your recovery.</p>
+              <p class="mb-0">Understanding your care team allows us to coordinate documentation and ensure nothing falls through the cracks during your recovery.</p>
             </div>
           </div>
 
           <div class="summary-section">
             <div class="summary-section-label">Treatment Providers</div>
             <div class="summary-section-box">
-          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 18px; background: var(--white);">
-            <div class="summary-section-label" style="margin-bottom: 12px;">Provider #1</div>
+          <div class="provider-panel">
+            <div class="summary-section-label">Provider #1</div>
             <div class="form-row">
               <div class="form-group mb-2">
                 <label class="form-label">Provider Name</label>
@@ -2635,8 +2922,8 @@
             </div>
           </div>
 
-          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 18px; background: var(--white);">
-            <div class="summary-section-label" style="margin-bottom: 12px;">Provider #2</div>
+          <div class="provider-panel">
+            <div class="summary-section-label">Provider #2</div>
             <div class="form-row">
               <div class="form-group mb-2">
                 <label class="form-label">Provider Name</label>
@@ -2738,7 +3025,7 @@
 
           <div class="form-group mt-6">
             <label class="form-label">Electronic Signature</label>
-            <input type="text" class="form-input" value="Maria Santos" style="font-family: 'Brush Script MT', cursive; font-size: 26px; text-align: center;">
+            <input type="text" class="form-input signature-input" value="Maria Santos">
             <div class="text-sm text-muted mt-2">By typing your name, you are electronically signing these acknowledgments.</div>
           </div>
             </div>
@@ -2767,7 +3054,7 @@
               <p>Your structured intake information is now visible in the attorney dashboard.</p>
               <p>The attorney reviews the case details, confirms representation, and activates RN clinical oversight to begin care plan development and documentation monitoring.</p>
               <p>Clients have <strong>7 days</strong> to complete intake. Attorneys have <strong>48 hours</strong> to attest that the client is theirs and activate RN oversight.</p>
-              <p style="margin-bottom: 0;"><em>Let's see what this looks like from the attorney's perspective.</em></p>
+              <p class="mb-0"><em>Let's see what this looks like from the attorney's perspective.</em></p>
             </div>
           </div>
           <div class="content-actions center">
@@ -2785,7 +3072,7 @@
         <div class="card-header">
           <h1>Client Intake Summary</h1>
           <p id="summary-clientName">Maria Santos</p>
-          <p style="font-size: 14px; opacity: 0.9;">Intake Number: <strong id="summary-caseNumber">MS04-260115-01F</strong></p>
+          <p class="card-header-meta">Intake Number: <strong id="summary-caseNumber">MS04-260115-01F</strong></p>
         </div>
         <div class="card-body card-body-premium">
           <div class="summary-grid">
@@ -2838,7 +3125,7 @@
 
           <div class="summary-nextsteps">
             <div class="summary-nextsteps-title">Next Steps</div>
-            <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: var(--gray-800); line-height: 1.7;">
+            <ul class="list-body">
               <li>The intake has been submitted and is now visible in the attorney dashboard.</li>
               <li>The attorney must attest that this case is theirs to activate RN clinical oversight.</li>
               <li>RN clinical oversight (care plan development and documentation monitoring) begins after attorney confirmation.</li>
@@ -2861,14 +3148,13 @@
   <div class="screen" id="screen-attorney-portal" data-step="5">
     <div class="container container-wide">
       <div class="card">
-        <div class="card-header card-header-orange">
-          <!-- Attorney identity row -->
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+        <div class="card-header">
+          <div class="dashboard-header-row">
             <div>
               <h1>Attorney Dashboard</h1>
-              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 4px;">
-                <div style="font-size: 17px; font-weight: 700; opacity: 1;">Lauren Mitchell</div>
-                <div style="font-size: 14px; font-weight: 400; opacity: 0.85;">Mitchell Law Group</div>
+              <div class="card-header-sub">
+                <div class="card-header-sub-name">Lauren Mitchell</div>
+                <div class="card-header-sub-meta">Mitchell Law Group</div>
               </div>
             </div>
           </div>
@@ -2911,33 +3197,33 @@
         <div class="card-body">
           <div class="summary-section">
             <div class="summary-section-label">Case Requiring Action</div>
-          <div style="background: var(--gray-50); border: 2px solid var(--gold); border-radius: 10px; padding: 24px 28px; margin-bottom: 8px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 18px;">
-              <div>
-                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Primary Demo Case</div>
-                <div style="font-size: 26px; font-weight: 700; color: var(--gold);">Maria Santos</div>
+          <div class="case-action-panel">
+            <div class="case-action-panel-header">
+              <div class="case-action-panel-title-wrap">
+                <div class="content-panel-label">Primary Demo Case</div>
+                <div class="case-action-panel-client-name">Maria Santos</div>
               </div>
-              <span class="badge badge-pending" style="font-size: 13px; padding: 8px 18px;">Awaiting Attorney Confirmation</span>
+              <span class="badge badge-pending badge-lg">Awaiting Attorney Confirmation</span>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Client Name</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800);">Maria Santos</div>
+            <div class="case-meta-grid">
+              <div class="case-meta-item">
+                <div class="data-label">Client Name</div>
+                <div class="data-value">Maria Santos</div>
               </div>
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Case Number</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800); font-family: monospace;">MS04-260115-01F</div>
+              <div class="case-meta-item">
+                <div class="data-label">Case Number</div>
+                <div class="data-value mono">MS04-260115-01F</div>
               </div>
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Incident Type</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800);">Motor Vehicle Accident</div>
+              <div class="case-meta-item">
+                <div class="data-label">Incident Type</div>
+                <div class="data-value">Motor Vehicle Accident</div>
               </div>
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Current Status</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--warning);">Intake Submitted – Awaiting Attorney Confirmation</div>
+              <div class="case-meta-item">
+                <div class="data-label">Current Status</div>
+                <div class="data-value text-warning">Intake Submitted – Awaiting Attorney Confirmation</div>
               </div>
             </div>
-            <div style="background: var(--warning-light); border-left: 3px solid var(--warning); border-radius: 4px; padding: 10px 14px; font-size: 13px; color: #92400e;">
+            <div class="alert-inline">
               📋 This case was just submitted through the intake process in this demonstration. In the live system, the attorney would now review and confirm representation to activate clinical coordination.
             </div>
           </div>
@@ -3034,131 +3320,87 @@
 
           <div class="summary-section">
             <div class="summary-section-label">Clinical Intelligence</div>
-          <div style="margin-bottom: 24px;">
-            
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
-              <!-- Provider Sequencing Concern -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--warning);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 18px;">⚠️</span>
-                    <span style="font-size: 14px; font-weight: 700; color: var(--gold);">Provider Sequencing Concern</span>
-                  </div>
-                  <span style="font-size: 11px; font-weight: 700; background: var(--warning-light); color: #92400e; padding: 3px 10px; border-radius: 12px;">Action Needed</span>
+          <div class="clinical-alerts-grid">
+              <div class="clinical-alert-card warning">
+                <div class="clinical-alert-card-header">
+                  <div class="clinical-alert-card-title-wrap"><span aria-hidden="true">⚠️</span><span class="clinical-alert-card-title">Provider Sequencing Concern</span></div>
+                  <span class="clinical-alert-card-badge" style="background: var(--warning-light); color: #92400e;">Action Needed</span>
                 </div>
-                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">Initial provider sequence may affect documentation strength. Neurologist referral pending 3+ weeks.</div>
+                <div class="clinical-alert-card-body">Initial provider sequence may affect documentation strength. Neurologist referral pending 3+ weeks.</div>
               </div>
-
-              <!-- Treatment Gap Indicator -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--error);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 18px;">🔴</span>
-                    <span style="font-size: 14px; font-weight: 700; color: var(--gold);">Treatment Gap Indicator</span>
-                  </div>
-                  <span style="font-size: 11px; font-weight: 700; background: var(--error-light); color: #991b1b; padding: 3px 10px; border-radius: 12px;">Flagged</span>
+              <div class="clinical-alert-card error">
+                <div class="clinical-alert-card-header">
+                  <div class="clinical-alert-card-title-wrap"><span aria-hidden="true">🔴</span><span class="clinical-alert-card-title">Treatment Gap Indicator</span></div>
+                  <span class="clinical-alert-card-badge" style="background: var(--error-light); color: #991b1b;">Flagged</span>
                 </div>
-                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">Follow-up care delay detected. 12-day gap between physical therapy sessions.</div>
+                <div class="clinical-alert-card-body">Follow-up care delay detected. 12-day gap between physical therapy sessions.</div>
               </div>
-
-              <!-- Barrier to Care Indicators -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--gold);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 18px;">🚧</span>
-                    <span style="font-size: 14px; font-weight: 700; color: var(--gold);">Barriers to Care Identified</span>
-                  </div>
-                  <span style="font-size: 11px; font-weight: 700; background: #ccfbf1; color: #0f766e; padding: 3px 10px; border-radius: 12px;">3 Active</span>
+              <div class="clinical-alert-card gold">
+                <div class="clinical-alert-card-header">
+                  <div class="clinical-alert-card-title-wrap"><span aria-hidden="true">🚧</span><span class="clinical-alert-card-title">Barriers to Care Identified</span></div>
+                  <span class="clinical-alert-card-badge" style="background: #ccfbf1; color: #0f766e;">3 Active</span>
                 </div>
-                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">
-                  <div style="margin-bottom: 5px;">• Transportation limitations to appointments</div>
-                  <div style="margin-bottom: 5px;">• Work schedule conflicts with therapy</div>
+                <div class="clinical-alert-card-body">
+                  <div class="alert-list-item">• Transportation limitations to appointments</div>
+                  <div class="alert-list-item">• Work schedule conflicts with therapy</div>
                   <div>• Financial strain affecting treatment access</div>
                 </div>
               </div>
-
-              <!-- RN Clinical Oversight Status -->
-              <div style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%); border-radius: 8px; padding: 22px 24px; color: var(--white);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 18px;">⚕️</span>
-                    <span style="font-size: 14px; font-weight: 700;">RN Clinical Oversight Status</span>
-                  </div>
-                  <span style="font-size: 11px; font-weight: 700; background: rgba(255,255,255,0.2); color: white; padding: 3px 10px; border-radius: 12px;">Active</span>
+              <div class="clinical-alert-card navy">
+                <div class="clinical-alert-card-header">
+                  <div class="clinical-alert-card-title-wrap"><span aria-hidden="true">⚕️</span><span class="clinical-alert-card-title">RN Clinical Oversight Status</span></div>
+                  <span class="clinical-alert-card-badge" style="background: rgba(255,255,255,0.2); color: white;">Active</span>
                 </div>
-                <div style="font-size: 14px; line-height: 1.6; opacity: 0.95;">RN Clinical Oversight Active — monitoring recovery trajectory and barriers to care.</div>
-                <div style="margin-top: 10px; font-size: 12px; opacity: 0.7;">Last reviewed: March 8, 2026</div>
+                <div class="clinical-alert-card-body">RN Clinical Oversight Active — monitoring recovery trajectory and barriers to care.</div>
+                <div class="clinical-alert-card-meta">Last reviewed: March 8, 2026</div>
               </div>
             </div>
-          </div>
           </div>
 
           <div class="summary-section">
             <div class="summary-section-label">Attorney Outputs</div>
-          <div style="margin-bottom: 24px;">
-            
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-              <!-- RN Care Plan -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
-                <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
-                  <div style="font-size: 15px; font-weight: 700;">RN Care Plan</div>
-                </div>
-                <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Comprehensive clinical care plan with goals, interventions, and recommendations.</div>
-                  <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
+          <div class="output-cards-grid">
+              <div class="output-card">
+                <div class="output-card-header">RN Care Plan</div>
+                <div class="output-card-body">
+                  <div class="output-card-desc">Comprehensive clinical care plan with goals, interventions, and recommendations.</div>
+                  <div class="output-card-cta">View Document →</div>
                 </div>
               </div>
-
-              <!-- Functional Capacity Index Report -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
-                <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
-                  <div style="font-size: 15px; font-weight: 700;">Functional Capacity Index Report</div>
-                </div>
-                <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Detailed assessment of functional limitations and daily living impact.</div>
-                  <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
+              <div class="output-card">
+                <div class="output-card-header">Functional Capacity Index Report</div>
+                <div class="output-card-body">
+                  <div class="output-card-desc">Detailed assessment of functional limitations and daily living impact.</div>
+                  <div class="output-card-cta">View Document →</div>
                 </div>
               </div>
-
-              <!-- Clinical Recovery Documentation -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
-                <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
-                  <div style="font-size: 15px; font-weight: 700;">Clinical Recovery Documentation</div>
-                </div>
-                <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Ongoing recovery progress, treatment compliance, and clinical observations.</div>
-                  <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
+              <div class="output-card">
+                <div class="output-card-header">Clinical Recovery Documentation</div>
+                <div class="output-card-body">
+                  <div class="output-card-desc">Ongoing recovery progress, treatment compliance, and clinical observations.</div>
+                  <div class="output-card-cta">View Document →</div>
                 </div>
               </div>
-
-              <!-- Provider Sequencing Insight -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
-                <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
-                  <div style="font-size: 15px; font-weight: 700;">Provider Sequencing Insight</div>
-                </div>
-                <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Analysis of treatment timeline and provider order for documentation integrity.</div>
-                  <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
+              <div class="output-card">
+                <div class="output-card-header">Provider Sequencing Insight</div>
+                <div class="output-card-body">
+                  <div class="output-card-desc">Analysis of treatment timeline and provider order for documentation integrity.</div>
+                  <div class="output-card-cta">View Document →</div>
                 </div>
               </div>
-
-              <!-- Attorney Clinical Guidance Resources -->
-              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
-                <div style="background: var(--warning); padding: 16px 20px; color: var(--gold);">
-                  <div style="font-size: 15px; font-weight: 700;">Attorney Clinical Guidance</div>
-                </div>
-                <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Resources and guidance for understanding clinical documentation in injury cases.</div>
-                  <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Resources →</div>
+              <div class="output-card accent-warning">
+                <div class="output-card-header">Attorney Clinical Guidance</div>
+                <div class="output-card-body">
+                  <div class="output-card-desc">Resources and guidance for understanding clinical documentation in injury cases.</div>
+                  <div class="output-card-cta">View Resources →</div>
                 </div>
               </div>
             </div>
           </div>
-          </div>
 
           <div class="summary-section">
             <div class="summary-section-label">Your Active Cases</div>
-            <div class="section-subtitle" style="margin-bottom: 12px;">Click any case to view details</div>
+            <div class="section-subtitle mb-4">Click any case to view details</div>
           <div class="table-container">
             <table>
               <thead>
@@ -3172,28 +3414,28 @@
                 </tr>
               </thead>
               <tbody>
-                <tr style="cursor: pointer;" onclick="alert('Demo: Would open case details for Maria Santos')">
+                <tr class="table-row-clickable" onclick="alert('Demo: Would open case details for Maria Santos')">
                   <td><strong>Maria Santos</strong></td>
-                  <td style="font-family: monospace; font-size: 13px;">MS04-260115-01F</td>
+                  <td class="cell-mono">MS04-260115-01F</td>
                   <td>Nov 15, 2024</td>
                   <td><span class="badge badge-active">Active</span></td>
-                  <td><span style="color: var(--warning); font-weight: 600;">Delayed</span></td>
+                  <td><span class="text-warning font-bold">Delayed</span></td>
                   <td><strong>3</strong></td>
                 </tr>
-                <tr style="cursor: pointer;" onclick="alert('Demo: Would open case details for James Rodriguez')">
+                <tr class="table-row-clickable" onclick="alert('Demo: Would open case details for James Rodriguez')">
                   <td><strong>James Rodriguez</strong></td>
-                  <td style="font-family: monospace; font-size: 13px;">JR04-241018-02M</td>
+                  <td class="cell-mono">JR04-241018-02M</td>
                   <td>Oct 18, 2024</td>
                   <td><span class="badge badge-active">Active</span></td>
-                  <td><span style="color: var(--success); font-weight: 600;">On Track</span></td>
+                  <td><span class="text-success font-bold">On Track</span></td>
                   <td><strong>3</strong></td>
                 </tr>
-                <tr style="cursor: pointer;" onclick="alert('Demo: Would open case details for Robert Chen')">
+                <tr class="table-row-clickable" onclick="alert('Demo: Would open case details for Robert Chen')">
                   <td><strong>Robert Chen</strong></td>
-                  <td style="font-family: monospace; font-size: 13px;">RC04-241201-03M</td>
+                  <td class="cell-mono">RC04-241201-03M</td>
                   <td>Dec 1, 2024</td>
                   <td><span class="badge badge-review">RN Review</span></td>
-                  <td><span style="color: var(--error); font-weight: 600;">At Risk</span></td>
+                  <td><span class="text-error font-bold">At Risk</span></td>
                   <td><strong>2</strong></td>
                 </tr>
               </tbody>
@@ -3201,7 +3443,7 @@
           </div>
           </div>
 
-          <div class="content-actions center" style="margin-top: 24px;">
+          <div class="content-actions center mt-6">
             <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-rn-oversight')">Continue: RN Clinical Oversight →</button>
           </div>
         </div>
@@ -3213,7 +3455,7 @@
   <div class="screen" id="screen-rn-oversight" data-step="6">
     <div class="container">
       <div class="card">
-        <div class="card-header card-header-teal">
+        <div class="card-header">
           <h1>RN Clinical Oversight</h1>
           <p>The critical layer that protects documentation integrity</p>
         </div>
@@ -3221,8 +3463,8 @@
           <div class="summary-section">
             <div class="summary-section-label">Why RN Oversight Matters for Your Case</div>
             <div class="summary-section-box">
-              <p style="margin: 0 0 14px;">Structured intake is powerful, but it requires clinical validation. A licensed Registered Nurse reviews every care plan before it reaches you, ensuring clinical accuracy, defensible documentation, and identification of red flags that could impact case value.</p>
-              <p style="margin: 0;">RN clinical oversight begins after attorney confirmation of representation. Once activated, the RN care manager monitors treatment progression, documentation completeness, and care coordination to support recovery and maintain a defensible clinical record. This oversight provides attorneys with ongoing visibility into treatment progress and potential documentation gaps.</p>
+              <p class="mb-0 mb-2">Structured intake is powerful, but it requires clinical validation. A licensed Registered Nurse reviews every care plan before it reaches you, ensuring clinical accuracy, defensible documentation, and identification of red flags that could impact case value.</p>
+              <p class="mb-0">RN clinical oversight begins after attorney confirmation of representation. Once activated, the RN care manager monitors treatment progression, documentation completeness, and care coordination to support recovery and maintain a defensible clinical record. This oversight provides attorneys with ongoing visibility into treatment progress and potential documentation gaps.</p>
             </div>
           </div>
 
@@ -3263,17 +3505,15 @@
   <div class="screen" id="screen-care-plan" data-step="7">
     <div class="container container-wide">
       <div class="card">
-        <div class="card-header card-header-teal">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div class="card-header">
+          <div class="dashboard-header-row">
             <div>
               <h1>Sample RN Care Plan</h1>
               <p id="careplan-client">Maria Santos | MS04-260115-01F</p>
             </div>
-            <div style="text-align: right;">
-              <span class="badge badge-active" style="background: rgba(255,255,255,0.2); color: white;">RN Approved</span>
-              <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">
-                Reviewed by RN Sarah Thompson, BSN
-              </div>
+            <div class="care-plan-badge-wrap">
+              <span class="badge badge-active badge-header">RN Approved</span>
+              <div class="care-plan-reviewed">Reviewed by RN Sarah Thompson, BSN</div>
             </div>
           </div>
         </div>
@@ -3281,8 +3521,8 @@
           <div class="summary-section">
             <div class="summary-section-label">Demonstration Care Plan</div>
             <div class="summary-section-box">
-              <p style="margin: 0 0 14px;">This is a sample RN care plan using fictional data. In the live system, care plans are generated from actual client intake data and validated by a licensed RN before delivery to the attorney.</p>
-              <p style="margin: 0;">The sample care plan demonstrates how client intake information and provider documentation are translated into a structured recovery oversight plan. RN care managers use this framework to monitor treatment progress, coordinate documentation, and identify potential barriers to recovery. The care plan evolves as treatment progresses and additional documentation becomes available.</p>
+              <p class="mb-0 mb-2">This is a sample RN care plan using fictional data. In the live system, care plans are generated from actual client intake data and validated by a licensed RN before delivery to the attorney.</p>
+              <p class="mb-0">The sample care plan demonstrates how client intake information and provider documentation are translated into a structured recovery oversight plan. RN care managers use this framework to monitor treatment progress, coordinate documentation, and identify potential barriers to recovery. The care plan evolves as treatment progresses and additional documentation becomes available.</p>
             </div>
           </div>
 
@@ -3447,7 +3687,7 @@
           <div class="summary-section">
             <div class="summary-section-label">Why Documentation Integrity Matters</div>
             <div class="summary-section-box">
-              <p style="margin: 0;">The combination of structured client intake, attorney visibility, and RN clinical oversight creates a documentation chain that is organized, clinically validated, and defensible in settlement negotiations.</p>
+              <p class="mb-0">The combination of structured client intake, attorney visibility, and RN clinical oversight creates a documentation chain that is organized, clinically validated, and defensible in settlement negotiations.</p>
             </div>
           </div>
 
@@ -3479,8 +3719,8 @@
 
           <div class="summary-section">
             <div class="summary-section-label">Sample Attorney Reports</div>
-            <div class="section-subtitle" style="margin-bottom: 16px;">What you receive monthly for each active case</div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px;">
+            <div class="section-subtitle mb-4">What you receive monthly for each active case</div>
+          <div class="report-grid">
             <div class="report-preview">
               <div class="report-preview-header">
                 <div class="report-preview-title">📋 Monthly Progress Summary</div>
@@ -3493,7 +3733,7 @@
                 </div>
                 <div class="report-preview-stat">
                   <span class="report-preview-stat-label">Treatment Compliance</span>
-                  <span class="report-preview-stat-value" style="color: var(--success);">94%</span>
+                  <span class="report-preview-stat-value text-success">94%</span>
                 </div>
                 <div class="report-preview-stat">
                   <span class="report-preview-stat-label">Appointments Attended</span>
@@ -3518,23 +3758,23 @@
               <div class="report-preview-body">
                 <div class="report-preview-stat">
                   <span class="report-preview-stat-label">Physical</span>
-                  <span class="report-preview-stat-value">1.8 → 2.2 <span style="color: var(--success);">↑</span></span>
+                  <span class="report-preview-stat-value">1.8 → 2.2 <span class="text-success">↑</span></span>
                 </div>
                 <div class="report-preview-stat">
                   <span class="report-preview-stat-label">Psychological</span>
-                  <span class="report-preview-stat-value">2.5 → 3.0 <span style="color: var(--success);">↑</span></span>
+                  <span class="report-preview-stat-value">2.5 → 3.0 <span class="text-success">↑</span></span>
                 </div>
                 <div class="report-preview-stat">
                   <span class="report-preview-stat-label">Psychosocial</span>
-                  <span class="report-preview-stat-value">3.0 → 3.2 <span style="color: var(--success);">↑</span></span>
+                  <span class="report-preview-stat-value">3.0 → 3.2 <span class="text-success">↑</span></span>
                 </div>
                 <div class="report-preview-stat">
                   <span class="report-preview-stat-label">Professional</span>
-                  <span class="report-preview-stat-value">1.5 → 2.0 <span style="color: var(--success);">↑</span></span>
+                  <span class="report-preview-stat-value">1.5 → 2.0 <span class="text-success">↑</span></span>
                 </div>
                 <div class="report-preview-stat">
                   <span class="report-preview-stat-label">Overall Trend</span>
-                  <span class="report-preview-stat-value" style="color: var(--success);">Improving</span>
+                  <span class="report-preview-stat-value text-success">Improving</span>
                 </div>
               </div>
             </div>
@@ -3575,7 +3815,7 @@
   <div class="screen" id="screen-resources" data-step="9">
     <div class="container">
       <div class="card">
-        <div class="card-header card-header-orange">
+        <div class="card-header">
           <h1>Attorney Resources</h1>
           <p>Support materials and onboarding guides</p>
         </div>
@@ -3583,14 +3823,14 @@
           <div class="summary-section">
             <div class="summary-section-label">Getting Started</div>
             <div class="summary-section-box">
-              <p style="margin: 0;">These resources help you and your team get the most out of Reconcile C.A.R.E. Download guides, share client handouts, and access training materials.</p>
+              <p class="mb-0">These resources help you and your team get the most out of Reconcile C.A.R.E. Download guides, share client handouts, and access training materials.</p>
             </div>
           </div>
 
           <div class="summary-section">
             <div class="summary-section-label">Resources</div>
           <div class="resource-grid">
-            <a href="clinical-oversight.html" target="_blank" class="resource-card" style="text-decoration: none; color: inherit; display: block;">
+            <a href="clinical-oversight.html" target="_blank" class="resource-card resource-card-link">
               <div class="resource-icon">📋</div>
               <div class="resource-title">Clinical Oversight & Documentation Guidance</div>
               <div class="resource-desc">Clinical guidance explaining how RN oversight supports documentation integrity, recovery monitoring, and defensible case preparation.</div>
@@ -3600,7 +3840,7 @@
               <div class="resource-icon">📄</div>
               <div class="resource-title">Attorney Overview (PDF)</div>
               <div class="resource-desc">Platform overview and clinical methodology</div>
-              <a href="#" class="resource-badge" id="attorney-pdf-link" data-pdf-placeholder="Set href to attorney PDF path when file is available" style="text-decoration: none; color: inherit;">Download PDF</a>
+              <a href="#" class="resource-badge resource-badge-link" id="attorney-pdf-link" data-pdf-placeholder="Set href to attorney PDF path when file is available">Download PDF</a>
             </div>
             <div class="resource-card">
               <div class="resource-icon">📘</div>
@@ -3644,16 +3884,16 @@
           <div class="summary-section">
             <div class="summary-section-label">Frequently Asked Questions</div>
             <div class="summary-section-box">
-              <div style="padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); margin-bottom: 16px;">
-                <strong style="color: var(--navy);">How quickly are care plans generated after intake?</strong>
+              <div class="faq-item">
+                <strong class="faq-question">How quickly are care plans generated after intake?</strong>
                 <div class="text-sm text-muted mt-2">Initial care plans are typically generated within 24-48 hours of attorney confirmation. Rush processing available for urgent cases.</div>
               </div>
-              <div style="padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); margin-bottom: 16px;">
-                <strong style="color: var(--navy);">What if my client doesn't complete diary entries?</strong>
+              <div class="faq-item">
+                <strong class="faq-question">What if my client doesn't complete diary entries?</strong>
                 <div class="text-sm text-muted mt-2">After 28 days of inactivity, the case enters "hibernation." You'll be notified, and the client receives reminders. Cases can be reactivated anytime.</div>
               </div>
-              <div>
-                <strong style="color: var(--navy);">Can I customize the monthly report format?</strong>
+              <div class="faq-item">
+                <strong class="faq-question">Can I customize the monthly report format?</strong>
                 <div class="text-sm text-muted mt-2">Yes — reports can be customized to match your firm's demand package format. Contact support for template customization options.</div>
               </div>
             </div>
@@ -3680,28 +3920,28 @@
             <div class="summary-section-label">Summary</div>
             <div class="summary-section-box">
               <p>You have now seen how a client intake flows into the attorney dashboard and how RN oversight supports recovery documentation. Reconcile C.A.R.E. is designed to give attorneys visibility into treatment progression, documentation integrity, and recovery coordination.</p>
-              <p style="margin-bottom: 0;">From intake through recovery monitoring, the system provides a structured clinical framework that supports case development. Use the options below to schedule a full platform demonstration or learn more about the clinical methodology behind the system.</p>
+              <p class="mb-0">From intake through recovery monitoring, the system provides a structured clinical framework that supports case development. Use the options below to schedule a full platform demonstration or learn more about the clinical methodology behind the system.</p>
             </div>
           </div>
 
           <div class="summary-section">
             <div class="summary-section-label">Platform Highlights</div>
             <div class="summary-section-box">
-              <div class="data-grid" style="margin-bottom: 0;">
-                <div class="data-item" style="text-align: center;">
-                  <div class="data-value" style="font-size: 24px; color: var(--gold);">24/7</div>
+              <div class="data-grid data-grid-cta">
+                <div class="data-item text-center">
+                  <div class="data-value data-value-emphasis">24/7</div>
                   <div class="data-label">Client Documentation</div>
                 </div>
-                <div class="data-item" style="text-align: center;">
-                  <div class="data-value" style="font-size: 24px; color: var(--gold);">RN</div>
+                <div class="data-item text-center">
+                  <div class="data-value data-value-emphasis">RN</div>
                   <div class="data-label">Clinical Oversight</div>
                 </div>
-                <div class="data-item" style="text-align: center;">
-                  <div class="data-value" style="font-size: 24px; color: var(--gold);">4Ps™</div>
+                <div class="data-item text-center">
+                  <div class="data-value data-value-emphasis">4Ps™</div>
                   <div class="data-label">Wellness Framework</div>
                 </div>
-                <div class="data-item" style="text-align: center;">
-                  <div class="data-value" style="font-size: 24px; color: var(--gold);">Monthly</div>
+                <div class="data-item text-center">
+                  <div class="data-value data-value-emphasis">Monthly</div>
                   <div class="data-label">Attorney Reports</div>
                 </div>
               </div>
@@ -3718,9 +3958,9 @@
         </div>
       </div>
 
-      <p class="text-center text-sm mt-8" style="color: var(--gray-100);">
+      <p class="text-center text-sm mt-8 footer-muted">
         © Reconcile Care Management Services<br>
-        <span style="font-size: 11px;">4Ps of Wellness™ | 7 Rights of Injury Management™</span>
+        <span class="text-xs">4Ps of Wellness™ | 7 Rights of Injury Management™</span>
       </p>
     </div>
   </div>
