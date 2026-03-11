@@ -225,6 +225,360 @@
       padding: 48px 52px;
     }
 
+    .card-premium {
+      border: 1px solid var(--gray-300);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .section-header-premium {
+      margin-top: 28px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy);
+    }
+
+    .section-header-premium .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .auth-intro {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 20px 24px;
+      margin-bottom: 8px;
+    }
+
+    .auth-intro p {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .auth-block {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 8px;
+    }
+
+    .auth-statement {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .auth-choices {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .auth-choice {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid var(--gray-300);
+      background: var(--gray-50);
+      color: var(--gray-700);
+    }
+
+    .auth-choice input { display: none; }
+
+    .auth-choice-yes:hover { border-color: var(--gold); background: rgba(176, 152, 55, 0.08); color: var(--navy); }
+    .auth-choice-no:hover { border-color: var(--gray-500); background: var(--gray-100); }
+
+    .auth-choice-yes:has(input:checked) { border-color: var(--gold); background: var(--gold); color: var(--white); }
+    .auth-choice-no:has(input:checked) { border-color: var(--error); background: var(--error-light); color: var(--error); }
+
+    .auth-contact-message {
+      background: var(--error-light);
+      border: 1px solid var(--error);
+      border-left: 4px solid var(--error);
+      padding: 18px 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    .auth-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .card-body-premium { padding: 44px 48px; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .summary-panel {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+    }
+
+    .summary-panel-label,
+    .summary-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .summary-panel-content,
+    .summary-section-box {
+      font-size: 14px;
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    .summary-section-box {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+    }
+
+    .summary-section { margin-bottom: 24px; }
+
+    .summary-nextsteps {
+      background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%);
+      border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 24px 26px;
+      margin-bottom: 28px;
+    }
+
+    .summary-nextsteps-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .summary-nextsteps ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 14px;
+      color: var(--gray-800);
+      line-height: 1.7;
+    }
+
+    .summary-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    /* Case Snapshot — premium, restrained palette */
+    .case-snapshot-panel {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      color: var(--white);
+      box-shadow: 0 8px 32px rgba(18,52,91,0.35);
+      border: 1px solid var(--navy-light);
+    }
+
+    .case-snapshot-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .case-snapshot-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.7;
+      font-weight: 700;
+    }
+
+    .case-snapshot-scale {
+      font-size: 11px;
+      opacity: 0.5;
+      letter-spacing: 0.5px;
+    }
+
+    .case-snapshot-block { margin-bottom: 8px; }
+    .case-snapshot-block:last-child { margin-bottom: 0; }
+
+    .case-snapshot-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      opacity: 0.6;
+      margin-bottom: 12px;
+    }
+
+    .case-snapshot-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .case-snapshot-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .case-snapshot-metric {
+      background: rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 18px 16px;
+      text-align: center;
+      border-top: 3px solid rgba(255,255,255,0.2);
+    }
+
+    .case-snapshot-metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .case-snapshot-metric-value {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold-light);
+    }
+
+    .case-snapshot-metric-value.trajectory-text { font-size: 20px; }
+
+    .case-snapshot-metric-of,
+    .case-snapshot-metric-sub {
+      font-size: 11px;
+      opacity: 0.6;
+      margin-top: 6px;
+    }
+
+    .case-snapshot-metric-p1 { border-top-color: rgba(196,177,90,0.7); }
+    .case-snapshot-metric-p1 .case-snapshot-metric-value { color: var(--gold-light); }
+    .case-snapshot-metric-p2 { border-top-color: rgba(255,255,255,0.35); }
+    .case-snapshot-metric-p2 .case-snapshot-metric-value { color: rgba(255,255,255,0.95); }
+    .case-snapshot-metric-p3 { border-top-color: rgba(255,255,255,0.3); }
+    .case-snapshot-metric-p3 .case-snapshot-metric-value { color: rgba(255,255,255,0.9); }
+    .case-snapshot-metric-p4 { border-top-color: rgba(196,177,90,0.6); }
+    .case-snapshot-metric-p4 .case-snapshot-metric-value { color: var(--gold-light); }
+    .case-snapshot-metric-fci { border-top-color: var(--gold); }
+    .case-snapshot-metric-fci .case-snapshot-metric-value { color: var(--gold-light); }
+    .case-snapshot-metric-intrinsic .case-snapshot-metric-value,
+    .case-snapshot-metric-intrinsic .case-snapshot-metric-sub { color: rgba(255,255,255,0.9); }
+    .case-snapshot-metric-extrinsic .case-snapshot-metric-value,
+    .case-snapshot-metric-extrinsic .case-snapshot-metric-sub { color: rgba(255,255,255,0.95); }
+    .case-snapshot-metric-trajectory .case-snapshot-metric-value { color: var(--gold-light); }
+
+    .case-snapshot-divider {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 20px 0;
+    }
+
+    .case-snapshot-row {
+      background: rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-top: 3px solid rgba(255,255,255,0.2);
+    }
+
+    .case-snapshot-row-value {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .case-snapshot-row-icon { font-size: 24px; flex-shrink: 0; opacity: 0.9; }
+    .case-snapshot-row-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .case-snapshot-row-desc { font-size: 12px; opacity: 0.65; }
+
+    .case-snapshot-alert {
+      background: rgba(176,152,55,0.15);
+      border-top-color: var(--gold);
+    }
+    .case-snapshot-alert .case-snapshot-row-title { color: var(--gold-light); }
+
+    .dashboard-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .dashboard-stat {
+      background: rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      min-width: 0;
+    }
+
+    .dashboard-stat-emphasis {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.28);
+    }
+
+    .dashboard-stat-num {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .dashboard-stat-label {
+      font-size: 11px;
+      line-height: 1.35;
+      opacity: 0.95;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0.2px;
+    }
+
     /* ==================== BUTTONS ==================== */
     .btn {
       display: inline-flex;
@@ -233,13 +587,14 @@
       gap: 10px;
       padding: 16px 32px;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       font-family: var(--font-body);
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.25s ease;
       text-decoration: none;
+      letter-spacing: 0.3px;
     }
 
     .btn:active {
@@ -270,11 +625,13 @@
       background: transparent;
       border: 2px solid var(--navy);
       color: var(--navy);
+      font-weight: 600;
     }
 
     .btn-outline:hover {
       background: var(--navy);
       color: var(--white);
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-outline-white {
@@ -304,8 +661,10 @@
     }
 
     .btn-lg {
-      padding: 20px 40px;
-      font-size: 18px;
+      padding: 18px 36px;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
     }
 
     .btn-sm {
@@ -1164,20 +1523,24 @@
     .cta-text {
       font-size: 18px;
       color: rgba(255,255,255,0.9);
-      margin-bottom: 40px;
+    }
+
+    .cta-text-premium {
       max-width: 640px;
       margin-left: auto;
       margin-right: auto;
-      line-height: 1.6;
+      margin-bottom: 36px;
+      line-height: 1.65;
     }
 
     .cta-card {
       background: var(--white);
       border-radius: var(--radius-lg);
-      padding: 48px;
+      padding: 48px 52px;
       max-width: 720px;
       margin: 0 auto;
-      box-shadow: var(--shadow-xl);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--gray-200);
     }
 
     .cta-buttons {
@@ -1187,6 +1550,8 @@
       flex-wrap: wrap;
       margin-bottom: 28px;
     }
+
+    .cta-buttons .btn { min-width: 200px; }
 
     /* ==================== RESUME MODAL ==================== */
     .resume-modal {
@@ -1719,43 +2084,56 @@
   <!-- ==================== SCREEN 2B: REQUIRED AUTHORIZATIONS ==================== -->
   <div class="screen" id="screen-client-authorization" data-step="2">
     <div class="container container-narrow">
-      <div class="card">
+      <div class="card card-premium">
         <div class="card-header">
           <h1>Required Authorizations</h1>
-          <p>You must accept both authorizations to continue</p>
+          <p>Formal platform authorization step — both items must be accepted to proceed</p>
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <label class="form-label">1. Consent to receive services from Reconcile Care Management Services (RCMS)</label>
-            <div style="display: flex; gap: 24px; margin-top: 8px;">
-              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+          <div class="auth-intro">
+            <p>These authorizations are required before intake can proceed. Reconcile Care Management Services (RCMS) cannot collect or share your information without these permissions. This step protects your privacy, documentation integrity, and care coordination with your attorney.</p>
+          </div>
+
+          <div class="section-header section-header-premium">
+            <div class="section-title">Authorization 1</div>
+          </div>
+          <div class="auth-block">
+            <div class="auth-statement">Consent to receive services from Reconcile Care Management Services (RCMS)</div>
+            <div class="auth-choices">
+              <label class="auth-choice auth-choice-yes">
                 <input type="radio" name="auth-rcms-services" value="yes" id="auth-rcms-yes" checked onchange="checkAuthorizations()">
                 <span>Yes</span>
               </label>
-              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <label class="auth-choice auth-choice-no">
                 <input type="radio" name="auth-rcms-services" value="no" id="auth-rcms-no" onchange="checkAuthorizations()">
                 <span>No</span>
               </label>
             </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">2. Consent for RCMS to release collected PHI/PII to your attorney</label>
-            <div style="display: flex; gap: 24px; margin-top: 8px;">
-              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+
+          <div class="section-header section-header-premium">
+            <div class="section-title">Authorization 2</div>
+          </div>
+          <div class="auth-block">
+            <div class="auth-statement">Consent for RCMS to release collected PHI/PII to your attorney</div>
+            <div class="auth-choices">
+              <label class="auth-choice auth-choice-yes">
                 <input type="radio" name="auth-phi-release" value="yes" id="auth-phi-yes" checked onchange="checkAuthorizations()">
                 <span>Yes</span>
               </label>
-              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <label class="auth-choice auth-choice-no">
                 <input type="radio" name="auth-phi-release" value="no" id="auth-phi-no" onchange="checkAuthorizations()">
                 <span>No</span>
               </label>
             </div>
           </div>
-          <div id="auth-contact-message" style="display: none; background: var(--gray-50); border-left: 4px solid var(--error); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 20px; font-size: 14px; color: var(--gray-800);">
-            Please contact your legal representative.
+
+          <div id="auth-contact-message" class="auth-contact-message" style="display: none;">
+            Please contact your legal representative before continuing.
           </div>
-          <div style="display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap;">
-            <button type="button" class="btn btn-outline" onclick="goToScreen('screen-client-login')">← Back</button>
+
+          <div class="auth-actions">
+            <button type="button" class="btn btn-outline btn-lg" onclick="goToScreen('screen-client-login')">← Back</button>
             <button type="button" class="btn btn-primary btn-lg" id="btn-continue-to-intake" disabled onclick="goToScreen('screen-intake-1')">Continue to Intake →</button>
           </div>
         </div>
@@ -2294,26 +2672,26 @@
   <!-- ==================== SCREEN 4B: INTAKE SUMMARY / PRINT-DOWNLOAD ==================== -->
   <div class="screen" id="screen-intake-summary" data-step="4">
     <div class="container container-wide">
-      <div class="card">
+      <div class="card card-premium">
         <div class="card-header">
           <h1>Client Intake Summary</h1>
           <p id="summary-clientName">Maria Santos</p>
           <p style="font-size: 14px; opacity: 0.9;">Intake Number: <strong id="summary-caseNumber">MS04-260115-01F</strong></p>
         </div>
-        <div class="card-body">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
-            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px;">
-              <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Client Information</div>
-              <div style="font-size: 14px; color: var(--gray-800); line-height: 1.5;" id="summary-client-info">
+        <div class="card-body card-body-premium">
+          <div class="summary-grid">
+            <div class="summary-panel">
+              <div class="summary-panel-label">Client Information</div>
+              <div class="summary-panel-content" id="summary-client-info">
                 <span id="summary-clientName-2">Maria Santos</span><br>
                 DOB: <span id="summary-dob">06/15/1985</span><br>
                 Contact: <span id="summary-contact">(512) 555-0147 · maria.santos@email.com</span><br>
                 Attorney: <span id="summary-attorney">Lauren Mitchell — Mitchell Law Group</span>
               </div>
             </div>
-            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px;">
-              <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Injury Summary</div>
-              <div style="font-size: 14px; color: var(--gray-800); line-height: 1.5;">
+            <div class="summary-panel">
+              <div class="summary-panel-label">Injury Summary</div>
+              <div class="summary-panel-content">
                 <strong>Type:</strong> <span id="summary-injury-type">Motor Vehicle Accident</span><br>
                 <strong>Date of incident:</strong> <span id="summary-injury-date">November 15, 2024</span><br>
                 <strong>Current pain level:</strong> <span id="summary-pain-level">7</span>/10<br>
@@ -2323,9 +2701,9 @@
             </div>
           </div>
 
-          <div style="margin-bottom: 24px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Medical History Summary</div>
-            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
+          <div class="summary-section">
+            <div class="summary-section-label">Medical History Summary</div>
+            <div class="summary-section-box">
               <strong>Pre-existing conditions:</strong> <span id="summary-conditions">Hypertension</span>.<br>
               <strong>Current medications:</strong> <span id="summary-medications">Lisinopril 10 mg once daily; Ibuprofen 400 mg as needed</span>.<br>
               <strong>Allergies:</strong> <span id="summary-allergies">Penicillin</span>.<br>
@@ -2334,23 +2712,23 @@
             </div>
           </div>
 
-          <div style="margin-bottom: 24px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Provider Summary</div>
-            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;" id="summary-providers">
+          <div class="summary-section">
+            <div class="summary-section-label">Provider Summary</div>
+            <div class="summary-section-box" id="summary-providers">
               <strong>Provider 1:</strong> <span id="summary-prov1">Austin Spine & Rehab Center (Chiropractor) — First visit 11/18/2024, 3×/week</span>.<br>
               <strong>Provider 2:</strong> <span id="summary-prov2">Dr. Michael Torres, MD (Pain Management) — First visit 11/25/2024, monthly</span>.
             </div>
           </div>
 
-          <div style="margin-bottom: 24px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Consent & Key Selections</div>
-            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
+          <div class="summary-section">
+            <div class="summary-section-label">Consent & Key Selections</div>
+            <div class="summary-section-box">
               <span id="summary-consents">C.A.R.E. Acknowledgment signed; HIPAA authorization signed; Attorney communication consent signed; Understanding of services (medical emergency disclaimer) acknowledged.</span> Preferred language: <span id="summary-language">English</span>.
             </div>
           </div>
 
-          <div style="background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%); border-left: 4px solid var(--gold); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 24px; margin-bottom: 28px; border: 1px solid var(--gray-200);">
-            <div style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 12px;">Next Steps</div>
+          <div class="summary-nextsteps">
+            <div class="summary-nextsteps-title">Next Steps</div>
             <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: var(--gray-800); line-height: 1.7;">
               <li>The intake has been submitted and is now visible in the attorney dashboard.</li>
               <li>The attorney must attest that this case is theirs to activate RN clinical oversight.</li>
@@ -2360,16 +2738,10 @@
             </ul>
           </div>
 
-          <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 32px;">
-            <button type="button" class="btn btn-outline btn-lg" onclick="window.print();">
-              🖨️ Print Intake Summary
-            </button>
-            <button type="button" class="btn btn-outline btn-lg" onclick="downloadIntakeSummary();">
-              📥 Download Intake Summary
-            </button>
-            <button type="button" class="btn btn-primary btn-lg" onclick="goToScreen('screen-attorney-portal')">
-              Continue to Attorney View →
-            </button>
+          <div class="summary-actions">
+            <button type="button" class="btn btn-outline btn-lg" onclick="window.print();">Print Intake Summary</button>
+            <button type="button" class="btn btn-outline btn-lg" onclick="downloadIntakeSummary();">Download Intake Summary</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="goToScreen('screen-attorney-portal')">Continue to Attorney View →</button>
           </div>
         </div>
       </div>
@@ -2392,38 +2764,38 @@
             </div>
           </div>
           <!-- Summary stats / quick-action row -->
-          <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch;">
-            <div style="background: rgba(255,255,255,0.28); border-radius: 8px; padding: 14px 22px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.25);">
-              <div style="font-size: 24px; font-weight: 700;">1</div>
-              <div style="font-size: 12px; opacity: 1; line-height: 1.3; font-weight: 600;">Cases Awaiting<br>Attestation</div>
+          <div class="dashboard-stats-row">
+            <div class="dashboard-stat dashboard-stat-emphasis">
+              <div class="dashboard-stat-num">1</div>
+              <div class="dashboard-stat-label">Cases Awaiting Attestation</div>
             </div>
-            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
-              <div style="font-size: 22px; font-weight: 700;">2</div>
-              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">Cases Needing<br>Review</div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat-num">2</div>
+              <div class="dashboard-stat-label">Cases Needing Review</div>
             </div>
-            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
-              <div style="font-size: 22px; font-weight: 700;">3</div>
-              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">Active<br>Cases</div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat-num">3</div>
+              <div class="dashboard-stat-label">Active Cases</div>
             </div>
-            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
-              <div style="font-size: 22px; font-weight: 700;">1</div>
-              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">Cases Awaiting<br>Review</div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat-num">1</div>
+              <div class="dashboard-stat-label">Cases Awaiting Review</div>
             </div>
-            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
-              <div style="font-size: 22px; font-weight: 700;">2</div>
-              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">RN Coordinated<br>Cases</div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat-num">2</div>
+              <div class="dashboard-stat-label">RN Coordinated Cases</div>
             </div>
-            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
-              <div style="font-size: 22px; font-weight: 700;">0</div>
-              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">7-Day Follow-Up<br>Window</div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat-num">0</div>
+              <div class="dashboard-stat-label">7-Day Follow-Up Window</div>
             </div>
-            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
-              <div style="font-size: 22px; font-weight: 700;">1</div>
-              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">14-Day Follow-Up<br>Window</div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat-num">1</div>
+              <div class="dashboard-stat-label">14-Day Follow-Up Window</div>
             </div>
-            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
-              <div style="font-size: 22px; font-weight: 700;">2</div>
-              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">28-Day Follow-Up<br>Window</div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat-num">2</div>
+              <div class="dashboard-stat-label">28-Day Follow-Up Window</div>
             </div>
           </div>
         </div>
@@ -2464,86 +2836,86 @@
           <!-- ============================================ -->
           <!-- SECTION 1: CASE SNAPSHOT (Key Metrics) -->
           <!-- ============================================ -->
-          <div style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%); border-radius: 12px; padding: 36px; margin-bottom: 32px; color: var(--white); box-shadow: 0 8px 32px rgba(18,52,91,0.35);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px;">
-              <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.6; font-weight: 700;">Case Snapshot — Maria Santos</div>
-              <div style="font-size: 11px; opacity: 0.5; letter-spacing: 0.5px;">All scores: 1 (critical) → 5 (optimal)</div>
+          <div class="case-snapshot-panel">
+            <div class="case-snapshot-header">
+              <div class="case-snapshot-title">Case Snapshot — Maria Santos</div>
+              <div class="case-snapshot-scale">All scores: 1 (critical) → 5 (optimal)</div>
             </div>
 
             <!-- 4Ps of Wellness -->
-            <div style="margin-bottom: 8px;">
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 12px;">4Ps of Wellness</div>
-              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #4ade80;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P1 · Physical</div>
-                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #4ade80;">2</div>
-                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+            <div class="case-snapshot-block">
+              <div class="case-snapshot-label">4Ps of Wellness</div>
+              <div class="case-snapshot-grid-4">
+                <div class="case-snapshot-metric case-snapshot-metric-p1">
+                  <div class="case-snapshot-metric-label">P1 · Physical</div>
+                  <div class="case-snapshot-metric-value">2</div>
+                  <div class="case-snapshot-metric-of">of 5</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #a78bfa;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P2 · Psychological</div>
-                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #a78bfa;">3</div>
-                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                <div class="case-snapshot-metric case-snapshot-metric-p2">
+                  <div class="case-snapshot-metric-label">P2 · Psychological</div>
+                  <div class="case-snapshot-metric-value">3</div>
+                  <div class="case-snapshot-metric-of">of 5</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #f472b6;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P3 · Psychosocial</div>
-                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #f472b6;">3</div>
-                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                <div class="case-snapshot-metric case-snapshot-metric-p3">
+                  <div class="case-snapshot-metric-label">P3 · Psychosocial</div>
+                  <div class="case-snapshot-metric-value">3</div>
+                  <div class="case-snapshot-metric-of">of 5</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fbbf24;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P4 · Professional</div>
-                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #fbbf24;">2</div>
-                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                <div class="case-snapshot-metric case-snapshot-metric-p4">
+                  <div class="case-snapshot-metric-label">P4 · Professional</div>
+                  <div class="case-snapshot-metric-value">2</div>
+                  <div class="case-snapshot-metric-of">of 5</div>
                 </div>
               </div>
             </div>
 
-            <div style="border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0;"></div>
+            <div class="case-snapshot-divider"></div>
 
             <!-- FCI, Concerns, Recovery Trajectory -->
-            <div style="margin-bottom: 8px;">
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 12px;">Clinical Indicators</div>
-              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #38bdf8;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Functional Capacity Index</div>
-                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #38bdf8;">2</div>
-                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+            <div class="case-snapshot-block">
+              <div class="case-snapshot-label">Clinical Indicators</div>
+              <div class="case-snapshot-grid-4">
+                <div class="case-snapshot-metric case-snapshot-metric-fci">
+                  <div class="case-snapshot-metric-label">Functional Capacity Index</div>
+                  <div class="case-snapshot-metric-value">2</div>
+                  <div class="case-snapshot-metric-of">of 5</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fbbf24;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Intrinsic Concerns</div>
-                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #fbbf24;">3</div>
-                  <div style="font-size: 11px; color: #fbbf24; opacity: 0.8; margin-top: 6px;">Moderate</div>
+                <div class="case-snapshot-metric case-snapshot-metric-intrinsic">
+                  <div class="case-snapshot-metric-label">Intrinsic Concerns</div>
+                  <div class="case-snapshot-metric-value">3</div>
+                  <div class="case-snapshot-metric-sub">Moderate</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fb923c;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Extrinsic Concerns</div>
-                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #fb923c;">4</div>
-                  <div style="font-size: 11px; color: #fb923c; opacity: 0.9; margin-top: 6px;">Elevated</div>
+                <div class="case-snapshot-metric case-snapshot-metric-extrinsic">
+                  <div class="case-snapshot-metric-label">Extrinsic Concerns</div>
+                  <div class="case-snapshot-metric-value">4</div>
+                  <div class="case-snapshot-metric-sub">Elevated</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fbbf24;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Recovery Trajectory</div>
-                  <div style="font-size: 22px; font-weight: 700; color: #fbbf24; margin-top: 6px;">Delayed</div>
-                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">Monitor closely</div>
+                <div class="case-snapshot-metric case-snapshot-metric-trajectory">
+                  <div class="case-snapshot-metric-label">Recovery Trajectory</div>
+                  <div class="case-snapshot-metric-value trajectory-text">Delayed</div>
+                  <div class="case-snapshot-metric-of">Monitor closely</div>
                 </div>
               </div>
             </div>
 
-            <div style="border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0;"></div>
+            <div class="case-snapshot-divider"></div>
 
             <!-- SDOH + Provider Sequencing -->
-            <div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 12px;">Social & Documentation Risk</div>
-              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
-                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 20px; display: flex; align-items: center; gap: 20px; border-top: 3px solid #38bdf8;">
-                  <div style="font-size: 44px; font-weight: 700; color: #38bdf8; line-height: 1; flex-shrink: 0;">3</div>
+            <div class="case-snapshot-block">
+              <div class="case-snapshot-label">Social & Documentation Risk</div>
+              <div class="case-snapshot-grid-2">
+                <div class="case-snapshot-row case-snapshot-sdoh">
+                  <div class="case-snapshot-row-value">3</div>
                   <div>
-                    <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px;">SDOH — Social Drivers of Health</div>
-                    <div style="font-size: 12px; opacity: 0.6;">Score 3 of 5 — Moderate Impact</div>
+                    <div class="case-snapshot-row-title">SDOH — Social Drivers of Health</div>
+                    <div class="case-snapshot-row-desc">Score 3 of 5 — Moderate Impact</div>
                   </div>
                 </div>
-                <div style="background: rgba(251,146,60,0.12); border-radius: 8px; padding: 18px 20px; display: flex; align-items: center; gap: 20px; border-top: 3px solid #fb923c;">
-                  <div style="font-size: 32px; line-height: 1; flex-shrink: 0;">⚠️</div>
+                <div class="case-snapshot-row case-snapshot-alert">
+                  <div class="case-snapshot-row-icon">⚠</div>
                   <div>
-                    <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px; color: #fb923c;">Provider Sequencing Concern</div>
-                    <div style="font-size: 12px; opacity: 0.7;">Neurologist referral pending 3+ weeks</div>
+                    <div class="case-snapshot-row-title">Provider Sequencing Concern</div>
+                    <div class="case-snapshot-row-desc">Neurologist referral pending 3+ weeks</div>
                   </div>
                 </div>
               </div>
@@ -3210,7 +3582,7 @@
     <div class="container">
       <div class="cta-section">
         <div class="cta-title">What You Have Seen</div>
-        <div class="cta-text">
+        <div class="cta-text cta-text-premium">
           You have now seen how a client intake flows into the attorney dashboard and how RN oversight supports recovery documentation.<br><br>
           Reconcile C.A.R.E. is designed to give attorneys visibility into treatment progression, documentation integrity, and recovery coordination.<br><br>
           From intake through recovery monitoring, the system provides a structured clinical framework that supports case development.<br><br>
@@ -3244,18 +3616,12 @@
         </div>
 
         <div class="cta-buttons">
-          <a href="#" class="btn btn-orange btn-lg">
-            🔍 Run C.A.R.E. Clinical Sequencing Auditor
-          </a>
-          <a href="#" class="btn btn-outline btn-lg">
-            📞 Request Live Attorney Walkthrough
-          </a>
+          <a href="#" class="btn btn-primary btn-lg">Run Reconcile C.A.R.E. Clinical Sequencing Auditor</a>
+          <a href="#" class="btn btn-outline btn-lg">Request Live Attorney Walkthrough</a>
         </div>
 
         <div class="text-center mt-6">
-          <button class="btn btn-ghost" onclick="restartDemo()">
-            ↻ Restart Demonstration
-          </button>
+          <button class="btn btn-ghost" onclick="restartDemo()">Restart Demonstration</button>
         </div>
       </div>
 
