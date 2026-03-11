@@ -2243,6 +2243,7 @@
       .demo-banner,
       .progress-container,
       .demo-nav,
+      .guidance-overlay-wrap,
       .screen:not(.active) {
         display: none !important;
       }
@@ -2281,6 +2282,57 @@
       .clinical-alerts-grid { grid-template-columns: 1fr; }
       .output-cards-grid { grid-template-columns: 1fr; }
     }
+
+    /* ==================== TIMED GUIDANCE OVERLAY ==================== */
+    .guidance-overlay-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 900;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 120px 24px 0;
+      box-sizing: border-box;
+    }
+
+    .guidance-overlay {
+      pointer-events: none;
+      max-width: 340px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--gold);
+      padding: 18px 20px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .guidance-overlay.visible {
+      opacity: 1;
+    }
+
+    .guidance-overlay-heading {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: var(--weight-bold);
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .guidance-overlay-text {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--gray-800);
+      line-height: 1.5;
+      font-weight: var(--weight-regular);
+    }
   </style>
 </head>
 <body>
@@ -2303,6 +2355,14 @@
       <div class="progress-step" data-step="7"><span class="progress-step-num">7</span> Sample Care Plan</div>
       <div class="progress-step" data-step="8"><span class="progress-step-num">8</span> Documentation</div>
       <div class="progress-step" data-step="9"><span class="progress-step-num">9</span> Next Steps</div>
+    </div>
+  </div>
+
+  <!-- ==================== TIMED GUIDANCE OVERLAY ==================== -->
+  <div class="guidance-overlay-wrap" id="guidanceOverlayWrap" aria-live="polite">
+    <div class="guidance-overlay" id="guidanceOverlay">
+      <div class="guidance-overlay-heading" id="guidanceOverlayHeading"></div>
+      <div class="guidance-overlay-text" id="guidanceOverlayText"></div>
     </div>
   </div>
 
@@ -3996,6 +4056,8 @@
     function initializeDemo() {
       updateProgress();
       updateNav();
+      var activeScreen = document.querySelector('.screen.active');
+      if (activeScreen && activeScreen.id) showGuidanceForScreen(activeScreen.id);
     }
 
     // Save progress to localStorage
@@ -4018,6 +4080,61 @@
       }
     }
 
+    // Timed guidance overlays (screenId -> { heading, text })
+    var guidanceTimeoutId = null;
+    var guidanceMessages = {
+      'screen-intro': {
+        heading: 'Demo Overview',
+        text: 'This demonstration shows how Reconcile C.A.R.E. organizes client recovery information, identifies clinical risks, and supports documentation integrity throughout the life of an injury case.'
+      },
+      'screen-intake-1': {
+        heading: 'Client Intake',
+        text: 'The intake captures structured recovery information across physical, psychological, psychosocial, and professional domains to establish a clinically informed starting point for the case.'
+      },
+      'screen-attorney-portal': {
+        heading: 'Attorney Dashboard',
+        text: 'The dashboard summarizes case status and highlights areas where RN clinical oversight may be needed to support recovery monitoring and documentation integrity.'
+      },
+      'screen-rn-oversight': {
+        heading: 'RN Clinical Oversight',
+        text: 'RN Care Managers review recovery patterns, identify barriers to care, and document structured care plans that support both the client\'s recovery and the clinical narrative of the case.'
+      },
+      'screen-documentation': {
+        heading: 'Documentation Integrity',
+        text: 'Structured clinical documentation connects symptoms, functional limitations, treatment patterns, and recovery progression in a defensible format.'
+      },
+      'screen-cta': {
+        heading: 'Next Steps',
+        text: 'You can download the Clinical Oversight & Documentation Guidance or continue evaluating cases using the Clinical Sequencing Auditor and Functional Capacity Index.'
+      }
+    };
+
+    function showGuidanceForScreen(screenId) {
+      if (guidanceTimeoutId) {
+        clearTimeout(guidanceTimeoutId);
+        guidanceTimeoutId = null;
+      }
+      var el = document.getElementById('guidanceOverlay');
+      var headingEl = document.getElementById('guidanceOverlayHeading');
+      var textEl = document.getElementById('guidanceOverlayText');
+      if (!el || !headingEl || !textEl) return;
+      var msg = guidanceMessages[screenId];
+      if (!msg) {
+        el.classList.remove('visible');
+        return;
+      }
+      headingEl.textContent = msg.heading;
+      textEl.textContent = msg.text;
+      el.classList.remove('visible');
+      requestAnimationFrame(function() {
+        el.classList.add('visible');
+      });
+      guidanceTimeoutId = setTimeout(function() {
+        el.classList.remove('visible');
+        guidanceTimeoutId = null;
+      }, 5400);
+    }
+
     // Show screen
     function showScreen(screenId) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -4029,6 +4146,7 @@
         updateProgress();
         updateNav();
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        showGuidanceForScreen(screenId);
       }
     }
 
