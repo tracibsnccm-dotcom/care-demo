@@ -388,13 +388,17 @@
       line-height: 1.7;
     }
 
-    .summary-actions {
+    .summary-actions,
+    .content-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       justify-content: center;
       margin-top: 32px;
     }
+
+    .content-actions { justify-content: flex-start; }
+    .content-actions.center { justify-content: center; }
 
     /* Case Snapshot — premium, restrained palette */
     .case-snapshot-panel {
@@ -534,6 +538,8 @@
       border-top-color: var(--gold);
     }
     .case-snapshot-alert .case-snapshot-row-title { color: var(--gold-light); }
+
+    .summary-section .case-snapshot-panel { margin-bottom: 8px; }
 
     .dashboard-stats-row {
       display: flex;
@@ -1396,6 +1402,19 @@
       font-weight: 300;
     }
 
+    .intro-logo-in-header {
+      color: var(--white);
+      font-size: 42px;
+      margin-bottom: 6px;
+    }
+    .intro-logo-in-header span { color: var(--gold-light); }
+    .intro-tagline-in-header {
+      color: rgba(255,255,255,0.9);
+      font-size: 16px;
+      margin-bottom: 0;
+      font-weight: 400;
+    }
+
     .intro-message {
       background: var(--gray-50);
       border-radius: var(--radius-md);
@@ -1983,72 +2002,91 @@
   <div class="screen active" id="screen-intro" data-step="1">
     <div class="container">
       <div class="card">
-        <div class="intro-hero">
-          <div class="intro-logo" title="Reconcile C.A.R.E.">Reconcile <span>C.A.R.E.</span></div>
-          <div class="intro-tagline">Clinical Oversight & Recovery Evidence</div>
-          
-          <div class="intro-message">
-            <h2>Welcome to the Attorney Demonstration</h2>
-            <p><strong>C.A.R.E. stands for Clinical Assessment & Recovery Evaluation.</strong></p>
-            <p>Attorneys handling injury cases receive large amounts of information from clients, medical providers, and records. The challenge is not simply collecting that information — but understanding what it reveals about the client's recovery and using it strategically to support a settlement demand with clear, defensible evidence.</p>
-            <p>Every case has two layers: the information itself, and the meaning behind it. Reconcile C.A.R.E. is designed to capture both.</p>
-            <h2>Preparation vs. Strategy Within the Platform</h2>
-            <p><strong>Preparation</strong> = collecting, organizing, and structuring the client's clinical, functional, financial, and SDOH information.</p>
-            <p><strong>Strategy</strong> = interpreting that information to anticipate recovery patterns, identify emerging risks, and proactively plan against poor trajectory, barriers, and case-impacting complications.</p>
-            <p>This distinction is foundational to the platform.</p>
-            <h2>A Comprehensive View of Recovery</h2>
-            <p>Reconcile C.A.R.E. gives attorneys a clear, defensible picture of a client's comprehensive recovery, grounded in the 4Ps of Wellness:</p>
-            <p><strong>P1 – Physical:</strong> symptom progression, functional capacity, mobility, pain patterns, and physical limitations.</p>
-            <p><strong>P2 – Psychological:</strong> stress responses, fear, anxiety, trauma-related barriers, and emotional impact.</p>
-            <p><strong>P3 – Psychosocial:</strong> relationships, support systems, role changes, and how injury affects social functioning and daily life.</p>
-            <p><strong>P4 – Professional:</strong> the client's ability to perform their primary role — whether employment, school, vocational training, caregiving, or managing the home — and how the injury disrupts or prevents participation in those responsibilities.</p>
-            <p>The 4Ps give attorneys a structured, clinically grounded way to understand how the injury affects the client's life, function, and future — the elements that ultimately shape case value.</p>
-            <p><strong>SDOH = Social Drivers of Health</strong></p>
-            <h2>Real-World Factors That Shape Recovery</h2>
-            <p>Reconcile C.A.R.E. also identifies the real-world forces that influence a client's ability to follow medical recommendations and maintain a healthy recovery trajectory. These factors fall across the Psychological and Psychosocial domains of the 4Ps.</p>
-            <p>Many injured clients miss appointments or struggle to participate in therapy — and the default assumption is often that the injury must not be that severe or that the client is not following through.</p>
-            <p>Reconcile C.A.R.E. corrects this assumption by documenting the actual barriers that interfere with care.</p>
-            <p>Psychosocial barriers may include:</p>
-            <ul style="margin: 0 0 14px 20px; line-height: 1.8;">
-              <li>loss of transportation</li>
-              <li>job loss or reduced hours</li>
-              <li>caregiving responsibilities</li>
-              <li>housing instability or homelessness</li>
-              <li>financial strain that limits access to care</li>
-              <li>lack of support or role overload</li>
-            </ul>
-            <p>This demonstration is intentionally structured so the attorney experiences the client intake first.</p>
-            <p>The attorney portal only makes sense when you understand what the client sees, the questions they answer, and how those answers populate the dashboard you will review.</p>
-            <p>The structured intake process creates the clinical documentation foundation for care coordination, recovery monitoring, and defensible case support.</p>
-            <p>In this demonstration you will follow a fictional client through the intake process and then see how that information appears in the attorney dashboard.</p>
-            <p>All information shown in this demonstration is fictional.</p>
-          </div>
-
-          <div class="intro-flow">
-            <div class="intro-flow-step">
-              <div class="intro-flow-step-number">1</div>
-              <div class="intro-flow-step-label">Client Intake</div>
-            </div>
-            <div class="intro-flow-arrow">→</div>
-            <div class="intro-flow-step">
-              <div class="intro-flow-step-number">2</div>
-              <div class="intro-flow-step-label">Attorney Portal</div>
-            </div>
-            <div class="intro-flow-arrow">→</div>
-            <div class="intro-flow-step">
-              <div class="intro-flow-step-number">3</div>
-              <div class="intro-flow-step-label">RN Oversight</div>
-            </div>
-            <div class="intro-flow-arrow">→</div>
-            <div class="intro-flow-step">
-              <div class="intro-flow-step-number">4</div>
-              <div class="intro-flow-step-label">Care Plan</div>
+        <div class="card-header">
+          <h1 class="intro-logo intro-logo-in-header" title="Reconcile C.A.R.E.">Reconcile <span>C.A.R.E.</span></h1>
+          <p class="intro-tagline intro-tagline-in-header">Clinical Oversight & Recovery Evidence</p>
+        </div>
+        <div class="card-body">
+          <div class="summary-section">
+            <div class="summary-section-label">Welcome to the Attorney Demonstration</div>
+            <div class="summary-section-box">
+              <p><strong>C.A.R.E. stands for Clinical Assessment & Recovery Evaluation.</strong></p>
+              <p>Attorneys handling injury cases receive large amounts of information from clients, medical providers, and records. The challenge is not simply collecting that information — but understanding what it reveals about the client's recovery and using it strategically to support a settlement demand with clear, defensible evidence.</p>
+              <p>Every case has two layers: the information itself, and the meaning behind it. Reconcile C.A.R.E. is designed to capture both.</p>
             </div>
           </div>
 
-          <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-client-login')">
-            Begin Demonstration →
-          </button>
+          <div class="summary-section">
+            <div class="summary-section-label">Preparation vs. Strategy Within the Platform</div>
+            <div class="summary-section-box">
+              <p><strong>Preparation</strong> = collecting, organizing, and structuring the client's clinical, functional, financial, and SDOH information.</p>
+              <p><strong>Strategy</strong> = interpreting that information to anticipate recovery patterns, identify emerging risks, and proactively plan against poor trajectory, barriers, and case-impacting complications.</p>
+              <p>This distinction is foundational to the platform.</p>
+            </div>
+          </div>
+
+          <div class="summary-section">
+            <div class="summary-section-label">A Comprehensive View of Recovery</div>
+            <div class="summary-section-box">
+              <p>Reconcile C.A.R.E. gives attorneys a clear, defensible picture of a client's comprehensive recovery, grounded in the 4Ps of Wellness:</p>
+              <p><strong>P1 – Physical:</strong> symptom progression, functional capacity, mobility, pain patterns, and physical limitations.</p>
+              <p><strong>P2 – Psychological:</strong> stress responses, fear, anxiety, trauma-related barriers, and emotional impact.</p>
+              <p><strong>P3 – Psychosocial:</strong> relationships, support systems, role changes, and how injury affects social functioning and daily life.</p>
+              <p><strong>P4 – Professional:</strong> the client's ability to perform their primary role — whether employment, school, vocational training, caregiving, or managing the home — and how the injury disrupts or prevents participation in those responsibilities.</p>
+              <p>The 4Ps give attorneys a structured, clinically grounded way to understand how the injury affects the client's life, function, and future — the elements that ultimately shape case value.</p>
+              <p><strong>SDOH = Social Drivers of Health</strong></p>
+            </div>
+          </div>
+
+          <div class="summary-section">
+            <div class="summary-section-label">Real-World Factors That Shape Recovery</div>
+            <div class="summary-section-box">
+              <p>Reconcile C.A.R.E. also identifies the real-world forces that influence a client's ability to follow medical recommendations and maintain a healthy recovery trajectory. These factors fall across the Psychological and Psychosocial domains of the 4Ps.</p>
+              <p>Many injured clients miss appointments or struggle to participate in therapy — and the default assumption is often that the injury must not be that severe or that the client is not following through.</p>
+              <p>Reconcile C.A.R.E. corrects this assumption by documenting the actual barriers that interfere with care.</p>
+              <p>Psychosocial barriers may include:</p>
+              <ul style="margin: 0 0 14px 20px; line-height: 1.8;">
+                <li>loss of transportation</li>
+                <li>job loss or reduced hours</li>
+                <li>caregiving responsibilities</li>
+                <li>housing instability or homelessness</li>
+                <li>financial strain that limits access to care</li>
+                <li>lack of support or role overload</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="summary-section">
+            <div class="summary-section-label">Demonstration Flow</div>
+            <div class="summary-section-box">
+              <div class="intro-flow">
+                <div class="intro-flow-step">
+                  <div class="intro-flow-step-number">1</div>
+                  <div class="intro-flow-step-label">Client Intake</div>
+                </div>
+                <div class="intro-flow-arrow">→</div>
+                <div class="intro-flow-step">
+                  <div class="intro-flow-step-number">2</div>
+                  <div class="intro-flow-step-label">Attorney Portal</div>
+                </div>
+                <div class="intro-flow-arrow">→</div>
+                <div class="intro-flow-step">
+                  <div class="intro-flow-step-number">3</div>
+                  <div class="intro-flow-step-label">RN Oversight</div>
+                </div>
+                <div class="intro-flow-arrow">→</div>
+                <div class="intro-flow-step">
+                  <div class="intro-flow-step-number">4</div>
+                  <div class="intro-flow-step-label">Care Plan</div>
+                </div>
+              </div>
+              <p style="margin-top: 16px; margin-bottom: 0;">This demonstration is intentionally structured so the attorney experiences the client intake first. The attorney portal only makes sense when you understand what the client sees, the questions they answer, and how those answers populate the dashboard you will review. The structured intake process creates the clinical documentation foundation for care coordination, recovery monitoring, and defensible case support. In this demonstration you will follow a fictional client through the intake process and then see how that information appears in the attorney dashboard. All information shown in this demonstration is fictional.</p>
+            </div>
+          </div>
+
+          <div class="content-actions center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-client-login')">Begin Demonstration →</button>
+          </div>
         </div>
       </div>
       <p class="text-center text-sm mt-6" style="color: var(--gray-100);">
@@ -2066,28 +2104,29 @@
           <p>Secure access to your Reconcile C.A.R.E. portal</p>
         </div>
         <div class="card-body">
-          <div class="info-box info-box-orange">
-            <div class="info-box-title">📋 Demonstration Mode</div>
-            <div class="info-box-text">This is a simulated login screen. In the live system, clients enter their case number and PIN. For this demo, click below to proceed as a new client completing intake.</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Demonstration Mode</div>
+            <div class="summary-section-box">
+              <p style="margin: 0;">This is a simulated login screen. In the live system, clients enter their case number and PIN. For this demo, click below to proceed as a new client completing intake.</p>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Case Number</label>
-            <input type="text" class="form-input" placeholder="e.g. MS04-260115-01F" disabled>
+          <div class="summary-section">
+            <div class="summary-section-label">Portal Access</div>
+            <div class="summary-section-box">
+              <div class="form-group">
+                <label class="form-label">Case Number</label>
+                <input type="text" class="form-input" placeholder="e.g. MS04-260115-01F" disabled>
+              </div>
+              <div class="form-group mb-6">
+                <label class="form-label">PIN</label>
+                <input type="password" class="form-input" placeholder="4-digit PIN" disabled>
+              </div>
+              <button class="btn btn-outline btn-block mb-4" disabled style="opacity: 0.4;">Sign In (Disabled for Demo)</button>
+              <div style="text-align: center; color: var(--gray-500); margin-bottom: 12px; font-size: 12px;">— or —</div>
+              <button class="btn btn-primary btn-block btn-lg" onclick="goToScreen('screen-client-authorization')">Continue as New Client →</button>
+            </div>
           </div>
-
-          <div class="form-group mb-6">
-            <label class="form-label">PIN</label>
-            <input type="password" class="form-input" placeholder="4-digit PIN" disabled>
-          </div>
-
-          <button class="btn btn-primary btn-block mb-4" disabled style="opacity: 0.4;">Sign In (Disabled for Demo)</button>
-          
-          <div style="text-align: center; color: var(--gray-400); margin-bottom: 16px; font-size: 13px;">— or —</div>
-          
-          <button class="btn btn-orange btn-block btn-lg" onclick="goToScreen('screen-client-authorization')">
-            Continue as New Client →
-          </button>
         </div>
       </div>
     </div>
@@ -2096,47 +2135,50 @@
   <!-- ==================== SCREEN 2B: REQUIRED AUTHORIZATIONS ==================== -->
   <div class="screen" id="screen-client-authorization" data-step="2">
     <div class="container container-narrow">
-      <div class="card card-premium">
+      <div class="card">
         <div class="card-header">
           <h1>Required Authorizations</h1>
           <p>Formal platform authorization step — both items must be accepted to proceed</p>
         </div>
         <div class="card-body">
-          <div class="auth-intro">
-            <p>These authorizations are required before intake can proceed. Reconcile Care Management Services (RCMS) cannot collect or share your information without these permissions. This step protects your privacy, documentation integrity, and care coordination with your attorney.</p>
-          </div>
-
-          <div class="section-header section-header-premium">
-            <div class="section-title">Authorization 1</div>
-          </div>
-          <div class="auth-block">
-            <div class="auth-statement">Consent to receive services from Reconcile Care Management Services (RCMS)</div>
-            <div class="auth-choices">
-              <label class="auth-choice auth-choice-yes">
-                <input type="radio" name="auth-rcms-services" value="yes" id="auth-rcms-yes" checked onchange="checkAuthorizations()">
-                <span>Yes</span>
-              </label>
-              <label class="auth-choice auth-choice-no">
-                <input type="radio" name="auth-rcms-services" value="no" id="auth-rcms-no" onchange="checkAuthorizations()">
-                <span>No</span>
-              </label>
+          <div class="summary-section">
+            <div class="summary-section-label">Required Before Intake</div>
+            <div class="summary-section-box">
+              <p style="margin: 0;">These authorizations are required before intake can proceed. Reconcile Care Management Services (RCMS) cannot collect or share your information without these permissions. This step protects your privacy, documentation integrity, and care coordination with your attorney.</p>
             </div>
           </div>
 
-          <div class="section-header section-header-premium">
-            <div class="section-title">Authorization 2</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Authorization 1</div>
+            <div class="summary-section-box">
+              <div class="auth-statement">Consent to receive services from Reconcile Care Management Services (RCMS)</div>
+              <div class="auth-choices">
+                <label class="auth-choice auth-choice-yes">
+                  <input type="radio" name="auth-rcms-services" value="yes" id="auth-rcms-yes" checked onchange="checkAuthorizations()">
+                  <span>Yes</span>
+                </label>
+                <label class="auth-choice auth-choice-no">
+                  <input type="radio" name="auth-rcms-services" value="no" id="auth-rcms-no" onchange="checkAuthorizations()">
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
           </div>
-          <div class="auth-block">
-            <div class="auth-statement">Consent for RCMS to release collected PHI/PII to your attorney</div>
-            <div class="auth-choices">
-              <label class="auth-choice auth-choice-yes">
-                <input type="radio" name="auth-phi-release" value="yes" id="auth-phi-yes" checked onchange="checkAuthorizations()">
-                <span>Yes</span>
-              </label>
-              <label class="auth-choice auth-choice-no">
-                <input type="radio" name="auth-phi-release" value="no" id="auth-phi-no" onchange="checkAuthorizations()">
-                <span>No</span>
-              </label>
+
+          <div class="summary-section">
+            <div class="summary-section-label">Authorization 2</div>
+            <div class="summary-section-box">
+              <div class="auth-statement">Consent for RCMS to release collected PHI/PII to your attorney</div>
+              <div class="auth-choices">
+                <label class="auth-choice auth-choice-yes">
+                  <input type="radio" name="auth-phi-release" value="yes" id="auth-phi-yes" checked onchange="checkAuthorizations()">
+                  <span>Yes</span>
+                </label>
+                <label class="auth-choice auth-choice-no">
+                  <input type="radio" name="auth-phi-release" value="no" id="auth-phi-no" onchange="checkAuthorizations()">
+                  <span>No</span>
+                </label>
+              </div>
             </div>
           </div>
 
@@ -2144,7 +2186,7 @@
             Please contact your legal representative before continuing.
           </div>
 
-          <div class="auth-actions">
+          <div class="content-actions">
             <button type="button" class="btn btn-outline btn-lg" onclick="goToScreen('screen-client-login')">← Back</button>
             <button type="button" class="btn btn-primary btn-lg" id="btn-continue-to-intake" disabled onclick="goToScreen('screen-intake-1')">Continue to Intake →</button>
           </div>
@@ -2179,61 +2221,64 @@
           <p>Let's start with some basic information</p>
         </div>
         <div class="card-body">
-          <div class="info-box info-box-orange">
-            <div class="info-box-title">🎭 Demo Data Pre-filled</div>
-            <div class="info-box-text">This form contains fictional client data for demonstration. In the live system, clients enter their own information.</div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">First Name</label>
-              <input type="text" class="form-input" id="intake-firstName" value="Maria">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Last Name</label>
-              <input type="text" class="form-input" id="intake-lastName" value="Santos">
+          <div class="summary-section">
+            <div class="summary-section-label">Demonstration Note</div>
+            <div class="summary-section-box">
+              <p style="margin: 0;">This form contains fictional client data for demonstration. In the live system, clients enter their own information.</p>
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Date of Birth</label>
-              <input type="date" class="form-input" id="intake-dob" value="1985-06-15">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Phone Number</label>
-              <input type="tel" class="form-input" id="intake-phone" value="(512) 555-0147">
+          <div class="summary-section">
+            <div class="summary-section-label">Personal Information</div>
+            <div class="summary-section-box">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">First Name</label>
+                  <input type="text" class="form-input" id="intake-firstName" value="Maria">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" class="form-input" id="intake-lastName" value="Santos">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Date of Birth</label>
+                  <input type="date" class="form-input" id="intake-dob" value="1985-06-15">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input type="tel" class="form-input" id="intake-phone" value="(512) 555-0147">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="intake-email" value="maria.santos@email.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-input" id="intake-address" value="4521 Cedar Lane, Austin, TX 78745">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Select Your Attorney</label>
+                  <select class="form-select" id="intake-attorney">
+                    <option value="lauren">Lauren Mitchell — Mitchell Law Group</option>
+                    <option value="other">Other Attorney</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preferred Language</label>
+                  <select class="form-select" id="intake-language">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" id="intake-email" value="maria.santos@email.com">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Address</label>
-            <input type="text" class="form-input" id="intake-address" value="4521 Cedar Lane, Austin, TX 78745">
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Select Your Attorney</label>
-              <select class="form-select" id="intake-attorney">
-                <option value="lauren">Lauren Mitchell — Mitchell Law Group</option>
-                <option value="other">Other Attorney</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Preferred Language</label>
-              <select class="form-select" id="intake-language">
-                <option value="en">English</option>
-                <option value="es">Spanish</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="display: flex; justify-content: flex-end; gap: 14px; margin-top: 36px;">
+          <div class="content-actions">
             <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-2')">Continue →</button>
           </div>
         </div>
@@ -2267,63 +2312,60 @@
           <p>Tell us about the incident and your injuries</p>
         </div>
         <div class="card-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Date of Incident</label>
-              <input type="date" class="form-input" id="intake-injuryDate" value="2024-11-15">
+          <div class="summary-section">
+            <div class="summary-section-label">Injury Details</div>
+            <div class="summary-section-box">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Date of Incident</label>
+                  <input type="date" class="form-input" id="intake-injuryDate" value="2024-11-15">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Type of Incident</label>
+                  <select class="form-select" id="intake-injuryType">
+                    <option value="mva" selected>Motor Vehicle Accident</option>
+                    <option value="slip">Slip and Fall</option>
+                    <option value="work">Workplace Injury</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Brief Description</label>
+                <textarea class="form-textarea" id="intake-description">I was stopped at a red light on Congress Ave when another vehicle rear-ended my car at approximately 35 mph. The impact pushed my car into the intersection. I was wearing my seatbelt but my head hit the headrest forcefully.</textarea>
+              </div>
+              <div class="summary-section-label" style="margin-top: 16px; margin-bottom: 8px;">Areas of Injury</div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px;">
+                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+                  <input type="checkbox" name="intake-bodyarea" value="Neck" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Neck</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+                  <input type="checkbox" name="intake-bodyarea" value="Upper Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Upper Back</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+                  <input type="checkbox" name="intake-bodyarea" value="Lower Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Lower Back</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+                  <input type="checkbox" name="intake-bodyarea" value="Head" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Head</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+                  <input type="checkbox" name="intake-bodyarea" value="Left Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Left Shoulder</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+                  <input type="checkbox" name="intake-bodyarea" value="Right Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Right Shoulder</span>
+                </label>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Current Pain Level (1-10)</label>
+                <select class="form-select" style="max-width: 220px;" id="intake-painLevel">
+                  <option value="7" selected>7 — Severe</option>
+                  <option value="6">6 — Moderate-Severe</option>
+                  <option value="5">5 — Moderate</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Type of Incident</label>
-              <select class="form-select" id="intake-injuryType">
-                <option value="mva" selected>Motor Vehicle Accident</option>
-                <option value="slip">Slip and Fall</option>
-                <option value="work">Workplace Injury</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
           </div>
-
-          <div class="form-group">
-            <label class="form-label">Brief Description</label>
-            <textarea class="form-textarea" id="intake-description">I was stopped at a red light on Congress Ave when another vehicle rear-ended my car at approximately 35 mph. The impact pushed my car into the intersection. I was wearing my seatbelt but my head hit the headrest forcefully.</textarea>
-          </div>
-
-          <div class="section-header mt-6">
-            <div class="section-title" style="font-size: 18px;">Areas of Injury</div>
-            <div class="section-subtitle">Select all body areas where you experience pain or discomfort</div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 24px;">
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" name="intake-bodyarea" value="Neck" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Neck</span>
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" name="intake-bodyarea" value="Upper Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Upper Back</span>
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" name="intake-bodyarea" value="Lower Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Lower Back</span>
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" name="intake-bodyarea" value="Head" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Head</span>
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" name="intake-bodyarea" value="Left Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Left Shoulder</span>
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" name="intake-bodyarea" value="Right Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Right Shoulder</span>
-            </label>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Current Pain Level (1-10)</label>
-            <select class="form-select" style="max-width: 220px;" id="intake-painLevel">
-              <option value="7" selected>7 — Severe</option>
-              <option value="6">6 — Moderate-Severe</option>
-              <option value="5">5 — Moderate</option>
-            </select>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+          <div class="content-actions">
             <button class="btn btn-outline" onclick="goToScreen('screen-intake-1')">← Back</button>
             <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-3')">Continue →</button>
           </div>
@@ -2358,10 +2400,13 @@
           <p>Help us understand your health background</p>
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <label class="form-label">Pre-existing Medical Conditions</label>
-            <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">Select all that apply. Hold Ctrl/Cmd to select multiple.</p>
-            <select class="form-select form-select-multiple" id="intake-conditions" multiple size="6">
+          <div class="summary-section">
+            <div class="summary-section-label">Medical History</div>
+            <div class="summary-section-box">
+              <div class="form-group">
+                <label class="form-label">Pre-existing Medical Conditions</label>
+                <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">Select all that apply. Hold Ctrl/Cmd to select multiple.</p>
+                <select class="form-select form-select-multiple" id="intake-conditions" multiple size="6">
               <option value="none">None</option>
               <option value="hypertension" selected>Hypertension</option>
               <option value="diabetes">Diabetes (Type 2)</option>
@@ -2471,12 +2516,13 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Primary Care Physician</label>
-            <input type="text" class="form-input" id="intake-pcp" value="Dr. Sarah Chen, Austin Primary Care">
+              <div class="form-group">
+                <label class="form-label">Primary Care Physician</label>
+                <input type="text" class="form-input" id="intake-pcp" value="Dr. Sarah Chen, Austin Primary Care">
+              </div>
+            </div>
           </div>
-
-          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+          <div class="content-actions">
             <button class="btn btn-outline" onclick="goToScreen('screen-intake-2')">← Back</button>
             <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-4')">Continue →</button>
           </div>
@@ -2511,13 +2557,18 @@
           <p>Tell us about the healthcare providers treating your injuries</p>
         </div>
         <div class="card-body">
-          <div class="info-box">
-            <div class="info-box-title">Why we ask this</div>
-            <div class="info-box-text">Understanding your care team allows us to coordinate documentation and ensure nothing falls through the cracks during your recovery.</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Why We Ask This</div>
+            <div class="summary-section-box">
+              <p style="margin: 0;">Understanding your care team allows us to coordinate documentation and ensure nothing falls through the cracks during your recovery.</p>
+            </div>
           </div>
 
-          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--gray-50);">
-            <div style="font-weight: 700; color: var(--gold); margin-bottom: 16px; font-size: 14px;">Provider #1</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Treatment Providers</div>
+            <div class="summary-section-box">
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 18px; background: var(--white);">
+            <div class="summary-section-label" style="margin-bottom: 12px;">Provider #1</div>
             <div class="form-row">
               <div class="form-group mb-2">
                 <label class="form-label">Provider Name</label>
@@ -2547,8 +2598,8 @@
             </div>
           </div>
 
-          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--gray-50);">
-            <div style="font-weight: 700; color: var(--gold); margin-bottom: 16px; font-size: 14px;">Provider #2</div>
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 18px; background: var(--white);">
+            <div class="summary-section-label" style="margin-bottom: 12px;">Provider #2</div>
             <div class="form-row">
               <div class="form-group mb-2">
                 <label class="form-label">Provider Name</label>
@@ -2576,8 +2627,9 @@
           </div>
 
           <button class="btn btn-outline btn-sm">+ Add Another Provider</button>
-
-          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+            </div>
+          </div>
+          <div class="content-actions">
             <button class="btn btn-outline" onclick="goToScreen('screen-intake-3')">← Back</button>
             <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-5')">Continue →</button>
           </div>
@@ -2612,6 +2664,9 @@
           <p>Please review and acknowledge the following</p>
         </div>
         <div class="card-body">
+          <div class="summary-section">
+            <div class="summary-section-label">Acknowledgments & Consents</div>
+            <div class="summary-section-box">
           <div class="form-checkbox-group">
             <input type="checkbox" class="form-checkbox" checked>
             <div class="form-checkbox-content">
@@ -2649,10 +2704,11 @@
             <input type="text" class="form-input" value="Maria Santos" style="font-family: 'Brush Script MT', cursive; font-size: 26px; text-align: center;">
             <div class="text-sm text-muted mt-2">By typing your name, you are electronically signing these acknowledgments.</div>
           </div>
-
-          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+            </div>
+          </div>
+          <div class="content-actions">
             <button class="btn btn-outline" onclick="goToScreen('screen-intake-4')">← Back</button>
-            <button class="btn btn-orange btn-lg" onclick="submitIntake()">Submit Intake →</button>
+            <button class="btn btn-primary btn-lg" onclick="submitIntake()">Submit Intake →</button>
           </div>
         </div>
       </div>
@@ -2661,22 +2717,26 @@
 
   <!-- ==================== SCREEN 4: INTAKE COMPLETE / TRANSITION ==================== -->
   <div class="screen" id="screen-intake-complete" data-step="4">
-    <div class="transition-screen">
-      <div class="transition-content">
-        <div class="transition-icon">✓</div>
-        <div class="transition-title">Intake Submitted Successfully</div>
-        <div class="transition-text">
-          <strong id="display-clientName">Maria Santos</strong> has completed her intake.<br>
-          Case Number: <strong id="display-caseNumber">MS04-260115-01F</strong><br><br>
-          Your structured intake information is now visible in the attorney dashboard.<br><br>
-          The attorney reviews the case details, confirms representation, and activates RN clinical oversight to begin care plan development and documentation monitoring.<br><br>
-          Clients have 7 days to complete intake.<br>
-          Attorneys have 48 hours to attest that the client is theirs and activate RN oversight.<br><br>
-          <em>Let's see what this looks like from the attorney's perspective.</em>
+    <div class="container container-narrow">
+      <div class="card">
+        <div class="card-header">
+          <h1>Intake Submitted Successfully</h1>
+          <p><strong id="display-clientName">Maria Santos</strong> — Case <strong id="display-caseNumber">MS04-260115-01F</strong></p>
         </div>
-        <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-intake-summary')">
-          View Intake Summary →
-        </button>
+        <div class="card-body">
+          <div class="summary-section">
+            <div class="summary-section-label">Next Steps</div>
+            <div class="summary-section-box">
+              <p>Your structured intake information is now visible in the attorney dashboard.</p>
+              <p>The attorney reviews the case details, confirms representation, and activates RN clinical oversight to begin care plan development and documentation monitoring.</p>
+              <p>Clients have <strong>7 days</strong> to complete intake. Attorneys have <strong>48 hours</strong> to attest that the client is theirs and activate RN oversight.</p>
+              <p style="margin-bottom: 0;"><em>Let's see what this looks like from the attorney's perspective.</em></p>
+            </div>
+          </div>
+          <div class="content-actions center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-summary')">View Intake Summary →</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2684,7 +2744,7 @@
   <!-- ==================== SCREEN 4B: INTAKE SUMMARY / PRINT-DOWNLOAD ==================== -->
   <div class="screen" id="screen-intake-summary" data-step="4">
     <div class="container container-wide">
-      <div class="card card-premium">
+      <div class="card">
         <div class="card-header">
           <h1>Client Intake Summary</h1>
           <p id="summary-clientName">Maria Santos</p>
@@ -2812,9 +2872,9 @@
           </div>
         </div>
         <div class="card-body">
-
-          <!-- Primary Case Card -->
-          <div style="background: var(--gray-50); border: 2px solid var(--gold); border-radius: 10px; padding: 24px 28px; margin-bottom: 28px;">
+          <div class="summary-section">
+            <div class="summary-section-label">Case Requiring Action</div>
+          <div style="background: var(--gray-50); border: 2px solid var(--gold); border-radius: 10px; padding: 24px 28px; margin-bottom: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 18px;">
               <div>
                 <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Primary Demo Case</div>
@@ -2844,10 +2904,10 @@
               📋 This case was just submitted through the intake process in this demonstration. In the live system, the attorney would now review and confirm representation to activate clinical coordination.
             </div>
           </div>
+          </div>
 
-          <!-- ============================================ -->
-          <!-- SECTION 1: CASE SNAPSHOT (Key Metrics) -->
-          <!-- ============================================ -->
+          <div class="summary-section">
+            <div class="summary-section-label">Case Snapshot — Maria Santos</div>
           <div class="case-snapshot-panel">
             <div class="case-snapshot-header">
               <div class="case-snapshot-title">Case Snapshot — Maria Santos</div>
@@ -2933,12 +2993,11 @@
               </div>
             </div>
           </div>
+          </div>
 
-          <!-- ============================================ -->
-          <!-- SECTION 2: CLINICAL INTELLIGENCE -->
-          <!-- ============================================ -->
-          <div style="margin-bottom: 32px;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); text-transform: uppercase; letter-spacing: 1.5px;">Clinical Intelligence</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Clinical Intelligence</div>
+          <div style="margin-bottom: 24px;">
             
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
               <!-- Provider Sequencing Concern -->
@@ -2995,12 +3054,11 @@
               </div>
             </div>
           </div>
+          </div>
 
-          <!-- ============================================ -->
-          <!-- SECTION 3: ATTORNEY OUTPUTS -->
-          <!-- ============================================ -->
-          <div style="margin-bottom: 32px;">
-            <div style="font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--gold);">Attorney Outputs</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Attorney Outputs</div>
+          <div style="margin-bottom: 24px;">
             
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
               <!-- RN Care Plan -->
@@ -3059,13 +3117,11 @@
               </div>
             </div>
           </div>
-
-          <!-- Active Cases Table (keeping original) -->
-          <div class="section-header">
-            <div class="section-title">Your Active Cases</div>
-            <div class="section-subtitle">Click any case to view details</div>
           </div>
 
+          <div class="summary-section">
+            <div class="summary-section-label">Your Active Cases</div>
+            <div class="section-subtitle" style="margin-bottom: 12px;">Click any case to view details</div>
           <div class="table-container">
             <table>
               <thead>
@@ -3106,9 +3162,10 @@
               </tbody>
             </table>
           </div>
+          </div>
 
-          <div style="text-align: center; margin-top: 32px;">
-            <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-rn-oversight')">Continue: RN Clinical Oversight →</button>
+          <div class="content-actions center" style="margin-top: 24px;">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-rn-oversight')">Continue: RN Clinical Oversight →</button>
           </div>
         </div>
       </div>
@@ -3124,25 +3181,16 @@
           <p>The critical layer that protects documentation integrity</p>
         </div>
         <div class="card-body">
-          <div class="info-box info-box-success">
-            <div class="info-box-title">⚕️ Why RN Oversight Matters for Your Case</div>
-            <div class="info-box-text">
-              Structured intake is powerful, but it requires clinical validation. A licensed Registered Nurse reviews every care plan before it reaches you, ensuring clinical accuracy, defensible documentation, and identification of red flags that could impact case value.
+          <div class="summary-section">
+            <div class="summary-section-label">Why RN Oversight Matters for Your Case</div>
+            <div class="summary-section-box">
+              <p style="margin: 0 0 14px;">Structured intake is powerful, but it requires clinical validation. A licensed Registered Nurse reviews every care plan before it reaches you, ensuring clinical accuracy, defensible documentation, and identification of red flags that could impact case value.</p>
+              <p style="margin: 0;">RN clinical oversight begins after attorney confirmation of representation. Once activated, the RN care manager monitors treatment progression, documentation completeness, and care coordination to support recovery and maintain a defensible clinical record. This oversight provides attorneys with ongoing visibility into treatment progress and potential documentation gaps.</p>
             </div>
           </div>
 
-          <div class="info-box">
-            <div class="info-box-text">
-              <p style="margin-bottom: 10px;">RN clinical oversight begins after attorney confirmation of representation.</p>
-              <p style="margin-bottom: 10px;">Once activated, the RN care manager monitors treatment progression, documentation completeness, and care coordination to support recovery and maintain a defensible clinical record.</p>
-              <p style="margin-bottom: 0;">This oversight provides attorneys with ongoing visibility into treatment progress and potential documentation gaps.</p>
-            </div>
-          </div>
-
-          <div class="section-header">
-            <div class="section-title">How RN Oversight Strengthens Your Case</div>
-          </div>
-
+          <div class="summary-section">
+            <div class="summary-section-label">How RN Oversight Strengthens Your Case</div>
           <div class="oversight-grid">
             <div class="oversight-card">
               <div class="oversight-icon">🔍</div>
@@ -3165,11 +3213,9 @@
               <div class="oversight-text">RN-validated records meet clinical standards and withstand scrutiny during settlement negotiations or litigation.</div>
             </div>
           </div>
-
-          <div class="text-center">
-            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-care-plan')">
-              View Sample RN Care Plan →
-            </button>
+          </div>
+          <div class="content-actions center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-care-plan')">View Sample RN Care Plan →</button>
           </div>
         </div>
       </div>
@@ -3195,20 +3241,16 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="info-box info-box-orange">
-            <div class="info-box-title">📄 Demonstration Care Plan</div>
-            <div class="info-box-text">This is a sample RN care plan using fictional data. In the live system, care plans are generated from actual client intake data and validated by a licensed RN before delivery to the attorney.</div>
-          </div>
-
-          <div class="info-box">
-            <div class="info-box-text">
-              <p style="margin-bottom: 10px;">The sample care plan demonstrates how client intake information and provider documentation are translated into a structured recovery oversight plan.</p>
-              <p style="margin-bottom: 10px;">RN care managers use this framework to monitor treatment progress, coordinate documentation, and identify potential barriers to recovery.</p>
-              <p style="margin-bottom: 0;">The care plan evolves as treatment progresses and additional documentation becomes available.</p>
+          <div class="summary-section">
+            <div class="summary-section-label">Demonstration Care Plan</div>
+            <div class="summary-section-box">
+              <p style="margin: 0 0 14px;">This is a sample RN care plan using fictional data. In the live system, care plans are generated from actual client intake data and validated by a licensed RN before delivery to the attorney.</p>
+              <p style="margin: 0;">The sample care plan demonstrates how client intake information and provider documentation are translated into a structured recovery oversight plan. RN care managers use this framework to monitor treatment progress, coordinate documentation, and identify potential barriers to recovery. The care plan evolves as treatment progresses and additional documentation becomes available.</p>
             </div>
           </div>
 
-          <!-- RN Care Plan Display (expand/collapse) -->
+          <div class="summary-section">
+            <div class="summary-section-label">Initial Care Plan Assessment</div>
           <div class="rn-care-plan">
             <div class="rn-care-plan-header">
               <h3>Initial Care Plan Assessment</h3>
@@ -3347,11 +3389,9 @@
               </details>
             </div>
           </div>
-
-          <div class="text-center">
-            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-documentation')">
-              View Documentation Overview →
-            </button>
+          </div>
+          <div class="content-actions center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-documentation')">View Documentation Overview →</button>
           </div>
         </div>
       </div>
@@ -3367,13 +3407,15 @@
           <p>How structured documentation strengthens your case</p>
         </div>
         <div class="card-body">
-          <div class="info-box">
-            <div class="info-box-title">⚖️ Why Documentation Integrity Matters</div>
-            <div class="info-box-text">
-              The combination of structured client intake, attorney visibility, and RN clinical oversight creates a documentation chain that is organized, clinically validated, and defensible in settlement negotiations.
+          <div class="summary-section">
+            <div class="summary-section-label">Why Documentation Integrity Matters</div>
+            <div class="summary-section-box">
+              <p style="margin: 0;">The combination of structured client intake, attorney visibility, and RN clinical oversight creates a documentation chain that is organized, clinically validated, and defensible in settlement negotiations.</p>
             </div>
           </div>
 
+          <div class="summary-section">
+            <div class="summary-section-label">Documentation Pillars</div>
           <div class="oversight-grid documentation-integrity-cards">
             <div class="oversight-card">
               <div class="oversight-icon">📝</div>
@@ -3396,13 +3438,12 @@
               <div class="oversight-text">4Ps Wellness framework provides quantifiable, trackable measures of injury impact over time.</div>
             </div>
           </div>
-
-          <div class="section-header mt-8">
-            <div class="section-title">Sample Attorney Reports</div>
-            <div class="section-subtitle">What you receive monthly for each active case</div>
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 32px;">
+          <div class="summary-section">
+            <div class="summary-section-label">Sample Attorney Reports</div>
+            <div class="section-subtitle" style="margin-bottom: 16px;">What you receive monthly for each active case</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px;">
             <div class="report-preview">
               <div class="report-preview-header">
                 <div class="report-preview-title">📋 Monthly Progress Summary</div>
@@ -3484,11 +3525,9 @@
               <div class="timeline-content"><strong>RN Clinical Commentary</strong> — Professional nursing assessment and prognosis discussion</div>
             </div>
           </div>
-
-          <div class="text-center">
-            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-resources')">
-              View Attorney Resources →
-            </button>
+          </div>
+          <div class="content-actions center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-resources')">View Attorney Resources →</button>
           </div>
         </div>
       </div>
@@ -3504,11 +3543,15 @@
           <p>Support materials and onboarding guides</p>
         </div>
         <div class="card-body">
-          <div class="info-box">
-            <div class="info-box-title">📚 Getting Started</div>
-            <div class="info-box-text">These resources help you and your team get the most out of Reconcile C.A.R.E. Download guides, share client handouts, and access training materials.</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Getting Started</div>
+            <div class="summary-section-box">
+              <p style="margin: 0;">These resources help you and your team get the most out of Reconcile C.A.R.E. Download guides, share client handouts, and access training materials.</p>
+            </div>
           </div>
 
+          <div class="summary-section">
+            <div class="summary-section-label">Resources</div>
           <div class="resource-grid">
             <a href="clinical-oversight.html" target="_blank" class="resource-card" style="text-decoration: none; color: inherit; display: block;">
               <div class="resource-icon">📋</div>
@@ -3559,30 +3602,28 @@
               <div class="resource-badge">Coming Soon</div>
             </div>
           </div>
-
-          <div class="section-header mt-6">
-            <div class="section-title">Frequently Asked Questions</div>
           </div>
 
-          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); overflow: hidden;">
-            <div style="padding: 18px 22px; border-bottom: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">How quickly are care plans generated after intake?</strong>
-              <div class="text-sm text-muted mt-2">Initial care plans are typically generated within 24-48 hours of attorney confirmation. Rush processing available for urgent cases.</div>
-            </div>
-            <div style="padding: 18px 22px; border-bottom: 1px solid var(--gray-200);">
-              <strong style="color: var(--gold);">What if my client doesn't complete diary entries?</strong>
-              <div class="text-sm text-muted mt-2">After 28 days of inactivity, the case enters "hibernation." You'll be notified, and the client receives reminders. Cases can be reactivated anytime.</div>
-            </div>
-            <div style="padding: 18px 22px;">
-              <strong style="color: var(--gold);">Can I customize the monthly report format?</strong>
-              <div class="text-sm text-muted mt-2">Yes — reports can be customized to match your firm's demand package format. Contact support for template customization options.</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Frequently Asked Questions</div>
+            <div class="summary-section-box">
+              <div style="padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); margin-bottom: 16px;">
+                <strong style="color: var(--navy);">How quickly are care plans generated after intake?</strong>
+                <div class="text-sm text-muted mt-2">Initial care plans are typically generated within 24-48 hours of attorney confirmation. Rush processing available for urgent cases.</div>
+              </div>
+              <div style="padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); margin-bottom: 16px;">
+                <strong style="color: var(--navy);">What if my client doesn't complete diary entries?</strong>
+                <div class="text-sm text-muted mt-2">After 28 days of inactivity, the case enters "hibernation." You'll be notified, and the client receives reminders. Cases can be reactivated anytime.</div>
+              </div>
+              <div>
+                <strong style="color: var(--navy);">Can I customize the monthly report format?</strong>
+                <div class="text-sm text-muted mt-2">Yes — reports can be customized to match your firm's demand package format. Contact support for template customization options.</div>
+              </div>
             </div>
           </div>
 
-          <div class="text-center mt-8">
-            <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-cta')">
-              Next Steps →
-            </button>
+          <div class="content-actions center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-cta')">Next Steps →</button>
           </div>
         </div>
       </div>
@@ -3592,48 +3633,51 @@
   <!-- ==================== SCREEN 10: FINAL CTA ==================== -->
   <div class="screen" id="screen-cta" data-step="10">
     <div class="container">
-      <div class="cta-section">
-        <div class="cta-title">What You Have Seen</div>
-        <div class="cta-text cta-text-premium">
-          You have now seen how a client intake flows into the attorney dashboard and how RN oversight supports recovery documentation.<br><br>
-          Reconcile C.A.R.E. is designed to give attorneys visibility into treatment progression, documentation integrity, and recovery coordination.<br><br>
-          From intake through recovery monitoring, the system provides a structured clinical framework that supports case development.<br><br>
-          Use the options below to schedule a full platform demonstration or learn more about the clinical methodology behind the system.
+      <div class="card">
+        <div class="card-header">
+          <h1>What You Have Seen</h1>
+          <p>Reconcile C.A.R.E. — Clinical Oversight & Recovery Evidence</p>
         </div>
-      </div>
-      
-      <div class="cta-card">
-        <div class="text-center mb-8">
-          <div class="intro-logo" style="font-size: 38px;" title="Reconcile C.A.R.E.">Reconcile <span>C.A.R.E.</span></div>
-          <div style="color: var(--gray-600); margin-top: 8px;">Clinical Oversight & Recovery Evidence</div>
-        </div>
+        <div class="card-body">
+          <div class="summary-section">
+            <div class="summary-section-label">Summary</div>
+            <div class="summary-section-box">
+              <p>You have now seen how a client intake flows into the attorney dashboard and how RN oversight supports recovery documentation. Reconcile C.A.R.E. is designed to give attorneys visibility into treatment progression, documentation integrity, and recovery coordination.</p>
+              <p style="margin-bottom: 0;">From intake through recovery monitoring, the system provides a structured clinical framework that supports case development. Use the options below to schedule a full platform demonstration or learn more about the clinical methodology behind the system.</p>
+            </div>
+          </div>
 
-        <div class="data-grid mb-8">
-          <div class="data-item" style="text-align: center;">
-            <div class="data-value" style="font-size: 28px; color: var(--gold);">24/7</div>
-            <div class="data-label">Client Documentation</div>
+          <div class="summary-section">
+            <div class="summary-section-label">Platform Highlights</div>
+            <div class="summary-section-box">
+              <div class="data-grid" style="margin-bottom: 0;">
+                <div class="data-item" style="text-align: center;">
+                  <div class="data-value" style="font-size: 24px; color: var(--gold);">24/7</div>
+                  <div class="data-label">Client Documentation</div>
+                </div>
+                <div class="data-item" style="text-align: center;">
+                  <div class="data-value" style="font-size: 24px; color: var(--gold);">RN</div>
+                  <div class="data-label">Clinical Oversight</div>
+                </div>
+                <div class="data-item" style="text-align: center;">
+                  <div class="data-value" style="font-size: 24px; color: var(--gold);">4Ps™</div>
+                  <div class="data-label">Wellness Framework</div>
+                </div>
+                <div class="data-item" style="text-align: center;">
+                  <div class="data-value" style="font-size: 24px; color: var(--gold);">Monthly</div>
+                  <div class="data-label">Attorney Reports</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="data-item" style="text-align: center;">
-            <div class="data-value" style="font-size: 28px; color: var(--gold);">RN</div>
-            <div class="data-label">Clinical Oversight</div>
-          </div>
-          <div class="data-item" style="text-align: center;">
-            <div class="data-value" style="font-size: 28px; color: var(--gold);">4Ps™</div>
-            <div class="data-label">Wellness Framework</div>
-          </div>
-          <div class="data-item" style="text-align: center;">
-            <div class="data-value" style="font-size: 28px; color: var(--gold);">Monthly</div>
-            <div class="data-label">Attorney Reports</div>
-          </div>
-        </div>
 
-        <div class="cta-buttons">
-          <a href="#" class="btn btn-primary btn-lg">Run Reconcile C.A.R.E. Clinical Sequencing Auditor</a>
-          <a href="#" class="btn btn-outline btn-lg">Request Live Attorney Walkthrough</a>
-        </div>
-
-        <div class="text-center mt-6">
-          <button class="btn btn-ghost" onclick="restartDemo()">Restart Demonstration</button>
+          <div class="content-actions center">
+            <a href="#" class="btn btn-primary btn-lg">Run Reconcile C.A.R.E. Clinical Sequencing Auditor</a>
+            <a href="#" class="btn btn-outline btn-lg">Request Live Attorney Walkthrough</a>
+          </div>
+          <div class="text-center mt-6">
+            <button class="btn btn-ghost" onclick="restartDemo()">Restart Demonstration</button>
+          </div>
         </div>
       </div>
 
