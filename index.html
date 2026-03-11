@@ -2301,13 +2301,13 @@
 
     .guidance-overlay {
       pointer-events: none;
-      max-width: 340px;
-      background: var(--white);
-      border-radius: var(--radius-md);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
-      border: 1px solid var(--gray-200);
+      max-width: 400px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 4px 16px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--navy-light);
       border-left: 4px solid var(--gold);
-      padding: 18px 20px;
+      padding: 22px 26px 20px;
       opacity: 0;
       transition: opacity 0.4s ease;
     }
@@ -2316,22 +2316,45 @@
       opacity: 1;
     }
 
+    .guidance-overlay-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: var(--weight-bold);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+    }
+
     .guidance-overlay-heading {
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: var(--weight-bold);
-      color: var(--navy);
+      color: var(--white);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .guidance-overlay-text {
       font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--gray-800);
-      line-height: 1.5;
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.55;
       font-weight: var(--weight-regular);
+      opacity: 0.95;
+    }
+
+    .guidance-overlay-step {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: var(--weight-semibold);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
   </style>
 </head>
@@ -2361,8 +2384,10 @@
   <!-- ==================== TIMED GUIDANCE OVERLAY ==================== -->
   <div class="guidance-overlay-wrap" id="guidanceOverlayWrap" aria-live="polite">
     <div class="guidance-overlay" id="guidanceOverlay">
+      <div class="guidance-overlay-label">DEMO GUIDANCE</div>
       <div class="guidance-overlay-heading" id="guidanceOverlayHeading"></div>
       <div class="guidance-overlay-text" id="guidanceOverlayText"></div>
+      <div class="guidance-overlay-step" id="guidanceOverlayStep"></div>
     </div>
   </div>
 
@@ -4083,30 +4108,12 @@
     // Timed guidance overlays (screenId -> { heading, text })
     var guidanceTimeoutId = null;
     var guidanceMessages = {
-      'screen-intro': {
-        heading: 'Demo Overview',
-        text: 'This demonstration shows how Reconcile C.A.R.E. organizes client recovery information, identifies clinical risks, and supports documentation integrity throughout the life of an injury case.'
-      },
-      'screen-intake-1': {
-        heading: 'Client Intake',
-        text: 'The intake captures structured recovery information across physical, psychological, psychosocial, and professional domains to establish a clinically informed starting point for the case.'
-      },
-      'screen-attorney-portal': {
-        heading: 'Attorney Dashboard',
-        text: 'The dashboard summarizes case status and highlights areas where RN clinical oversight may be needed to support recovery monitoring and documentation integrity.'
-      },
-      'screen-rn-oversight': {
-        heading: 'RN Clinical Oversight',
-        text: 'RN Care Managers review recovery patterns, identify barriers to care, and document structured care plans that support both the client\'s recovery and the clinical narrative of the case.'
-      },
-      'screen-documentation': {
-        heading: 'Documentation Integrity',
-        text: 'Structured clinical documentation connects symptoms, functional limitations, treatment patterns, and recovery progression in a defensible format.'
-      },
-      'screen-cta': {
-        heading: 'Next Steps',
-        text: 'You can download the Clinical Oversight & Documentation Guidance or continue evaluating cases using the Clinical Sequencing Auditor and Functional Capacity Index.'
-      }
+      'screen-intro': { step: 1, heading: 'Demo Overview', text: 'This demonstration shows how Reconcile C.A.R.E. organizes client recovery information, identifies clinical risks, and supports documentation integrity throughout the life of an injury case.' },
+      'screen-intake-1': { step: 2, heading: 'Client Intake', text: 'The intake captures structured recovery information across physical, psychological, psychosocial, and professional domains to establish a clinically informed starting point for the case.' },
+      'screen-attorney-portal': { step: 3, heading: 'Attorney Dashboard', text: 'The dashboard summarizes case status and highlights areas where RN clinical oversight may be needed to support recovery monitoring and documentation integrity.' },
+      'screen-rn-oversight': { step: 4, heading: 'RN Clinical Oversight', text: 'RN Care Managers review recovery patterns, identify barriers to care, and document structured care plans that support both the client\'s recovery and the clinical narrative of the case.' },
+      'screen-documentation': { step: 5, heading: 'Documentation Integrity', text: 'Structured clinical documentation connects symptoms, functional limitations, treatment patterns, and recovery progression in a defensible format.' },
+      'screen-cta': { step: 6, heading: 'Next Steps', text: 'You can download the Clinical Oversight & Documentation Guidance or continue evaluating cases using the Clinical Sequencing Auditor and Functional Capacity Index.' }
     };
 
     function showGuidanceForScreen(screenId) {
@@ -4117,6 +4124,7 @@
       var el = document.getElementById('guidanceOverlay');
       var headingEl = document.getElementById('guidanceOverlayHeading');
       var textEl = document.getElementById('guidanceOverlayText');
+      var stepEl = document.getElementById('guidanceOverlayStep');
       if (!el || !headingEl || !textEl) return;
       var msg = guidanceMessages[screenId];
       if (!msg) {
@@ -4125,6 +4133,7 @@
       }
       headingEl.textContent = msg.heading;
       textEl.textContent = msg.text;
+      if (stepEl) stepEl.textContent = 'Step ' + msg.step + ' of 6';
       el.classList.remove('visible');
       requestAnimationFrame(function() {
         el.classList.add('visible');
