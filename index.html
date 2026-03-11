@@ -1533,6 +1533,17 @@
       }
     }
 
+    @media print {
+      .demo-banner,
+      .progress-container,
+      .demo-nav,
+      .screen:not(.active) {
+        display: none !important;
+      }
+      body { background: #fff; }
+      .card { box-shadow: none; border: 1px solid #ddd; }
+    }
+
     /* ==================== UTILITY CLASSES ==================== */
     .mb-0 { margin-bottom: 0 !important; }
     .mb-2 { margin-bottom: 8px !important; }
@@ -2223,9 +2234,93 @@
           Attorneys have 48 hours to attest that the client is theirs and activate RN oversight.<br><br>
           <em>Let's see what this looks like from the attorney's perspective.</em>
         </div>
-        <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-attorney-portal')">
-          Continue to Attorney Portal →
+        <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-intake-summary')">
+          View Intake Summary →
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 4B: INTAKE SUMMARY / PRINT-DOWNLOAD ==================== -->
+  <div class="screen" id="screen-intake-summary" data-step="4">
+    <div class="container container-wide">
+      <div class="card">
+        <div class="card-header">
+          <h1>Client Intake Summary</h1>
+          <p id="summary-clientName">Maria Santos</p>
+          <p style="font-size: 14px; opacity: 0.9;">Intake Number: <strong id="summary-caseNumber">MS04-260115-01F</strong></p>
+        </div>
+        <div class="card-body">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
+            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Client Information</div>
+              <div style="font-size: 14px; color: var(--gray-800); line-height: 1.5;">
+                <span id="summary-clientName-2">Maria Santos</span><br>
+                DOB: 06/15/1985<br>
+                Contact: (512) 555-0147 · maria.santos@email.com<br>
+                Attorney: Lauren Mitchell — Mitchell Law Group
+              </div>
+            </div>
+            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Injury Summary</div>
+              <div style="font-size: 14px; color: var(--gray-800); line-height: 1.5;">
+                <strong>Type:</strong> Motor Vehicle Accident<br>
+                <strong>Date of incident:</strong> November 15, 2024<br>
+                <strong>Current pain level:</strong> 7/10<br>
+                <strong>Description:</strong> Rear-ended at red light; cervical and lumbar strain; head hit headrest. Seeking chiropractic and pain management.
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Medical History Summary</div>
+            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
+              <strong>Pre-existing conditions:</strong> Hypertension (controlled).<br>
+              <strong>Current medications:</strong> Lisinopril 10 mg once daily; Ibuprofen 400 mg as needed.<br>
+              <strong>Allergies:</strong> Penicillin.<br>
+              <strong>Previous surgeries:</strong> Appendectomy (2010).<br>
+              <strong>Primary care:</strong> Dr. Sarah Chen, Austin Primary Care.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Provider Summary</div>
+            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
+              <strong>Provider 1:</strong> Austin Spine & Rehab Center (Chiropractor) — First visit 11/18/2024, 3×/week.<br>
+              <strong>Provider 2:</strong> Dr. Michael Torres, MD (Pain Management) — First visit 11/25/2024, monthly.
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Consent & Key Selections</div>
+            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
+              C.A.R.E. Acknowledgment signed; PHI authorization signed; Attorney communication consent signed; Medical emergency disclaimer acknowledged. Preferred language: English.
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%); border-left: 4px solid var(--gold); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 24px; margin-bottom: 28px; border: 1px solid var(--gray-200);">
+            <div style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 12px;">Next Steps</div>
+            <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: var(--gray-800); line-height: 1.7;">
+              <li>The intake has been submitted and is now visible in the attorney dashboard.</li>
+              <li>The attorney must attest that this case is theirs to activate RN clinical oversight.</li>
+              <li>RN clinical oversight (care plan development and documentation monitoring) begins after attorney confirmation.</li>
+              <li>Clients have <strong>7 days</strong> to complete intake from the time they receive the link.</li>
+              <li>Attorneys have <strong>48 hours</strong> to attest and activate oversight once intake is submitted.</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 32px;">
+            <button type="button" class="btn btn-outline btn-lg" onclick="window.print();">
+              🖨️ Print Intake Summary
+            </button>
+            <button type="button" class="btn btn-outline btn-lg" onclick="downloadIntakeSummary();">
+              📥 Download Intake Summary
+            </button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="goToScreen('screen-attorney-portal')">
+              Continue to Attorney View →
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3169,6 +3264,7 @@
       { id: 'screen-intake-4', step: 3, label: 'Client Intake' },
       { id: 'screen-intake-5', step: 3, label: 'Client Intake' },
       { id: 'screen-intake-complete', step: 4, label: 'Intake Complete' },
+      { id: 'screen-intake-summary', step: 4, label: 'Intake Summary' },
       { id: 'screen-attorney-portal', step: 5, label: 'Attorney Portal' },
       { id: 'screen-rn-oversight', step: 6, label: 'RN Oversight' },
       { id: 'screen-care-plan', step: 7, label: 'Sample Care Plan' },
@@ -3299,6 +3395,46 @@
       goToScreen('screen-intake-complete');
     }
 
+    // Download intake summary as text file
+    function downloadIntakeSummary() {
+      const name = document.getElementById('summary-clientName')?.textContent || intakeData.firstName + ' ' + intakeData.lastName;
+      const caseNum = document.getElementById('summary-caseNumber')?.textContent || intakeData.caseNumber;
+      const text = [
+        'CLIENT INTAKE SUMMARY',
+        'Reconcile C.A.R.E.',
+        '========================',
+        '',
+        'Client: ' + name,
+        'Intake / Case Number: ' + caseNum,
+        '',
+        '--- Client Information ---',
+        'DOB: 06/15/1985 | Contact: (512) 555-0147',
+        'Attorney: Lauren Mitchell — Mitchell Law Group',
+        '',
+        '--- Injury Summary ---',
+        'Type: Motor Vehicle Accident | Date: November 15, 2024',
+        'Pain level: 7/10',
+        'Description: Rear-ended at red light; cervical and lumbar strain.',
+        '',
+        '--- Medical History ---',
+        'Pre-existing: Hypertension (controlled). Medications: Lisinopril 10 mg daily; Ibuprofen 400 mg as needed. Allergies: Penicillin. PCP: Dr. Sarah Chen.',
+        '',
+        '--- Providers ---',
+        'Austin Spine & Rehab (Chiropractor) 3x/week; Dr. Michael Torres, MD (Pain Management) monthly.',
+        '',
+        '--- Next Steps ---',
+        'Intake submitted. Attorney must attest within 48 hours. RN oversight begins after confirmation. Clients have 7 days to complete intake.',
+        '',
+        'Generated by Reconcile C.A.R.E. Attorney Demonstration.'
+      ].join('\r\n');
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'Intake-Summary-' + (caseNum || 'client').replace(/\s/g, '-') + '.txt';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
     // Generate case number
     function generateCaseNumber(first, last) {
       const initials = (first.charAt(0) + last.charAt(0)).toUpperCase();
@@ -3314,6 +3450,8 @@
         'display-clientName': fullName,
         'display-caseNumber': intakeData.caseNumber,
         'summary-clientName': fullName,
+        'summary-clientName-2': fullName,
+        'summary-caseNumber': intakeData.caseNumber,
         'attest-clientName': fullName,
         'attest-caseNumber': intakeData.caseNumber,
         'attest-injuryDate': intakeData.injuryDate,
