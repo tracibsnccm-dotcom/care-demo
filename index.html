@@ -1,0 +1,3162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reconcile C.A.R.E. — Attorney Demonstration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1e3a8a;
+      --navy-dark: #1a2f6d;
+      --navy-light: #3b5998;
+      --orange: #fb923c;
+      --orange-hover: #f97316;
+      --teal: #0891b2;
+      --dark: #1a1a2e;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --white: #ffffff;
+      --success: #10b981;
+      --success-light: #d1fae5;
+      --warning: #f59e0b;
+      --warning-light: #fef3c7;
+      --error: #ef4444;
+      --error-light: #fee2e2;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+      --shadow-xl: 0 20px 50px rgba(0,0,0,0.2);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(145deg, var(--navy) 0%, var(--navy-dark) 50%, var(--teal) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: var(--dark);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* ==================== SCREEN MANAGEMENT ==================== */
+    .screen {
+      display: none;
+      min-height: 100vh;
+      animation: screenFadeIn 0.5s ease-out;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes screenFadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==================== DEMO BANNER ==================== */
+    .demo-banner {
+      background: linear-gradient(90deg, var(--orange) 0%, var(--orange-hover) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+    }
+
+    .demo-banner-badge {
+      background: rgba(255,255,255,0.25);
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-left: 10px;
+      font-size: 11px;
+    }
+
+    /* ==================== PROGRESS BAR ==================== */
+    .progress-container {
+      position: fixed;
+      top: 42px;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 8px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .progress-step.active {
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .progress-step.completed {
+      background: var(--success);
+      color: var(--white);
+    }
+
+    .progress-step-num {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .progress-step.active .progress-step-num,
+    .progress-step.completed .progress-step-num {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ==================== CONTAINERS ==================== */
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 120px 24px 60px;
+    }
+
+    .container-wide {
+      max-width: 1080px;
+    }
+
+    .container-narrow {
+      max-width: 560px;
+    }
+
+    /* ==================== CARDS ==================== */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      color: var(--white);
+      padding: 36px 44px;
+    }
+
+    .card-header h1 {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .card-header p {
+      opacity: 0.9;
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    .card-header-orange {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hover) 100%);
+    }
+
+    .card-header-teal {
+      background: linear-gradient(135deg, var(--teal) 0%, #0e7490 100%);
+    }
+
+    .card-body {
+      padding: 44px;
+    }
+
+    /* ==================== BUTTONS ==================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-dark);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-orange {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-orange:hover {
+      background: var(--orange-hover);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+    }
+
+    .btn-outline:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      border: 2px solid var(--white);
+      color: var(--white);
+    }
+
+    .btn-outline-white:hover {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--gray-500);
+      padding: 10px 16px;
+    }
+
+    .btn-ghost:hover {
+      color: var(--navy);
+      background: var(--gray-100);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .btn-lg {
+      padding: 18px 36px;
+      font-size: 17px;
+    }
+
+    .btn-sm {
+      padding: 10px 18px;
+      font-size: 13px;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ==================== FORM ELEMENTS ==================== */
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: var(--white);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    }
+
+    .form-input::placeholder {
+      color: var(--gray-400);
+    }
+
+    .form-input:disabled {
+      background: var(--gray-100);
+      cursor: not-allowed;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      background: var(--white);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      min-height: 100px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    }
+
+    .form-checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      border: 1px solid var(--gray-200);
+    }
+
+    .form-checkbox {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .form-checkbox-content strong {
+      display: block;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+
+    .form-checkbox-content span {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* ==================== INTAKE WIZARD STEPS ==================== */
+    .wizard-header {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .wizard-step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+
+    .wizard-step-indicator.active {
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .wizard-step-indicator.completed {
+      background: var(--success);
+      color: var(--white);
+    }
+
+    .wizard-step-indicator-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    /* ==================== INFO BOXES ==================== */
+    .info-box {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-left: 4px solid var(--navy);
+      padding: 20px 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 28px;
+    }
+
+    .info-box-orange {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border-left-color: var(--orange);
+    }
+
+    .info-box-success {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border-left-color: var(--success);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-box-orange .info-box-title {
+      color: var(--orange-hover);
+    }
+
+    .info-box-text {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* ==================== DATA DISPLAY ==================== */
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .data-item {
+      background: var(--gray-50);
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gray-200);
+    }
+
+    .data-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .data-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    /* ==================== BADGES ==================== */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-pending {
+      background: var(--warning-light);
+      color: #92400e;
+    }
+
+    .badge-active {
+      background: var(--success-light);
+      color: #065f46;
+    }
+
+    .badge-review {
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+
+    .badge-demo {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    /* ==================== TABLES ==================== */
+    .table-container {
+      overflow-x: auto;
+      margin-bottom: 28px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 18px;
+      background: var(--gray-50);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+      color: var(--gray-700);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover {
+      background: var(--gray-50);
+    }
+
+    /* ==================== ATTESTATION CARD ==================== */
+    .attestation-card {
+      border: 2px solid var(--orange);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .attestation-header {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(251, 146, 60, 0.3);
+    }
+
+    .attestation-body {
+      padding: 28px;
+      background: var(--white);
+    }
+
+    .attestation-legal {
+      background: var(--gray-50);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-bottom: 24px;
+      max-height: 160px;
+      overflow-y: auto;
+      border: 1px solid var(--gray-200);
+      line-height: 1.6;
+    }
+
+    .attestation-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ==================== CARE PLAN SECTIONS ==================== */
+    .care-plan-section {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .care-plan-header {
+      background: var(--gray-50);
+      padding: 16px 22px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 15px;
+    }
+
+    .care-plan-body {
+      padding: 22px;
+    }
+
+    .care-plan-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+      align-items: flex-start;
+    }
+
+    .care-plan-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .care-plan-item:first-child {
+      padding-top: 0;
+    }
+
+    .care-plan-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .care-plan-item-content strong {
+      display: block;
+      color: var(--gray-800);
+      margin-bottom: 3px;
+    }
+
+    .care-plan-item-content span {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* ==================== 4Ps WELLNESS GRID ==================== */
+    .four-ps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .four-ps-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 2px solid;
+    }
+
+    .four-ps-physical {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border-color: var(--success);
+    }
+
+    .four-ps-psychological {
+      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+      border-color: #6366f1;
+    }
+
+    .four-ps-psychosocial {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border-color: var(--warning);
+    }
+
+    .four-ps-professional {
+      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+      border-color: #f43f5e;
+    }
+
+    .four-ps-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--gray-800);
+    }
+
+    .four-ps-score {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .four-ps-physical .four-ps-score { color: #059669; }
+    .four-ps-psychological .four-ps-score { color: #4f46e5; }
+    .four-ps-psychosocial .four-ps-score { color: #d97706; }
+    .four-ps-professional .four-ps-score { color: #e11d48; }
+
+    .four-ps-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ==================== SECTION HEADERS ==================== */
+    .section-header {
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    /* ==================== OVERSIGHT GRID ==================== */
+    .oversight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .oversight-card {
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      text-align: center;
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s ease;
+    }
+
+    .oversight-card:hover {
+      border-color: var(--navy);
+      box-shadow: var(--shadow-md);
+    }
+
+    .oversight-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+
+    .oversight-title {
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .oversight-text {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* ==================== RESOURCE CARDS ==================== */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+
+    .resource-card {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .resource-card:hover {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-md);
+    }
+
+    .resource-card.coming-soon {
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    .resource-card.coming-soon:hover {
+      border-color: var(--gray-200);
+      box-shadow: none;
+    }
+
+    .resource-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .resource-title {
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 6px;
+    }
+
+    .resource-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .resource-badge {
+      display: inline-block;
+      background: var(--gray-200);
+      color: var(--gray-600);
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 10px;
+      text-transform: uppercase;
+    }
+
+    /* ==================== TIMELINE ==================== */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: var(--gray-200);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 24px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--navy);
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-content {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+
+    .timeline-content strong {
+      color: var(--gray-800);
+    }
+
+    /* ==================== INTRO SCREEN ==================== */
+    .intro-hero {
+      text-align: center;
+      padding: 50px 40px;
+    }
+
+    .intro-logo {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .intro-logo span {
+      color: var(--orange);
+    }
+
+    .intro-tagline {
+      font-size: 20px;
+      color: var(--gray-600);
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .intro-message {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      text-align: left;
+      margin-bottom: 40px;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .intro-message h2 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--navy);
+      margin-bottom: 18px;
+    }
+
+    .intro-message p {
+      font-size: 15px;
+      color: var(--gray-700);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .intro-message p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro-flow {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .intro-flow-step {
+      background: var(--gray-50);
+      padding: 18px 24px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      min-width: 130px;
+      border: 1px solid var(--gray-200);
+    }
+
+    .intro-flow-step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 auto 10px;
+    }
+
+    .intro-flow-step-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .intro-flow-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--gray-300);
+      font-size: 24px;
+      font-weight: 300;
+    }
+
+    /* ==================== TRANSITION SCREENS ==================== */
+    .transition-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 100px 24px 60px;
+    }
+
+    .transition-content {
+      max-width: 620px;
+    }
+
+    .transition-icon {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--success);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      margin: 0 auto 28px;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+    }
+
+    .transition-title {
+      font-family: var(--font-display);
+      font-size: 40px;
+      color: var(--white);
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+
+    .transition-text {
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    /* ==================== CTA SECTION ==================== */
+    .cta-section {
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      color: var(--white);
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+
+    .cta-text {
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 40px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      max-width: 720px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    /* ==================== RESUME MODAL ==================== */
+    .resume-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .resume-modal.active {
+      display: flex;
+    }
+
+    .resume-modal-content {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-xl);
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .resume-modal-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 24px;
+    }
+
+    .resume-modal-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .resume-modal-text {
+      color: var(--gray-600);
+      margin-bottom: 32px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .resume-modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ==================== DEMO NAVIGATION ==================== */
+    .demo-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 998;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+
+    .demo-nav-info {
+      font-size: 13px;
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+
+    .demo-nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* ==================== RN CARE PLAN DISPLAY ==================== */
+    .rn-care-plan {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 2px solid var(--teal);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .rn-care-plan-header {
+      background: linear-gradient(135deg, var(--teal) 0%, #0e7490 100%);
+      color: var(--white);
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rn-care-plan-header h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .rn-care-plan-body {
+      padding: 28px;
+    }
+
+    .rn-care-plan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .rn-care-plan-block {
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      border: 1px solid var(--gray-200);
+    }
+
+    .rn-care-plan-block-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rn-care-plan-block-content {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    .rn-care-plan-block-content ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .rn-care-plan-block-content li {
+      margin-bottom: 6px;
+    }
+
+    .rn-care-plan-block-content li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ==================== REPORT PREVIEW CARDS ==================== */
+    .report-preview {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .report-preview-header {
+      background: var(--gray-50);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .report-preview-title {
+      font-weight: 700;
+      color: var(--gray-800);
+      font-size: 14px;
+    }
+
+    .report-preview-date {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .report-preview-body {
+      padding: 20px;
+    }
+
+    .report-preview-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+    }
+
+    .report-preview-stat:last-child {
+      border-bottom: none;
+    }
+
+    .report-preview-stat-label {
+      color: var(--gray-600);
+    }
+
+    .report-preview-stat-value {
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-flow {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .intro-flow-arrow {
+        transform: rotate(90deg);
+      }
+
+      .four-ps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-body {
+        padding: 28px;
+      }
+
+      .card-header {
+        padding: 28px;
+      }
+
+      .progress-steps {
+        display: none;
+      }
+
+      .wizard-header {
+        gap: 4px;
+      }
+
+      .wizard-step-indicator {
+        padding: 6px 10px;
+        font-size: 10px;
+      }
+
+      .intro-logo {
+        font-size: 36px;
+      }
+
+      .cta-title {
+        font-size: 32px;
+      }
+
+      .transition-title {
+        font-size: 32px;
+      }
+
+      .demo-nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+
+      .demo-nav-info {
+        text-align: center;
+      }
+    }
+
+    /* ==================== UTILITY CLASSES ==================== */
+    .mb-0 { margin-bottom: 0 !important; }
+    .mb-2 { margin-bottom: 8px !important; }
+    .mb-4 { margin-bottom: 16px !important; }
+    .mb-6 { margin-bottom: 24px !important; }
+    .mb-8 { margin-bottom: 32px !important; }
+    .mt-4 { margin-top: 16px !important; }
+    .mt-6 { margin-top: 24px !important; }
+    .mt-8 { margin-top: 32px !important; }
+    .text-center { text-align: center !important; }
+    .text-muted { color: var(--gray-500) !important; }
+    .text-sm { font-size: 14px !important; }
+    .text-xs { font-size: 12px !important; }
+    .font-bold { font-weight: 700 !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== DEMO BANNER ==================== -->
+  <div class="demo-banner">
+    🎯 ATTORNEY DEMONSTRATION
+    <span class="demo-banner-badge">Fictional Data Only</span>
+  </div>
+
+  <!-- ==================== PROGRESS STEPS ==================== -->
+  <div class="progress-container" id="progressContainer">
+    <div class="progress-steps" id="progressSteps">
+      <div class="progress-step" data-step="1"><span class="progress-step-num">1</span> Introduction</div>
+      <div class="progress-step" data-step="2"><span class="progress-step-num">2</span> Client Login</div>
+      <div class="progress-step" data-step="3"><span class="progress-step-num">3</span> Client Intake</div>
+      <div class="progress-step" data-step="4"><span class="progress-step-num">4</span> Intake Complete</div>
+      <div class="progress-step" data-step="5"><span class="progress-step-num">5</span> Attorney Portal</div>
+      <div class="progress-step" data-step="6"><span class="progress-step-num">6</span> RN Oversight</div>
+      <div class="progress-step" data-step="7"><span class="progress-step-num">7</span> Sample Care Plan</div>
+      <div class="progress-step" data-step="8"><span class="progress-step-num">8</span> Documentation</div>
+      <div class="progress-step" data-step="9"><span class="progress-step-num">9</span> Resources</div>
+      <div class="progress-step" data-step="10"><span class="progress-step-num">10</span> Next Steps</div>
+    </div>
+  </div>
+
+  <!-- ==================== RESUME MODAL ==================== -->
+  <div class="resume-modal" id="resumeModal">
+    <div class="resume-modal-content">
+      <div class="resume-modal-icon">↻</div>
+      <div class="resume-modal-title">Welcome Back</div>
+      <div class="resume-modal-text">
+        You have a saved demo session. Would you like to continue where you left off or start fresh?
+      </div>
+      <div class="resume-modal-buttons">
+        <button class="btn btn-orange btn-block btn-lg" onclick="resumeDemo()">Resume Demo</button>
+        <button class="btn btn-outline btn-block" onclick="startFresh()">Start Over</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 1: INTRODUCTION ==================== -->
+  <div class="screen active" id="screen-intro" data-step="1">
+    <div class="container">
+      <div class="card">
+        <div class="intro-hero">
+          <div class="intro-logo">Reconcile <span>C.A.R.E.</span></div>
+          <div class="intro-tagline">Clinical Assessment & Recovery Evaluation</div>
+          
+          <div class="intro-message">
+            <h2>Welcome to the Attorney Demonstration</h2>
+            <p><strong>C.A.R.E. stands for Clinical Assessment & Recovery Evaluation.</strong></p>
+            <p>Attorneys handling injury cases receive large amounts of information from clients, medical providers, and records. The challenge is not simply collecting that information — but understanding what it reveals about the client's recovery and using it strategically to support a settlement demand with clear, defensible evidence.</p>
+            <p>Every case has two layers: the information itself, and the meaning behind it. Reconcile C.A.R.E. is designed to capture both.</p>
+            <h2>Preparation vs. Strategy Within the Platform</h2>
+            <p><strong>Preparation</strong> = collecting, organizing, and structuring the client's clinical, functional, financial, and SDOH information.</p>
+            <p><strong>Strategy</strong> = interpreting that information to anticipate recovery patterns, identify emerging risks, and proactively plan against poor trajectory, barriers, and case-impacting complications.</p>
+            <p>This distinction is foundational to the platform.</p>
+            <h2>A Comprehensive View of Recovery</h2>
+            <p>C.A.R.E. gives attorneys a clear, defensible picture of a client's comprehensive recovery, grounded in the 4Ps of Wellness:</p>
+            <p><strong>P1 – Physical:</strong> symptom progression, functional capacity, mobility, pain patterns, and physical limitations.</p>
+            <p><strong>P2 – Psychological:</strong> stress responses, fear, anxiety, trauma-related barriers, and emotional impact.</p>
+            <p><strong>P3 – Psychosocial:</strong> relationships, support systems, role changes, and how injury affects social functioning and daily life.</p>
+            <p><strong>P4 – Professional:</strong> the client's ability to perform their primary role — whether employment, school, vocational training, caregiving, or managing the home — and how the injury disrupts or prevents participation in those responsibilities.</p>
+            <p>The 4Ps give attorneys a structured, clinically grounded way to understand how the injury affects the client's life, function, and future — the elements that ultimately shape case value.</p>
+            <p><strong>SDOH = Social Drivers of Health</strong></p>
+            <h2>Real-World Factors That Shape Recovery</h2>
+            <p>C.A.R.E. also identifies the real-world forces that influence a client's ability to follow medical recommendations and maintain a healthy recovery trajectory. These factors fall across the Psychological and Psychosocial domains of the 4Ps.</p>
+            <p>Many injured clients miss appointments or struggle to participate in therapy — and the default assumption is often that the injury must not be that severe or that the client is not following through.</p>
+            <p>C.A.R.E. corrects this assumption by documenting the actual barriers that interfere with care.</p>
+            <p>Psychosocial barriers may include:</p>
+            <ul style="margin: 0 0 14px 20px; line-height: 1.8;">
+              <li>loss of transportation</li>
+              <li>job loss or reduced hours</li>
+              <li>caregiving responsibilities</li>
+              <li>housing instability or homelessness</li>
+              <li>financial strain that limits access to care</li>
+              <li>lack of support or role overload</li>
+            </ul>
+            <p>This demonstration is intentionally structured so the attorney experiences the client intake first.</p>
+            <p>The attorney portal only makes sense when you understand what the client sees, the questions they answer, and how those answers populate the dashboard you will review.</p>
+            <p>The structured intake process creates the clinical documentation foundation for care coordination, recovery monitoring, and defensible case support.</p>
+            <p>In this demonstration you will follow a fictional client through the intake process and then see how that information appears in the attorney dashboard.</p>
+            <p>All information shown in this demonstration is fictional.</p>
+          </div>
+
+          <div class="intro-flow">
+            <div class="intro-flow-step">
+              <div class="intro-flow-step-number">1</div>
+              <div class="intro-flow-step-label">Client Intake</div>
+            </div>
+            <div class="intro-flow-arrow">→</div>
+            <div class="intro-flow-step">
+              <div class="intro-flow-step-number">2</div>
+              <div class="intro-flow-step-label">Attorney Portal</div>
+            </div>
+            <div class="intro-flow-arrow">→</div>
+            <div class="intro-flow-step">
+              <div class="intro-flow-step-number">3</div>
+              <div class="intro-flow-step-label">RN Oversight</div>
+            </div>
+            <div class="intro-flow-arrow">→</div>
+            <div class="intro-flow-step">
+              <div class="intro-flow-step-number">4</div>
+              <div class="intro-flow-step-label">Care Plan</div>
+            </div>
+          </div>
+
+          <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-client-login')">
+            Begin Demonstration →
+          </button>
+        </div>
+      </div>
+      <p class="text-center text-sm mt-6" style="color: rgba(255,255,255,0.7);">
+        © Reconcile Care Management Services
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 2: CLIENT LOGIN (SIMULATED) ==================== -->
+  <div class="screen" id="screen-client-login" data-step="2">
+    <div class="container container-narrow">
+      <div class="card">
+        <div class="card-header">
+          <h1>Client Login</h1>
+          <p>Secure access to your C.A.R.E. portal</p>
+        </div>
+        <div class="card-body">
+          <div class="info-box info-box-orange">
+            <div class="info-box-title">📋 Demonstration Mode</div>
+            <div class="info-box-text">This is a simulated login screen. In the live system, clients enter their case number and PIN. For this demo, click below to proceed as a new client completing intake.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Case Number</label>
+            <input type="text" class="form-input" placeholder="e.g. MS04-260115-01F" disabled>
+          </div>
+
+          <div class="form-group mb-6">
+            <label class="form-label">PIN</label>
+            <input type="password" class="form-input" placeholder="4-digit PIN" disabled>
+          </div>
+
+          <button class="btn btn-primary btn-block mb-4" disabled style="opacity: 0.4;">Sign In (Disabled for Demo)</button>
+          
+          <div style="text-align: center; color: var(--gray-400); margin-bottom: 16px; font-size: 13px;">— or —</div>
+          
+          <button class="btn btn-orange btn-block btn-lg" onclick="goToScreen('screen-intake-1')">
+            Continue as New Client →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 3A: INTAKE STEP 1 - PERSONAL INFO ==================== -->
+  <div class="screen" id="screen-intake-1" data-step="3">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="wizard-header">
+            <div class="wizard-step-indicator active">
+              <span class="wizard-step-indicator-num">1</span> Personal Info
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">2</span> Injury
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">3</span> Medical
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">4</span> Providers
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">5</span> Consents
+            </div>
+          </div>
+          <h1>Personal Information</h1>
+          <p>Let's start with some basic information</p>
+        </div>
+        <div class="card-body">
+          <div class="info-box info-box-orange">
+            <div class="info-box-title">🎭 Demo Data Pre-filled</div>
+            <div class="info-box-text">This form contains fictional client data for demonstration. In the live system, clients enter their own information.</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" id="intake-firstName" value="Maria">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" id="intake-lastName" value="Santos">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" class="form-input" value="1985-06-15">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-input" value="(512) 555-0147">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" value="maria.santos@email.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-input" value="4521 Cedar Lane, Austin, TX 78745">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Select Your Attorney</label>
+              <select class="form-select" id="intake-attorney">
+                <option value="lauren">Lauren Mitchell — Mitchell Law Group</option>
+                <option value="other">Other Attorney</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Language</label>
+              <select class="form-select">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 14px; margin-top: 36px;">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-2')">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 3B: INTAKE STEP 2 - INJURY DETAILS ==================== -->
+  <div class="screen" id="screen-intake-2" data-step="3">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="wizard-header">
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Personal Info
+            </div>
+            <div class="wizard-step-indicator active">
+              <span class="wizard-step-indicator-num">2</span> Injury
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">3</span> Medical
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">4</span> Providers
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">5</span> Consents
+            </div>
+          </div>
+          <h1>Injury Details</h1>
+          <p>Tell us about the incident and your injuries</p>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Date of Incident</label>
+              <input type="date" class="form-input" id="intake-injuryDate" value="2024-11-15">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type of Incident</label>
+              <select class="form-select" id="intake-injuryType">
+                <option value="mva" selected>Motor Vehicle Accident</option>
+                <option value="slip">Slip and Fall</option>
+                <option value="work">Workplace Injury</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Brief Description</label>
+            <textarea class="form-textarea" id="intake-description">I was stopped at a red light on Congress Ave when another vehicle rear-ended my car at approximately 35 mph. The impact pushed my car into the intersection. I was wearing my seatbelt but my head hit the headrest forcefully.</textarea>
+          </div>
+
+          <div class="section-header mt-6">
+            <div class="section-title" style="font-size: 18px;">Areas of Injury</div>
+            <div class="section-subtitle">Select all body areas where you experience pain or discomfort</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 24px;">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+              <input type="checkbox" checked style="accent-color: var(--navy); width: 18px; height: 18px;"> <span style="font-size: 14px;">Neck</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+              <input type="checkbox" checked style="accent-color: var(--navy); width: 18px; height: 18px;"> <span style="font-size: 14px;">Upper Back</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+              <input type="checkbox" checked style="accent-color: var(--navy); width: 18px; height: 18px;"> <span style="font-size: 14px;">Lower Back</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+              <input type="checkbox" checked style="accent-color: var(--navy); width: 18px; height: 18px;"> <span style="font-size: 14px;">Head</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+              <input type="checkbox" style="accent-color: var(--navy); width: 18px; height: 18px;"> <span style="font-size: 14px;">Left Shoulder</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
+              <input type="checkbox" style="accent-color: var(--navy); width: 18px; height: 18px;"> <span style="font-size: 14px;">Right Shoulder</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Current Pain Level (1-10)</label>
+            <select class="form-select" style="max-width: 220px;" id="intake-painLevel">
+              <option value="7" selected>7 — Severe</option>
+              <option value="6">6 — Moderate-Severe</option>
+              <option value="5">5 — Moderate</option>
+            </select>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+            <button class="btn btn-outline" onclick="goToScreen('screen-intake-1')">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-3')">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 3C: INTAKE STEP 3 - MEDICAL HISTORY ==================== -->
+  <div class="screen" id="screen-intake-3" data-step="3">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="wizard-header">
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Personal Info
+            </div>
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Injury
+            </div>
+            <div class="wizard-step-indicator active">
+              <span class="wizard-step-indicator-num">3</span> Medical
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">4</span> Providers
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">5</span> Consents
+            </div>
+          </div>
+          <h1>Medical History</h1>
+          <p>Help us understand your health background</p>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Pre-existing Medical Conditions</label>
+            <textarea class="form-textarea" style="min-height: 90px;">Mild hypertension (controlled with medication). No prior back or neck injuries.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Current Medications</label>
+            <textarea class="form-textarea" style="min-height: 90px;">Lisinopril 10mg daily for blood pressure. Ibuprofen as needed for pain (started after accident).</textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Allergies</label>
+              <input type="text" class="form-input" value="Penicillin">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Previous Surgeries</label>
+              <input type="text" class="form-input" value="Appendectomy (2010)">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Primary Care Physician</label>
+            <input type="text" class="form-input" value="Dr. Sarah Chen, Austin Primary Care">
+          </div>
+
+          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+            <button class="btn btn-outline" onclick="goToScreen('screen-intake-2')">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-4')">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 3D: INTAKE STEP 4 - PROVIDERS ==================== -->
+  <div class="screen" id="screen-intake-4" data-step="3">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="wizard-header">
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Personal Info
+            </div>
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Injury
+            </div>
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Medical
+            </div>
+            <div class="wizard-step-indicator active">
+              <span class="wizard-step-indicator-num">4</span> Providers
+            </div>
+            <div class="wizard-step-indicator">
+              <span class="wizard-step-indicator-num">5</span> Consents
+            </div>
+          </div>
+          <h1>Treatment Providers</h1>
+          <p>Tell us about the healthcare providers treating your injuries</p>
+        </div>
+        <div class="card-body">
+          <div class="info-box">
+            <div class="info-box-title">Why we ask this</div>
+            <div class="info-box-text">Understanding your care team allows us to coordinate documentation and ensure nothing falls through the cracks during your recovery.</div>
+          </div>
+
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--gray-50);">
+            <div style="font-weight: 700; color: var(--navy); margin-bottom: 16px; font-size: 14px;">Provider #1</div>
+            <div class="form-row">
+              <div class="form-group mb-2">
+                <label class="form-label">Provider Name</label>
+                <input type="text" class="form-input" value="Austin Spine & Rehab Center">
+              </div>
+              <div class="form-group mb-2">
+                <label class="form-label">Provider Type</label>
+                <select class="form-select">
+                  <option value="chiro" selected>Chiropractor</option>
+                  <option value="pt">Physical Therapist</option>
+                  <option value="ortho">Orthopedist</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group mb-0">
+                <label class="form-label">First Visit Date</label>
+                <input type="date" class="form-input" value="2024-11-18">
+              </div>
+              <div class="form-group mb-0">
+                <label class="form-label">Visit Frequency</label>
+                <select class="form-select">
+                  <option value="3x" selected>3x per week</option>
+                  <option value="2x">2x per week</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--gray-50);">
+            <div style="font-weight: 700; color: var(--navy); margin-bottom: 16px; font-size: 14px;">Provider #2</div>
+            <div class="form-row">
+              <div class="form-group mb-2">
+                <label class="form-label">Provider Name</label>
+                <input type="text" class="form-input" value="Dr. Michael Torres, MD">
+              </div>
+              <div class="form-group mb-2">
+                <label class="form-label">Provider Type</label>
+                <select class="form-select">
+                  <option value="pain" selected>Pain Management</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group mb-0">
+                <label class="form-label">First Visit Date</label>
+                <input type="date" class="form-input" value="2024-11-25">
+              </div>
+              <div class="form-group mb-0">
+                <label class="form-label">Visit Frequency</label>
+                <select class="form-select">
+                  <option value="monthly" selected>Monthly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-outline btn-sm">+ Add Another Provider</button>
+
+          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+            <button class="btn btn-outline" onclick="goToScreen('screen-intake-3')">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-intake-5')">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 3E: INTAKE STEP 5 - CONSENTS ==================== -->
+  <div class="screen" id="screen-intake-5" data-step="3">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="wizard-header">
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Personal Info
+            </div>
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Injury
+            </div>
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Medical
+            </div>
+            <div class="wizard-step-indicator completed">
+              <span class="wizard-step-indicator-num">✓</span> Providers
+            </div>
+            <div class="wizard-step-indicator active">
+              <span class="wizard-step-indicator-num">5</span> Consents
+            </div>
+          </div>
+          <h1>Acknowledgments & Consents</h1>
+          <p>Please review and acknowledge the following</p>
+        </div>
+        <div class="card-body">
+          <div class="form-checkbox-group">
+            <input type="checkbox" class="form-checkbox" checked>
+            <div class="form-checkbox-content">
+              <strong>C.A.R.E. Acknowledgment</strong>
+              <span>I understand that by using the Reconcile C.A.R.E. platform, I agree to provide accurate information about my health, treatment, and daily functioning. My entries will be used to generate clinical care plans and progress reports shared with my attorney.</span>
+            </div>
+          </div>
+
+          <div class="form-checkbox-group">
+            <input type="checkbox" class="form-checkbox" checked>
+            <div class="form-checkbox-content">
+              <strong>HIPAA Authorization</strong>
+              <span>I authorize Reconcile Care Management Services to access, use, and share my protected health information (PHI) with my attorney and healthcare providers involved in my care coordination.</span>
+            </div>
+          </div>
+
+          <div class="form-checkbox-group">
+            <input type="checkbox" class="form-checkbox" checked>
+            <div class="form-checkbox-content">
+              <strong>Attorney Communication Consent</strong>
+              <span>I consent to Reconcile Care Management Services communicating with my attorney regarding my case status, care plan progress, and clinical recommendations.</span>
+            </div>
+          </div>
+
+          <div class="form-checkbox-group">
+            <input type="checkbox" class="form-checkbox" checked>
+            <div class="form-checkbox-content">
+              <strong>Understanding of Services</strong>
+              <span>I understand that Reconcile C.A.R.E. is not a substitute for medical care. If I experience a medical emergency, I will call 911.</span>
+            </div>
+          </div>
+
+          <div class="form-group mt-6">
+            <label class="form-label">Electronic Signature</label>
+            <input type="text" class="form-input" value="Maria Santos" style="font-family: 'Brush Script MT', cursive; font-size: 26px; text-align: center;">
+            <div class="text-sm text-muted mt-2">By typing your name, you are electronically signing these acknowledgments.</div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
+            <button class="btn btn-outline" onclick="goToScreen('screen-intake-4')">← Back</button>
+            <button class="btn btn-orange btn-lg" onclick="submitIntake()">Submit Intake →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 4: INTAKE COMPLETE / TRANSITION ==================== -->
+  <div class="screen" id="screen-intake-complete" data-step="4">
+    <div class="transition-screen">
+      <div class="transition-content">
+        <div class="transition-icon">✓</div>
+        <div class="transition-title">Intake Submitted Successfully</div>
+        <div class="transition-text">
+          <strong id="display-clientName">Maria Santos</strong> has completed her intake.<br>
+          Case Number: <strong id="display-caseNumber">MS04-260115-01F</strong><br><br>
+          Your structured intake information is now visible in the attorney dashboard.<br><br>
+          The attorney reviews the case details, confirms representation, and activates RN clinical oversight to begin care plan development and documentation monitoring.<br><br>
+          Clients have 7 days to complete intake.<br>
+          Attorneys have 48 hours to attest that the client is theirs and activate RN oversight.<br><br>
+          <em>Let's see what this looks like from the attorney's perspective.</em>
+        </div>
+        <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-attorney-portal')">
+          Continue to Attorney Portal →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 5: ATTORNEY PORTAL ==================== -->
+  <div class="screen" id="screen-attorney-portal" data-step="5">
+    <div class="container container-wide">
+      <div class="card">
+        <div class="card-header card-header-orange">
+          <!-- Attorney identity row -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+            <div>
+              <h1>Attorney Dashboard</h1>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 4px;">
+                <div style="font-size: 17px; font-weight: 700; opacity: 1;">Lauren Mitchell</div>
+                <div style="font-size: 14px; font-weight: 400; opacity: 0.85;">Mitchell Law Group</div>
+              </div>
+            </div>
+          </div>
+          <!-- Summary stats row -->
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
+              <div style="font-size: 22px; font-weight: 700;">3</div>
+              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">Active<br>Cases</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
+              <div style="font-size: 22px; font-weight: 700;">1</div>
+              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">Cases Awaiting<br>Review</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.18); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;">
+              <div style="font-size: 22px; font-weight: 700;">2</div>
+              <div style="font-size: 12px; opacity: 0.9; line-height: 1.3;">RN Coordinated<br>Cases</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <!-- Primary Case Card -->
+          <div style="background: var(--gray-50); border: 2px solid var(--navy); border-radius: 10px; padding: 24px 28px; margin-bottom: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 18px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Primary Demo Case</div>
+                <div style="font-size: 26px; font-weight: 700; color: var(--navy);">Maria Santos</div>
+              </div>
+              <span class="badge badge-pending" style="font-size: 13px; padding: 8px 18px;">Awaiting Attorney Confirmation</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Client Name</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800);">Maria Santos</div>
+              </div>
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Case Number</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800); font-family: monospace;">MS04-260115-01F</div>
+              </div>
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Incident Type</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800);">Motor Vehicle Accident</div>
+              </div>
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Current Status</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--warning);">Intake Submitted – Awaiting Attorney Confirmation</div>
+              </div>
+            </div>
+            <div style="background: var(--warning-light); border-left: 3px solid var(--warning); border-radius: 4px; padding: 10px 14px; font-size: 13px; color: #92400e;">
+              📋 This case was just submitted through the intake process in this demonstration. In the live system, the attorney would now review and confirm representation to activate clinical coordination.
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- SECTION 1: CASE SNAPSHOT (Key Metrics) -->
+          <!-- ============================================ -->
+          <div style="background: linear-gradient(135deg, var(--navy) 0%, #1e2d4d 100%); border-radius: 12px; padding: 36px; margin-bottom: 32px; color: var(--white); box-shadow: 0 8px 32px rgba(30,58,138,0.25);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px;">
+              <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.6; font-weight: 700;">Case Snapshot — Maria Santos</div>
+              <div style="font-size: 11px; opacity: 0.5; letter-spacing: 0.5px;">All scores: 1 (critical) → 5 (optimal)</div>
+            </div>
+
+            <!-- 4Ps of Wellness -->
+            <div style="margin-bottom: 8px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 12px;">4Ps of Wellness</div>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #4ade80;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P1 · Physical</div>
+                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #4ade80;">2</div>
+                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #a78bfa;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P2 · Psychological</div>
+                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #a78bfa;">3</div>
+                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #f472b6;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P3 · Psychosocial</div>
+                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #f472b6;">3</div>
+                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fbbf24;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">P4 · Professional</div>
+                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #fbbf24;">2</div>
+                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0;"></div>
+
+            <!-- FCI, Concerns, Recovery Trajectory -->
+            <div style="margin-bottom: 8px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 12px;">Clinical Indicators</div>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #38bdf8;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Functional Capacity Index</div>
+                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #38bdf8;">2</div>
+                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">of 5</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fbbf24;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Intrinsic Concerns</div>
+                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #fbbf24;">3</div>
+                  <div style="font-size: 11px; color: #fbbf24; opacity: 0.8; margin-top: 6px;">Moderate</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fb923c;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Extrinsic Concerns</div>
+                  <div style="font-size: 40px; font-weight: 700; line-height: 1; color: #fb923c;">4</div>
+                  <div style="font-size: 11px; color: #fb923c; opacity: 0.9; margin-top: 6px;">Elevated</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 16px; text-align: center; border-top: 3px solid #fbbf24;">
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; margin-bottom: 10px;">Recovery Trajectory</div>
+                  <div style="font-size: 22px; font-weight: 700; color: #fbbf24; margin-top: 6px;">Delayed</div>
+                  <div style="font-size: 11px; opacity: 0.45; margin-top: 6px;">Monitor closely</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0;"></div>
+
+            <!-- SDOH + Provider Sequencing -->
+            <div>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 12px;">Social & Documentation Risk</div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                <div style="background: rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 20px; display: flex; align-items: center; gap: 20px; border-top: 3px solid #38bdf8;">
+                  <div style="font-size: 44px; font-weight: 700; color: #38bdf8; line-height: 1; flex-shrink: 0;">3</div>
+                  <div>
+                    <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px;">SDOH — Social Drivers of Health</div>
+                    <div style="font-size: 12px; opacity: 0.6;">Score 3 of 5 — Moderate Impact</div>
+                  </div>
+                </div>
+                <div style="background: rgba(251,146,60,0.12); border-radius: 8px; padding: 18px 20px; display: flex; align-items: center; gap: 20px; border-top: 3px solid #fb923c;">
+                  <div style="font-size: 32px; line-height: 1; flex-shrink: 0;">⚠️</div>
+                  <div>
+                    <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px; color: #fb923c;">Provider Sequencing Concern</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Neurologist referral pending 3+ weeks</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- SECTION 2: CLINICAL INTELLIGENCE -->
+          <!-- ============================================ -->
+          <div style="margin-bottom: 32px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--orange); text-transform: uppercase; letter-spacing: 1.5px;">Clinical Intelligence</div>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+              <!-- Provider Sequencing Concern -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--warning);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">⚠️</span>
+                    <span style="font-size: 14px; font-weight: 700; color: var(--navy);">Provider Sequencing Concern</span>
+                  </div>
+                  <span style="font-size: 11px; font-weight: 700; background: var(--warning-light); color: #92400e; padding: 3px 10px; border-radius: 12px;">Action Needed</span>
+                </div>
+                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">Initial provider sequence may affect documentation strength. Neurologist referral pending 3+ weeks.</div>
+              </div>
+
+              <!-- Treatment Gap Indicator -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--error);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">🔴</span>
+                    <span style="font-size: 14px; font-weight: 700; color: var(--navy);">Treatment Gap Indicator</span>
+                  </div>
+                  <span style="font-size: 11px; font-weight: 700; background: var(--error-light); color: #991b1b; padding: 3px 10px; border-radius: 12px;">Flagged</span>
+                </div>
+                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">Follow-up care delay detected. 12-day gap between physical therapy sessions.</div>
+              </div>
+
+              <!-- Barrier to Care Indicators -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--teal);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">🚧</span>
+                    <span style="font-size: 14px; font-weight: 700; color: var(--navy);">Barriers to Care Identified</span>
+                  </div>
+                  <span style="font-size: 11px; font-weight: 700; background: #ccfbf1; color: #0f766e; padding: 3px 10px; border-radius: 12px;">3 Active</span>
+                </div>
+                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">
+                  <div style="margin-bottom: 5px;">• Transportation limitations to appointments</div>
+                  <div style="margin-bottom: 5px;">• Work schedule conflicts with therapy</div>
+                  <div>• Financial strain affecting treatment access</div>
+                </div>
+              </div>
+
+              <!-- RN Clinical Oversight Status -->
+              <div style="background: linear-gradient(135deg, var(--teal) 0%, #1e6070 100%); border-radius: 8px; padding: 22px 24px; color: var(--white);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">⚕️</span>
+                    <span style="font-size: 14px; font-weight: 700;">RN Clinical Oversight Status</span>
+                  </div>
+                  <span style="font-size: 11px; font-weight: 700; background: rgba(255,255,255,0.2); color: white; padding: 3px 10px; border-radius: 12px;">Active</span>
+                </div>
+                <div style="font-size: 14px; line-height: 1.6; opacity: 0.95;">RN Clinical Oversight Active — monitoring recovery trajectory and barriers to care.</div>
+                <div style="margin-top: 10px; font-size: 12px; opacity: 0.7;">Last reviewed: March 8, 2026</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- SECTION 3: ATTORNEY OUTPUTS -->
+          <!-- ============================================ -->
+          <div style="margin-bottom: 32px;">
+            <div style="font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--orange);">Attorney Outputs</div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+              <!-- RN Care Plan -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                <div style="background: var(--navy); padding: 16px 20px; color: var(--white);">
+                  <div style="font-size: 15px; font-weight: 700;">RN Care Plan</div>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Comprehensive clinical care plan with goals, interventions, and recommendations.</div>
+                  <div style="font-size: 13px; color: var(--teal); font-weight: 600;">View Document →</div>
+                </div>
+              </div>
+
+              <!-- Functional Capacity Index Report -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                <div style="background: var(--navy); padding: 16px 20px; color: var(--white);">
+                  <div style="font-size: 15px; font-weight: 700;">Functional Capacity Index Report</div>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Detailed assessment of functional limitations and daily living impact.</div>
+                  <div style="font-size: 13px; color: var(--teal); font-weight: 600;">View Document →</div>
+                </div>
+              </div>
+
+              <!-- Clinical Recovery Documentation -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                <div style="background: var(--navy); padding: 16px 20px; color: var(--white);">
+                  <div style="font-size: 15px; font-weight: 700;">Clinical Recovery Documentation</div>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Ongoing recovery progress, treatment compliance, and clinical observations.</div>
+                  <div style="font-size: 13px; color: var(--teal); font-weight: 600;">View Document →</div>
+                </div>
+              </div>
+
+              <!-- Provider Sequencing Insight -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                <div style="background: var(--navy); padding: 16px 20px; color: var(--white);">
+                  <div style="font-size: 15px; font-weight: 700;">Provider Sequencing Insight</div>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Analysis of treatment timeline and provider order for documentation integrity.</div>
+                  <div style="font-size: 13px; color: var(--teal); font-weight: 600;">View Document →</div>
+                </div>
+              </div>
+
+              <!-- Attorney Clinical Guidance Resources -->
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                <div style="background: var(--warning); padding: 16px 20px; color: var(--navy);">
+                  <div style="font-size: 15px; font-weight: 700;">Attorney Clinical Guidance</div>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Resources and guidance for understanding clinical documentation in injury cases.</div>
+                  <div style="font-size: 13px; color: var(--teal); font-weight: 600;">View Resources →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Cases Table (keeping original) -->
+          <div class="section-header">
+            <div class="section-title">Your Active Cases</div>
+            <div class="section-subtitle">Click any case to view details</div>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Case #</th>
+                  <th>Date of Injury</th>
+                  <th>Status</th>
+                  <th>Recovery</th>
+                  <th>4Ps Avg</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="cursor: pointer;" onclick="alert('Demo: Would open case details for Maria Santos')">
+                  <td><strong>Maria Santos</strong></td>
+                  <td style="font-family: monospace; font-size: 13px;">MS04-260115-01F</td>
+                  <td>Nov 15, 2024</td>
+                  <td><span class="badge badge-active">Active</span></td>
+                  <td><span style="color: var(--warning); font-weight: 600;">Delayed</span></td>
+                  <td><strong>3</strong></td>
+                </tr>
+                <tr style="cursor: pointer;" onclick="alert('Demo: Would open case details for James Rodriguez')">
+                  <td><strong>James Rodriguez</strong></td>
+                  <td style="font-family: monospace; font-size: 13px;">JR04-241018-02M</td>
+                  <td>Oct 18, 2024</td>
+                  <td><span class="badge badge-active">Active</span></td>
+                  <td><span style="color: var(--success); font-weight: 600;">On Track</span></td>
+                  <td><strong>3</strong></td>
+                </tr>
+                <tr style="cursor: pointer;" onclick="alert('Demo: Would open case details for Robert Chen')">
+                  <td><strong>Robert Chen</strong></td>
+                  <td style="font-family: monospace; font-size: 13px;">RC04-241201-03M</td>
+                  <td>Dec 1, 2024</td>
+                  <td><span class="badge badge-review">RN Review</span></td>
+                  <td><span style="color: var(--error); font-weight: 600;">At Risk</span></td>
+                  <td><strong>2</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="text-align: center; margin-top: 32px;">
+            <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-rn-oversight')">Continue: RN Clinical Oversight →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 6: RN CLINICAL OVERSIGHT ==================== -->
+  <div class="screen" id="screen-rn-oversight" data-step="6">
+    <div class="container">
+      <div class="card">
+        <div class="card-header card-header-teal">
+          <h1>RN Clinical Oversight</h1>
+          <p>The critical layer that protects documentation integrity</p>
+        </div>
+        <div class="card-body">
+          <div class="info-box info-box-success">
+            <div class="info-box-title">⚕️ Why RN Oversight Matters for Your Case</div>
+            <div class="info-box-text">
+              Structured intake is powerful, but it requires clinical validation. A licensed Registered Nurse reviews every care plan before it reaches you, ensuring clinical accuracy, defensible documentation, and identification of red flags that could impact case value.
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-text">
+              <p style="margin-bottom: 10px;">RN clinical oversight begins after attorney confirmation of representation.</p>
+              <p style="margin-bottom: 10px;">Once activated, the RN care manager monitors treatment progression, documentation completeness, and care coordination to support recovery and maintain a defensible clinical record.</p>
+              <p style="margin-bottom: 0;">This oversight provides attorneys with ongoing visibility into treatment progress and potential documentation gaps.</p>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <div class="section-title">How RN Oversight Strengthens Your Case</div>
+          </div>
+
+          <div class="oversight-grid">
+            <div class="oversight-card">
+              <div class="oversight-icon">🔍</div>
+              <div class="oversight-title">Identify Strengths & Barriers</div>
+              <div class="oversight-text">RNs recognize what's working in the client's recovery and what obstacles may be slowing progress or complicating care.</div>
+            </div>
+            <div class="oversight-card">
+              <div class="oversight-icon">🛡️</div>
+              <div class="oversight-title">Recognize Safety Issues</div>
+              <div class="oversight-text">Clinical training allows RNs to spot red flags — medication interactions, mental health concerns, or care gaps that need attention.</div>
+            </div>
+            <div class="oversight-card">
+              <div class="oversight-icon">📈</div>
+              <div class="oversight-title">Track Care Progression</div>
+              <div class="oversight-text">Ongoing monitoring ensures the client's treatment trajectory is documented and any plateau or setback is captured for the record.</div>
+            </div>
+            <div class="oversight-card">
+              <div class="oversight-icon">⚖️</div>
+              <div class="oversight-title">Support Defensible Documentation</div>
+              <div class="oversight-text">RN-validated records meet clinical standards and withstand scrutiny during settlement negotiations or litigation.</div>
+            </div>
+          </div>
+
+          <div class="section-header mt-8">
+            <div class="section-title">The 10-Vs of Care Management™</div>
+            <div class="section-subtitle">Our proprietary framework guiding every RN assessment</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 36px;">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V1:</strong> Verify Identity
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V2:</strong> Validate Injury
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V3:</strong> Verify Providers
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V4:</strong> Validate Treatment
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V5:</strong> Verify Compliance
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V6:</strong> Validate Progress
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V7:</strong> Verify Documentation
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V8:</strong> Validate Barriers
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V9:</strong> Verify Communication
+            </div>
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
+              <strong style="color: var(--teal);">V10:</strong> Validate Outcomes
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-care-plan')">
+              View Sample RN Care Plan →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 7: SAMPLE RN CARE PLAN ==================== -->
+  <div class="screen" id="screen-care-plan" data-step="7">
+    <div class="container container-wide">
+      <div class="card">
+        <div class="card-header card-header-teal">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <h1>Sample RN Care Plan</h1>
+              <p id="careplan-client">Maria Santos | MS04-260115-01F</p>
+            </div>
+            <div style="text-align: right;">
+              <span class="badge badge-active" style="background: rgba(255,255,255,0.2); color: white;">RN Approved</span>
+              <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">
+                Reviewed by RN Sarah Thompson, BSN
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-box info-box-orange">
+            <div class="info-box-title">📄 Demonstration Care Plan</div>
+            <div class="info-box-text">This is a sample RN care plan using fictional data. In the live system, care plans are generated from actual client intake data and validated by a licensed RN before delivery to the attorney.</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-text">
+              <p style="margin-bottom: 10px;">The sample care plan demonstrates how client intake information and provider documentation are translated into a structured recovery oversight plan.</p>
+              <p style="margin-bottom: 10px;">RN care managers use this framework to monitor treatment progress, coordinate documentation, and identify potential barriers to recovery.</p>
+              <p style="margin-bottom: 0;">The care plan evolves as treatment progresses and additional documentation becomes available.</p>
+            </div>
+          </div>
+
+          <!-- RN Care Plan Display -->
+          <div class="rn-care-plan">
+            <div class="rn-care-plan-header">
+              <h3>Initial Care Plan Assessment</h3>
+              <span style="font-size: 13px; opacity: 0.8;">Generated: January 15, 2025</span>
+            </div>
+            <div class="rn-care-plan-body">
+              <div class="rn-care-plan-grid">
+                <div class="rn-care-plan-block">
+                  <div class="rn-care-plan-block-title">📋 Current Status</div>
+                  <div class="rn-care-plan-block-content">
+                    Client is 8 weeks post-MVA with cervical and lumbar strain. Currently receiving chiropractic care 3x/week and monthly pain management. Reports pain level 7/10 with difficulty performing ADLs. Actively engaged in treatment plan.
+                  </div>
+                </div>
+                <div class="rn-care-plan-block">
+                  <div class="rn-care-plan-block-title">✅ Strengths</div>
+                  <div class="rn-care-plan-block-content">
+                    <ul>
+                      <li>Highly compliant with treatment schedule</li>
+                      <li>Strong family support system</li>
+                      <li>Motivated to return to work</li>
+                      <li>Good health literacy</li>
+                      <li>No substance abuse history</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="rn-care-plan-block">
+                  <div class="rn-care-plan-block-title">⚠️ Barriers to Care</div>
+                  <div class="rn-care-plan-block-content">
+                    <ul>
+                      <li>Transportation challenges for appointments</li>
+                      <li>Work schedule conflicts with therapy times</li>
+                      <li>Insurance pre-authorization delays</li>
+                      <li>Limited access to home exercise equipment</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="rn-care-plan-block">
+                  <div class="rn-care-plan-block-title">🛡️ Safety Considerations</div>
+                  <div class="rn-care-plan-block-content">
+                    <ul>
+                      <li>No fall risk identified</li>
+                      <li>Medication interactions reviewed — none identified</li>
+                      <li>Driving limitations documented</li>
+                      <li>Emergency contacts verified</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-header mt-8 mb-4">
+                <div class="section-title" style="font-size: 20px; color: var(--teal);">4Ps Wellness Assessment</div>
+              </div>
+
+              <div class="four-ps-grid mb-6">
+                <div class="four-ps-card four-ps-physical">
+                  <div class="four-ps-title">Physical Wellness</div>
+                  <div class="four-ps-score">2</div>
+                  <div class="four-ps-label">Pain impacts daily function</div>
+                </div>
+                <div class="four-ps-card four-ps-psychological">
+                  <div class="four-ps-title">Psychological Wellness</div>
+                  <div class="four-ps-score">3</div>
+                  <div class="four-ps-label">Anxiety about recovery timeline</div>
+                </div>
+                <div class="four-ps-card four-ps-psychosocial">
+                  <div class="four-ps-title">Psychosocial Wellness</div>
+                  <div class="four-ps-score">3</div>
+                  <div class="four-ps-label">Strong support, some isolation</div>
+                </div>
+                <div class="four-ps-card four-ps-professional">
+                  <div class="four-ps-title">Professional Wellness</div>
+                  <div class="four-ps-score">2</div>
+                  <div class="four-ps-label">Unable to perform full duties</div>
+                </div>
+              </div>
+
+              <div class="rn-care-plan-grid">
+                <div class="rn-care-plan-block">
+                  <div class="rn-care-plan-block-title">🎯 Goals</div>
+                  <div class="rn-care-plan-block-content">
+                    <ul>
+                      <li>Reduce pain level to 4/10 within 60 days</li>
+                      <li>Return to modified work duties within 30 days</li>
+                      <li>Complete prescribed PT regimen</li>
+                      <li>Maintain treatment compliance >90%</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="rn-care-plan-block">
+                  <div class="rn-care-plan-block-title">💊 Interventions</div>
+                  <div class="rn-care-plan-block-content">
+                    <ul>
+                      <li>Continue chiropractic 3x/week</li>
+                      <li>Add physical therapy referral</li>
+                      <li>Pain management follow-up monthly</li>
+                      <li>Home exercise program education</li>
+                      <li>Weekly C.A.R.E. check-ins</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="rn-care-plan-block" style="grid-column: 1 / -1;">
+                  <div class="rn-care-plan-block-title">📅 Follow-Up Plan</div>
+                  <div class="rn-care-plan-block-content">
+                    RN reassessment scheduled for February 15, 2025. Will evaluate treatment progress, update 4Ps scores, and adjust care plan as needed. Attorney will receive monthly summary report on the 1st of each month. Client reminded to maintain daily diary entries for optimal documentation.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-documentation')">
+              View Documentation Overview →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 8: DOCUMENTATION INTEGRITY ==================== -->
+  <div class="screen" id="screen-documentation" data-step="8">
+    <div class="container container-wide">
+      <div class="card">
+        <div class="card-header">
+          <h1>Documentation Integrity</h1>
+          <p>How structured documentation strengthens your case</p>
+        </div>
+        <div class="card-body">
+          <div class="info-box">
+            <div class="info-box-title">⚖️ Why Documentation Integrity Matters</div>
+            <div class="info-box-text">
+              The combination of structured client intake, attorney visibility, and RN clinical oversight creates a documentation chain that is organized, clinically validated, and defensible in settlement negotiations.
+            </div>
+          </div>
+
+          <div class="oversight-grid">
+            <div class="oversight-card">
+              <div class="oversight-icon">📝</div>
+              <div class="oversight-title">Structured Intake</div>
+              <div class="oversight-text">Consistent data collection ensures nothing is missed. Every client answers the same comprehensive questions.</div>
+            </div>
+            <div class="oversight-card">
+              <div class="oversight-icon">👁️</div>
+              <div class="oversight-title">Attorney Visibility</div>
+              <div class="oversight-text">Real-time access to client status, treatment compliance, and care plan updates — no surprises before settlement.</div>
+            </div>
+            <div class="oversight-card">
+              <div class="oversight-icon">⚕️</div>
+              <div class="oversight-title">RN Clinical Validation</div>
+              <div class="oversight-text">Every care plan reviewed by a licensed RN before delivery. Clinical language that holds up to scrutiny.</div>
+            </div>
+            <div class="oversight-card">
+              <div class="oversight-icon">📊</div>
+              <div class="oversight-title">Objective Scoring</div>
+              <div class="oversight-text">4Ps Wellness framework provides quantifiable, trackable measures of injury impact over time.</div>
+            </div>
+          </div>
+
+          <div class="section-header mt-8">
+            <div class="section-title">Sample Attorney Reports</div>
+            <div class="section-subtitle">What you receive monthly for each active case</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 32px;">
+            <div class="report-preview">
+              <div class="report-preview-header">
+                <div class="report-preview-title">📋 Monthly Progress Summary</div>
+                <div class="report-preview-date">January 2025</div>
+              </div>
+              <div class="report-preview-body">
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Client</span>
+                  <span class="report-preview-stat-value">Maria Santos</span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Treatment Compliance</span>
+                  <span class="report-preview-stat-value" style="color: var(--success);">94%</span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Appointments Attended</span>
+                  <span class="report-preview-stat-value">12 of 13</span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">4Ps Average</span>
+                  <span class="report-preview-stat-value">2.5 → 2.8</span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">RN Recommendation</span>
+                  <span class="report-preview-stat-value">Continue current plan</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="report-preview">
+              <div class="report-preview-header">
+                <div class="report-preview-title">📈 4Ps Trend Analysis</div>
+                <div class="report-preview-date">8-Week View</div>
+              </div>
+              <div class="report-preview-body">
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Physical</span>
+                  <span class="report-preview-stat-value">1.8 → 2.2 <span style="color: var(--success);">↑</span></span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Psychological</span>
+                  <span class="report-preview-stat-value">2.5 → 3.0 <span style="color: var(--success);">↑</span></span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Psychosocial</span>
+                  <span class="report-preview-stat-value">3.0 → 3.2 <span style="color: var(--success);">↑</span></span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Professional</span>
+                  <span class="report-preview-stat-value">1.5 → 2.0 <span style="color: var(--success);">↑</span></span>
+                </div>
+                <div class="report-preview-stat">
+                  <span class="report-preview-stat-label">Overall Trend</span>
+                  <span class="report-preview-stat-value" style="color: var(--success);">Improving</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">Report Section 1</div>
+              <div class="timeline-content"><strong>Executive Summary</strong> — High-level overview of client status, key changes, and RN recommendations</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Report Section 2</div>
+              <div class="timeline-content"><strong>4Ps Wellness Trends</strong> — Visual charts showing Physical, Psychological, Psychosocial, and Professional scores over time</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Report Section 3</div>
+              <div class="timeline-content"><strong>Treatment Compliance</strong> — Appointment attendance, medication adherence, home exercise compliance</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Report Section 4</div>
+              <div class="timeline-content"><strong>Functional Limitations</strong> — Documented impact on activities of daily living, work capacity, quality of life</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Report Section 5</div>
+              <div class="timeline-content"><strong>RN Clinical Commentary</strong> — Professional nursing assessment and prognosis discussion</div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-primary btn-lg" onclick="goToScreen('screen-resources')">
+              View Attorney Resources →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 9: ATTORNEY RESOURCES ==================== -->
+  <div class="screen" id="screen-resources" data-step="9">
+    <div class="container">
+      <div class="card">
+        <div class="card-header card-header-orange">
+          <h1>Attorney Resources</h1>
+          <p>Support materials and onboarding guides</p>
+        </div>
+        <div class="card-body">
+          <div class="info-box">
+            <div class="info-box-title">📚 Getting Started</div>
+            <div class="info-box-text">These resources help you and your team get the most out of Reconcile C.A.R.E. Download guides, share client handouts, and access training materials.</div>
+          </div>
+
+          <div class="resource-grid">
+            <div class="resource-card">
+              <div class="resource-icon">📘</div>
+              <div class="resource-title">Attorney Onboarding Guide</div>
+              <div class="resource-desc">Step-by-step setup for your practice</div>
+              <div class="resource-badge">Coming Soon</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-icon">📝</div>
+              <div class="resource-title">Client Intake Handout</div>
+              <div class="resource-desc">Printable instructions for clients</div>
+              <div class="resource-badge">Coming Soon</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-icon">🎥</div>
+              <div class="resource-title">Training Videos</div>
+              <div class="resource-desc">Dashboard tutorials and best practices</div>
+              <div class="resource-badge">Coming Soon</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-icon">💬</div>
+              <div class="resource-title">RN Support Line</div>
+              <div class="resource-desc">Direct access to clinical care managers</div>
+              <div class="resource-badge">Coming Soon</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-icon">📊</div>
+              <div class="resource-title">Report Templates</div>
+              <div class="resource-desc">Customize reports for your demand packages</div>
+              <div class="resource-badge">Coming Soon</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-icon">⚖️</div>
+              <div class="resource-title">Legal Documentation Guide</div>
+              <div class="resource-desc">Using C.A.R.E. reports in settlement</div>
+              <div class="resource-badge">Coming Soon</div>
+            </div>
+          </div>
+
+          <div class="section-header mt-6">
+            <div class="section-title">Frequently Asked Questions</div>
+          </div>
+
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); overflow: hidden;">
+            <div style="padding: 18px 22px; border-bottom: 1px solid var(--gray-200);">
+              <strong style="color: var(--navy);">How quickly are care plans generated after intake?</strong>
+              <div class="text-sm text-muted mt-2">Initial care plans are typically generated within 24-48 hours of attorney confirmation. Rush processing available for urgent cases.</div>
+            </div>
+            <div style="padding: 18px 22px; border-bottom: 1px solid var(--gray-200);">
+              <strong style="color: var(--navy);">What if my client doesn't complete diary entries?</strong>
+              <div class="text-sm text-muted mt-2">After 28 days of inactivity, the case enters "hibernation." You'll be notified, and the client receives reminders. Cases can be reactivated anytime.</div>
+            </div>
+            <div style="padding: 18px 22px;">
+              <strong style="color: var(--navy);">Can I customize the monthly report format?</strong>
+              <div class="text-sm text-muted mt-2">Yes — reports can be customized to match your firm's demand package format. Contact support for template customization options.</div>
+            </div>
+          </div>
+
+          <div class="text-center mt-8">
+            <button class="btn btn-orange btn-lg" onclick="goToScreen('screen-cta')">
+              Next Steps →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 10: FINAL CTA ==================== -->
+  <div class="screen" id="screen-cta" data-step="10">
+    <div class="container">
+      <div class="cta-section">
+        <div class="cta-title">What You Have Seen</div>
+        <div class="cta-text">
+          You have now seen how a client intake flows into the attorney dashboard and how RN oversight supports recovery documentation.<br><br>
+          Reconcile C.A.R.E. is designed to give attorneys visibility into treatment progression, documentation integrity, and recovery coordination.<br><br>
+          From intake through recovery monitoring, the system provides a structured clinical framework that supports case development.<br><br>
+          Use the options below to schedule a full platform demonstration or learn more about the clinical methodology behind the system.
+        </div>
+      </div>
+      
+      <div class="cta-card">
+        <div class="text-center mb-8">
+          <div class="intro-logo" style="font-size: 38px;">Reconcile <span>C.A.R.E.</span></div>
+          <div style="color: var(--gray-600); margin-top: 8px;">Clinical Oversight & Recovery Evidence</div>
+        </div>
+
+        <div class="data-grid mb-8">
+          <div class="data-item" style="text-align: center;">
+            <div class="data-value" style="font-size: 28px; color: var(--navy);">24/7</div>
+            <div class="data-label">Client Documentation</div>
+          </div>
+          <div class="data-item" style="text-align: center;">
+            <div class="data-value" style="font-size: 28px; color: var(--navy);">RN</div>
+            <div class="data-label">Clinical Oversight</div>
+          </div>
+          <div class="data-item" style="text-align: center;">
+            <div class="data-value" style="font-size: 28px; color: var(--navy);">4Ps™</div>
+            <div class="data-label">Wellness Framework</div>
+          </div>
+          <div class="data-item" style="text-align: center;">
+            <div class="data-value" style="font-size: 28px; color: var(--navy);">Monthly</div>
+            <div class="data-label">Attorney Reports</div>
+          </div>
+        </div>
+
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-orange btn-lg">
+            🔍 Run C.A.R.E. Clinical Sequencing Auditor
+          </a>
+          <a href="#" class="btn btn-outline btn-lg">
+            📞 Request Live Attorney Walkthrough
+          </a>
+        </div>
+
+        <div class="text-center mt-6">
+          <button class="btn btn-ghost" onclick="restartDemo()">
+            ↻ Restart Demonstration
+          </button>
+        </div>
+      </div>
+
+      <p class="text-center text-sm mt-8" style="color: rgba(255,255,255,0.7);">
+        © Reconcile Care Management Services<br>
+        <span style="font-size: 11px;">4Ps of Wellness™ | 10-Vs of Care Management™ | 7 Rights of Injury Management™</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== DEMO NAVIGATION ==================== -->
+  <div class="demo-nav" id="demoNav">
+    <div class="demo-nav-info">
+      <span id="currentStepLabel">Step 1 of 10</span>
+    </div>
+    <div class="demo-nav-buttons">
+      <button class="btn btn-outline btn-sm" id="prevBtn" onclick="prevScreen()">← Previous</button>
+      <button class="btn btn-primary btn-sm" id="nextBtn" onclick="nextScreen()">Next →</button>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // Screen configuration with step mapping
+    const screens = [
+      { id: 'screen-intro', step: 1, label: 'Introduction' },
+      { id: 'screen-client-login', step: 2, label: 'Client Login' },
+      { id: 'screen-intake-1', step: 3, label: 'Client Intake' },
+      { id: 'screen-intake-2', step: 3, label: 'Client Intake' },
+      { id: 'screen-intake-3', step: 3, label: 'Client Intake' },
+      { id: 'screen-intake-4', step: 3, label: 'Client Intake' },
+      { id: 'screen-intake-5', step: 3, label: 'Client Intake' },
+      { id: 'screen-intake-complete', step: 4, label: 'Intake Complete' },
+      { id: 'screen-attorney-portal', step: 5, label: 'Attorney Portal' },
+      { id: 'screen-rn-oversight', step: 6, label: 'RN Oversight' },
+      { id: 'screen-care-plan', step: 7, label: 'Sample Care Plan' },
+      { id: 'screen-documentation', step: 8, label: 'Documentation' },
+      { id: 'screen-resources', step: 9, label: 'Resources' },
+      { id: 'screen-cta', step: 10, label: 'Next Steps' }
+    ];
+
+    let currentIndex = 0;
+    const STORAGE_KEY = 'case_demo_progress';
+
+    // Intake data storage
+    let intakeData = {
+      firstName: 'Maria',
+      lastName: 'Santos',
+      caseNumber: 'MS04-260115-01F',
+      injuryDate: 'November 15, 2024',
+      injuryType: 'Motor Vehicle Accident',
+      painLevel: '7'
+    };
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      checkForSavedProgress();
+    });
+
+    // Check for saved progress
+    function checkForSavedProgress() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          if (data.screenIndex > 0) {
+            // Show resume modal
+            document.getElementById('resumeModal').classList.add('active');
+            return;
+          }
+        } catch (e) {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
+      // No saved progress, start fresh
+      initializeDemo();
+    }
+
+    // Resume demo from saved position
+    function resumeDemo() {
+      document.getElementById('resumeModal').classList.remove('active');
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved) {
+        currentIndex = saved.screenIndex;
+        intakeData = saved.intakeData || intakeData;
+        updateAllDisplays();
+      }
+      showScreen(screens[currentIndex].id);
+      initializeDemo();
+    }
+
+    // Start fresh
+    function startFresh() {
+      document.getElementById('resumeModal').classList.remove('active');
+      localStorage.removeItem(STORAGE_KEY);
+      currentIndex = 0;
+      intakeData = {
+        firstName: 'Maria',
+        lastName: 'Santos',
+        caseNumber: 'MS04-260115-01F',
+        injuryDate: 'November 15, 2024',
+        injuryType: 'Motor Vehicle Accident',
+        painLevel: '7'
+      };
+      showScreen('screen-intro');
+      initializeDemo();
+    }
+
+    // Initialize demo
+    function initializeDemo() {
+      updateProgress();
+      updateNav();
+    }
+
+    // Save progress to localStorage
+    function saveProgress() {
+      const data = {
+        screenIndex: currentIndex,
+        intakeData: intakeData,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    // Go to specific screen
+    function goToScreen(screenId) {
+      const index = screens.findIndex(s => s.id === screenId);
+      if (index !== -1) {
+        currentIndex = index;
+        showScreen(screenId);
+        saveProgress();
+      }
+    }
+
+    // Show screen
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(screenId);
+      if (target) {
+        target.classList.add('active');
+        updateProgress();
+        updateNav();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // Submit intake (capture data)
+    function submitIntake() {
+      // Capture intake data from form fields
+      const firstName = document.getElementById('intake-firstName')?.value || 'Maria';
+      const lastName = document.getElementById('intake-lastName')?.value || 'Santos';
+      
+      intakeData.firstName = firstName;
+      intakeData.lastName = lastName;
+      intakeData.caseNumber = generateCaseNumber(firstName, lastName);
+      
+      // Update displays
+      updateAllDisplays();
+      
+      // Navigate to completion
+      goToScreen('screen-intake-complete');
+    }
+
+    // Generate case number
+    function generateCaseNumber(first, last) {
+      const initials = (first.charAt(0) + last.charAt(0)).toUpperCase();
+      return `${initials}04-260115-01${last.charAt(0).toUpperCase() === 'S' ? 'F' : 'M'}`;
+    }
+
+    // Update all display elements with intake data
+    function updateAllDisplays() {
+      const fullName = `${intakeData.firstName} ${intakeData.lastName}`;
+      
+      // Update all display elements
+      const displays = {
+        'display-clientName': fullName,
+        'display-caseNumber': intakeData.caseNumber,
+        'summary-clientName': fullName,
+        'attest-clientName': fullName,
+        'attest-caseNumber': intakeData.caseNumber,
+        'attest-injuryDate': intakeData.injuryDate,
+        'attest-injuryType': intakeData.injuryType,
+        'careplan-client': `${fullName} | ${intakeData.caseNumber}`
+      };
+
+      for (const [id, value] of Object.entries(displays)) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+    }
+
+    // Navigate to next screen
+    function nextScreen() {
+      if (currentIndex < screens.length - 1) {
+        currentIndex++;
+        showScreen(screens[currentIndex].id);
+        saveProgress();
+      }
+    }
+
+    // Navigate to previous screen
+    function prevScreen() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showScreen(screens[currentIndex].id);
+        saveProgress();
+      }
+    }
+
+    // Restart demo
+    function restartDemo() {
+      startFresh();
+    }
+
+    // Update progress indicators
+    function updateProgress() {
+      const currentStep = screens[currentIndex].step;
+      
+      document.querySelectorAll('.progress-step').forEach(el => {
+        const step = parseInt(el.dataset.step);
+        el.classList.remove('active', 'completed');
+        if (step === currentStep) {
+          el.classList.add('active');
+        } else if (step < currentStep) {
+          el.classList.add('completed');
+        }
+      });
+    }
+
+    // Update navigation
+    function updateNav() {
+      const nav = document.getElementById('demoNav');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const label = document.getElementById('currentStepLabel');
+
+      const currentStep = screens[currentIndex].step;
+      label.textContent = `Step ${currentStep} of 10: ${screens[currentIndex].label}`;
+
+      prevBtn.disabled = currentIndex === 0;
+      prevBtn.style.opacity = currentIndex === 0 ? '0.4' : '1';
+      
+      if (currentIndex === screens.length - 1) {
+        nextBtn.textContent = '↻ Restart';
+        nextBtn.onclick = restartDemo;
+      } else {
+        nextBtn.textContent = 'Next →';
+        nextBtn.onclick = nextScreen;
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' && currentIndex < screens.length - 1) {
+        nextScreen();
+      }
+      if (e.key === 'ArrowLeft' && currentIndex > 0) {
+        prevScreen();
+      }
+    });
+  </script>
+
+</body>
+</html>
