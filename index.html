@@ -1331,6 +1331,64 @@
       margin-bottom: 0;
     }
 
+    .rn-care-plan details {
+      margin-bottom: 12px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .rn-care-plan details:last-child {
+      margin-bottom: 0;
+    }
+
+    .rn-care-plan details summary {
+      padding: 16px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rn-care-plan details summary::-webkit-details-marker,
+    .rn-care-plan details summary::marker {
+      display: none;
+    }
+
+    .rn-care-plan details summary::before {
+      content: '▶';
+      font-size: 10px;
+    }
+
+    .rn-care-plan details[open] summary::before {
+      content: '▼';
+    }
+
+    .rn-care-plan .care-plan-section-content {
+      padding: 20px;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    .rn-care-plan .care-plan-section-content ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .rn-care-plan .care-plan-section-content li {
+      margin-bottom: 6px;
+    }
+
     /* ==================== REPORT PREVIEW CARDS ==================== */
     .report-preview {
       background: var(--white);
@@ -2540,114 +2598,143 @@
             </div>
           </div>
 
-          <!-- RN Care Plan Display -->
+          <!-- RN Care Plan Display (expand/collapse) -->
           <div class="rn-care-plan">
             <div class="rn-care-plan-header">
               <h3>Initial Care Plan Assessment</h3>
               <span style="font-size: 13px; opacity: 0.8;">Generated: January 15, 2025</span>
             </div>
             <div class="rn-care-plan-body">
-              <div class="rn-care-plan-grid">
-                <div class="rn-care-plan-block">
-                  <div class="rn-care-plan-block-title">📋 Current Status</div>
-                  <div class="rn-care-plan-block-content">
-                    Client is 8 weeks post-MVA with cervical and lumbar strain. Currently receiving chiropractic care 3x/week and monthly pain management. Reports pain level 7/10 with difficulty performing ADLs. Actively engaged in treatment plan.
-                  </div>
+              <details open>
+                <summary>📋 Current Clinical Status</summary>
+                <div class="care-plan-section-content">
+                  <p style="margin-bottom: 12px;">Client is 8 weeks post motor vehicle accident (MVA) with diagnosed cervical strain (C5–C6) and lumbar strain (L4–L5). Currently in active treatment phase with chiropractic care 3×/week and monthly pain management follow-up.</p>
+                  <p style="margin-bottom: 12px;">Reports current pain level 7/10 with notable difficulty performing activities of daily living (ADLs), including prolonged sitting, lifting >10 lb, and overhead reaching. Sleep disrupted 3–4 nights per week. No new neurological symptoms; no bowel/bladder changes. Client is fully engaged with treatment plan and adherent to prescribed visits.</p>
+                  <p style="margin-bottom: 0;">Clinical impression: musculoskeletal injury consistent with MVA mechanism; treatment trajectory appropriate; continued monitoring indicated.</p>
                 </div>
-                <div class="rn-care-plan-block">
-                  <div class="rn-care-plan-block-title">✅ Strengths</div>
-                  <div class="rn-care-plan-block-content">
-                    <ul>
-                      <li>Highly compliant with treatment schedule</li>
-                      <li>Strong family support system</li>
-                      <li>Motivated to return to work</li>
-                      <li>Good health literacy</li>
-                      <li>No substance abuse history</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="rn-care-plan-block">
-                  <div class="rn-care-plan-block-title">⚠️ Barriers to Care</div>
-                  <div class="rn-care-plan-block-content">
-                    <ul>
-                      <li>Transportation challenges for appointments</li>
-                      <li>Work schedule conflicts with therapy times</li>
-                      <li>Insurance pre-authorization delays</li>
-                      <li>Limited access to home exercise equipment</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="rn-care-plan-block">
-                  <div class="rn-care-plan-block-title">🛡️ Safety Considerations</div>
-                  <div class="rn-care-plan-block-content">
-                    <ul>
-                      <li>No fall risk identified</li>
-                      <li>Medication interactions reviewed — none identified</li>
-                      <li>Driving limitations documented</li>
-                      <li>Emergency contacts verified</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              </details>
 
-              <div class="section-header mt-8 mb-4">
-                <div class="section-title" style="font-size: 20px; color: var(--gold);">4Ps Wellness Assessment</div>
-              </div>
+              <details>
+                <summary>✅ Client Strengths Supporting Recovery</summary>
+                <div class="care-plan-section-content">
+                  <ul>
+                    <li>Highly compliant with treatment schedule; no missed appointments in past 4 weeks</li>
+                    <li>Strong family support system; spouse available for transportation and ADL assistance</li>
+                    <li>Motivated to return to work; employer supportive of modified duty when medically cleared</li>
+                    <li>Good health literacy; asks appropriate questions and follows home exercise instructions</li>
+                    <li>No substance abuse history; medication use as prescribed</li>
+                    <li>Previous positive response to conservative care for prior minor injury (2019)</li>
+                  </ul>
+                </div>
+              </details>
 
-              <div class="four-ps-grid mb-6">
-                <div class="four-ps-card four-ps-physical">
-                  <div class="four-ps-title">Physical Wellness</div>
-                  <div class="four-ps-score">2</div>
-                  <div class="four-ps-label">Pain impacts daily function</div>
+              <details open>
+                <summary>⚠️ Barriers to Care</summary>
+                <div class="care-plan-section-content">
+                  <ul>
+                    <li><strong>Transportation:</strong> Limited reliable transportation for 3×/week chiropractic visits; occasional reliance on family schedule</li>
+                    <li><strong>Work schedule:</strong> Current work hours conflict with preferred therapy time slots; may need evening or early-morning options</li>
+                    <li><strong>Insurance:</strong> Pre-authorization delays for physical therapy referral; PT start pending approval (estimated 1–2 weeks)</li>
+                    <li><strong>Resources:</strong> Limited access to home exercise equipment; relying on bodyweight and resistance bands; ROM limited by pain</li>
+                    <li><strong>Provider sequencing:</strong> Neurologist referral pending 3+ weeks; may affect documentation timeline if imaging or specialist opinion required</li>
+                  </ul>
                 </div>
-                <div class="four-ps-card four-ps-psychological">
-                  <div class="four-ps-title">Psychological Wellness</div>
-                  <div class="four-ps-score">3</div>
-                  <div class="four-ps-label">Anxiety about recovery timeline</div>
-                </div>
-                <div class="four-ps-card four-ps-psychosocial">
-                  <div class="four-ps-title">Psychosocial Wellness</div>
-                  <div class="four-ps-score">3</div>
-                  <div class="four-ps-label">Strong support, some isolation</div>
-                </div>
-                <div class="four-ps-card four-ps-professional">
-                  <div class="four-ps-title">Professional Wellness</div>
-                  <div class="four-ps-score">2</div>
-                  <div class="four-ps-label">Unable to perform full duties</div>
-                </div>
-              </div>
+              </details>
 
-              <div class="rn-care-plan-grid">
-                <div class="rn-care-plan-block">
-                  <div class="rn-care-plan-block-title">🎯 Goals</div>
-                  <div class="rn-care-plan-block-content">
-                    <ul>
-                      <li>Reduce pain level to 4/10 within 60 days</li>
-                      <li>Return to modified work duties within 30 days</li>
-                      <li>Complete prescribed PT regimen</li>
-                      <li>Maintain treatment compliance >90%</li>
-                    </ul>
-                  </div>
+              <details>
+                <summary>🛡️ Safety Considerations</summary>
+                <div class="care-plan-section-content">
+                  <ul>
+                    <li>Fall risk: Screen completed — no significant fall risk identified; home environment adequate</li>
+                    <li>Medication review: Current medications (NSAIDs, muscle relaxant PRN) reviewed; no significant interactions or contraindications</li>
+                    <li>Driving: Client advised to avoid driving when pain or medication affects alertness; limitations documented in plan</li>
+                    <li>Emergency contacts: Verified and on file; client knows to report any new weakness, numbness, or bowel/bladder changes</li>
+                    <li>Mental health: No acute safety concerns; client reports manageable anxiety regarding recovery timeline</li>
+                  </ul>
                 </div>
-                <div class="rn-care-plan-block">
-                  <div class="rn-care-plan-block-title">💊 Interventions</div>
-                  <div class="rn-care-plan-block-content">
-                    <ul>
-                      <li>Continue chiropractic 3x/week</li>
-                      <li>Add physical therapy referral</li>
-                      <li>Pain management follow-up monthly</li>
-                      <li>Home exercise program education</li>
-                      <li>Weekly C.A.R.E. check-ins</li>
-                    </ul>
+              </details>
+
+              <details>
+                <summary>📊 4Ps Wellness Review</summary>
+                <div class="care-plan-section-content">
+                  <div class="four-ps-grid mb-6" style="margin-top: 12px;">
+                    <div class="four-ps-card four-ps-physical">
+                      <div class="four-ps-title">Physical Wellness</div>
+                      <div class="four-ps-score">2</div>
+                      <div class="four-ps-label">Pain impacts daily function; ROM limited</div>
+                    </div>
+                    <div class="four-ps-card four-ps-psychological">
+                      <div class="four-ps-title">Psychological Wellness</div>
+                      <div class="four-ps-score">3</div>
+                      <div class="four-ps-label">Anxiety about recovery timeline</div>
+                    </div>
+                    <div class="four-ps-card four-ps-psychosocial">
+                      <div class="four-ps-title">Psychosocial Wellness</div>
+                      <div class="four-ps-score">3</div>
+                      <div class="four-ps-label">Strong support; some isolation when home</div>
+                    </div>
+                    <div class="four-ps-card four-ps-professional">
+                      <div class="four-ps-title">Professional Wellness</div>
+                      <div class="four-ps-score">2</div>
+                      <div class="four-ps-label">Unable to perform full job duties</div>
+                    </div>
                   </div>
+                  <p style="margin: 0; font-size: 13px; color: var(--gray-600);">Scores: 1 (critical) → 5 (optimal). Reassessment in 30 days or with significant change.</p>
                 </div>
-                <div class="rn-care-plan-block" style="grid-column: 1 / -1;">
-                  <div class="rn-care-plan-block-title">📅 Follow-Up Plan</div>
-                  <div class="rn-care-plan-block-content">
-                    RN reassessment scheduled for February 15, 2025. Will evaluate treatment progress, update 4Ps scores, and adjust care plan as needed. Attorney will receive monthly summary report on the 1st of each month. Client reminded to maintain daily diary entries for optimal documentation.
-                  </div>
+              </details>
+
+              <details open>
+                <summary>📐 Functional Capacity Observations</summary>
+                <div class="care-plan-section-content">
+                  <p style="margin-bottom: 12px;">Based on intake, provider notes, and client report at time of assessment:</p>
+                  <ul>
+                    <li><strong>Sitting:</strong> Tolerance ~30 minutes before pain increase; requires position change</li>
+                    <li><strong>Standing/walking:</strong> Limited to ~20 minutes continuous; uses rest breaks for ADLs</li>
+                    <li><strong>Lifting/carrying:</strong> Avoids >10 lb; reports increased pain with repetitive bending</li>
+                    <li><strong>Overhead/reaching:</strong> Right shoulder and cervical motion limited by pain; left side less restricted</li>
+                    <li><strong>Driving:</strong> Self-limited; avoids long distances; medication timing considered</li>
+                    <li><strong>Sleep:</strong> Disrupted 3–4 nights/week; positional discomfort; next-day fatigue reported</li>
+                  </ul>
+                  <p style="margin: 12px 0 0; font-size: 13px;">Formal FCE not yet performed; above reflects clinical observations for care planning. Recommend re-evaluation at 12 weeks post-MVA or when treatment plateau is evident.</p>
                 </div>
-              </div>
+              </details>
+
+              <details>
+                <summary>🎯 Goals of Care</summary>
+                <div class="care-plan-section-content">
+                  <ul>
+                    <li>Reduce pain level to ≤4/10 within 60 days with consistent treatment and home program</li>
+                    <li>Return to modified/light duty work within 30 days if medically appropriate and employer accommodation available</li>
+                    <li>Complete prescribed physical therapy regimen (once authorized) and maintain ≥90% attendance</li>
+                    <li>Improve 4Ps Physical and Professional scores by next reassessment (target: each ≥3)</li>
+                    <li>Establish sustainable home exercise routine; client independent with HEP by 45 days</li>
+                    <li>Maintain treatment compliance and documentation (diary, visits) to support recovery record</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details>
+                <summary>💊 Interventions</summary>
+                <div class="care-plan-section-content">
+                  <ul>
+                    <li>Continue chiropractic care 3×/week per current plan; re-evaluate at 12 weeks</li>
+                    <li>Physical therapy: initiate once authorization received; focus on cervical/lumbar stabilization and graded activity</li>
+                    <li>Pain management: maintain monthly follow-up; medication review at each visit</li>
+                    <li>Home exercise program: education provided; progress to independent performance; document compliance</li>
+                    <li>Weekly C.A.R.E. check-ins for first 4 weeks to monitor barriers and adherence</li>
+                    <li>Coordinate with attorney office for any records or work-status documentation requests</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details>
+                <summary>📅 Follow-Up Plan</summary>
+                <div class="care-plan-section-content">
+                  <p style="margin-bottom: 12px;">RN reassessment scheduled for February 15, 2025. Will evaluate treatment progress, 4Ps scores, functional capacity, and barrier resolution. Care plan will be updated as needed based on new documentation and client response.</p>
+                  <p style="margin-bottom: 12px;">Attorney will receive monthly summary report on the 1st of each month. Client reminded to maintain daily diary entries for optimal documentation. Next care plan review trigger: 30 days, or upon receipt of PT discharge summary / significant change in status.</p>
+                  <p style="margin-bottom: 0;">Care plan valid until next RN review; any acute change in condition should be reported to treating providers and documented in C.A.R.E. for attorney visibility.</p>
+                </div>
+              </details>
             </div>
           </div>
 
