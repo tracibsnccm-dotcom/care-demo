@@ -1758,22 +1758,22 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Date of Birth</label>
-              <input type="date" class="form-input" value="1985-06-15">
+              <input type="date" class="form-input" id="intake-dob" value="1985-06-15">
             </div>
             <div class="form-group">
               <label class="form-label">Phone Number</label>
-              <input type="tel" class="form-input" value="(512) 555-0147">
+              <input type="tel" class="form-input" id="intake-phone" value="(512) 555-0147">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" value="maria.santos@email.com">
+            <input type="email" class="form-input" id="intake-email" value="maria.santos@email.com">
           </div>
 
           <div class="form-group">
             <label class="form-label">Address</label>
-            <input type="text" class="form-input" value="4521 Cedar Lane, Austin, TX 78745">
+            <input type="text" class="form-input" id="intake-address" value="4521 Cedar Lane, Austin, TX 78745">
           </div>
 
           <div class="form-row">
@@ -1786,7 +1786,7 @@
             </div>
             <div class="form-group">
               <label class="form-label">Preferred Language</label>
-              <select class="form-select">
+              <select class="form-select" id="intake-language">
                 <option value="en">English</option>
                 <option value="es">Spanish</option>
               </select>
@@ -1855,22 +1855,22 @@
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 24px;">
             <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Neck</span>
+              <input type="checkbox" name="intake-bodyarea" value="Neck" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Neck</span>
             </label>
             <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Upper Back</span>
+              <input type="checkbox" name="intake-bodyarea" value="Upper Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Upper Back</span>
             </label>
             <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Lower Back</span>
+              <input type="checkbox" name="intake-bodyarea" value="Lower Back" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Lower Back</span>
             </label>
             <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Head</span>
+              <input type="checkbox" name="intake-bodyarea" value="Head" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Head</span>
             </label>
             <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Left Shoulder</span>
+              <input type="checkbox" name="intake-bodyarea" value="Left Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Left Shoulder</span>
             </label>
             <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
-              <input type="checkbox" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Right Shoulder</span>
+              <input type="checkbox" name="intake-bodyarea" value="Right Shoulder" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Right Shoulder</span>
             </label>
           </div>
 
@@ -1921,7 +1921,7 @@
           <div class="form-group">
             <label class="form-label">Pre-existing Medical Conditions</label>
             <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">Select all that apply. Hold Ctrl/Cmd to select multiple.</p>
-            <select class="form-select form-select-multiple" multiple size="6">
+            <select class="form-select form-select-multiple" id="intake-conditions" multiple size="6">
               <option value="none">None</option>
               <option value="hypertension" selected>Hypertension</option>
               <option value="diabetes">Diabetes (Type 2)</option>
@@ -1943,7 +1943,7 @@
               <div class="medication-row">
                 <div>
                   <label class="form-label">Medication</label>
-                  <select class="form-select">
+                  <select class="form-select" id="intake-med1-name">
                     <option value="lisinopril" selected>Lisinopril</option>
                     <option value="amlodipine">Amlodipine</option>
                     <option value="metformin">Metformin</option>
@@ -1957,7 +1957,7 @@
                 </div>
                 <div>
                   <label class="form-label">Dosage</label>
-                  <select class="form-select">
+                  <select class="form-select" id="intake-med1-dosage">
                     <option value="10mg" selected>10 mg</option>
                     <option value="20mg">20 mg</option>
                     <option value="5mg">5 mg</option>
@@ -1969,7 +1969,7 @@
                 </div>
                 <div>
                   <label class="form-label">Frequency</label>
-                  <select class="form-select">
+                  <select class="form-select" id="intake-med1-freq">
                     <option value="daily" selected>Once daily</option>
                     <option value="twice">Twice daily</option>
                     <option value="prn">As needed</option>
@@ -1981,7 +1981,7 @@
               <div class="medication-row">
                 <div>
                   <label class="form-label">Medication</label>
-                  <select class="form-select">
+                  <select class="form-select" id="intake-med2-name">
                     <option value="lisinopril">Lisinopril</option>
                     <option value="amlodipine">Amlodipine</option>
                     <option value="metformin">Metformin</option>
@@ -1995,7 +1995,7 @@
                 </div>
                 <div>
                   <label class="form-label">Dosage</label>
-                  <select class="form-select">
+                  <select class="form-select" id="intake-med2-dosage">
                     <option value="10mg">10 mg</option>
                     <option value="20mg">20 mg</option>
                     <option value="5mg">5 mg</option>
@@ -2007,7 +2007,7 @@
                 </div>
                 <div>
                   <label class="form-label">Frequency</label>
-                  <select class="form-select">
+                  <select class="form-select" id="intake-med2-freq">
                     <option value="daily">Once daily</option>
                     <option value="twice">Twice daily</option>
                     <option value="prn" selected>As needed</option>
@@ -2023,17 +2023,17 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Allergies</label>
-              <input type="text" class="form-input" value="Penicillin">
+              <input type="text" class="form-input" id="intake-allergies" value="Penicillin">
             </div>
             <div class="form-group">
               <label class="form-label">Previous Surgeries</label>
-              <input type="text" class="form-input" value="Appendectomy (2010)">
+              <input type="text" class="form-input" id="intake-surgeries" value="Appendectomy (2010)">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Primary Care Physician</label>
-            <input type="text" class="form-input" value="Dr. Sarah Chen, Austin Primary Care">
+            <input type="text" class="form-input" id="intake-pcp" value="Dr. Sarah Chen, Austin Primary Care">
           </div>
 
           <div style="display: flex; justify-content: space-between; gap: 14px; margin-top: 36px;">
@@ -2081,11 +2081,11 @@
             <div class="form-row">
               <div class="form-group mb-2">
                 <label class="form-label">Provider Name</label>
-                <input type="text" class="form-input" value="Austin Spine & Rehab Center">
+                <input type="text" class="form-input" id="intake-prov1-name" value="Austin Spine & Rehab Center">
               </div>
               <div class="form-group mb-2">
                 <label class="form-label">Provider Type</label>
-                <select class="form-select">
+                <select class="form-select" id="intake-prov1-type">
                   <option value="chiro" selected>Chiropractor</option>
                   <option value="pt">Physical Therapist</option>
                   <option value="ortho">Orthopedist</option>
@@ -2095,11 +2095,11 @@
             <div class="form-row">
               <div class="form-group mb-0">
                 <label class="form-label">First Visit Date</label>
-                <input type="date" class="form-input" value="2024-11-18">
+                <input type="date" class="form-input" id="intake-prov1-date" value="2024-11-18">
               </div>
               <div class="form-group mb-0">
                 <label class="form-label">Visit Frequency</label>
-                <select class="form-select">
+                <select class="form-select" id="intake-prov1-freq">
                   <option value="3x" selected>3x per week</option>
                   <option value="2x">2x per week</option>
                 </select>
@@ -2112,11 +2112,11 @@
             <div class="form-row">
               <div class="form-group mb-2">
                 <label class="form-label">Provider Name</label>
-                <input type="text" class="form-input" value="Dr. Michael Torres, MD">
+                <input type="text" class="form-input" id="intake-prov2-name" value="Dr. Michael Torres, MD">
               </div>
               <div class="form-group mb-2">
                 <label class="form-label">Provider Type</label>
-                <select class="form-select">
+                <select class="form-select" id="intake-prov2-type">
                   <option value="pain" selected>Pain Management</option>
                 </select>
               </div>
@@ -2124,11 +2124,11 @@
             <div class="form-row">
               <div class="form-group mb-0">
                 <label class="form-label">First Visit Date</label>
-                <input type="date" class="form-input" value="2024-11-25">
+                <input type="date" class="form-input" id="intake-prov2-date" value="2024-11-25">
               </div>
               <div class="form-group mb-0">
                 <label class="form-label">Visit Frequency</label>
-                <select class="form-select">
+                <select class="form-select" id="intake-prov2-freq">
                   <option value="monthly" selected>Monthly</option>
                 </select>
               </div>
@@ -2254,20 +2254,21 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
             <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px;">
               <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Client Information</div>
-              <div style="font-size: 14px; color: var(--gray-800); line-height: 1.5;">
+              <div style="font-size: 14px; color: var(--gray-800); line-height: 1.5;" id="summary-client-info">
                 <span id="summary-clientName-2">Maria Santos</span><br>
-                DOB: 06/15/1985<br>
-                Contact: (512) 555-0147 · maria.santos@email.com<br>
-                Attorney: Lauren Mitchell — Mitchell Law Group
+                DOB: <span id="summary-dob">06/15/1985</span><br>
+                Contact: <span id="summary-contact">(512) 555-0147 · maria.santos@email.com</span><br>
+                Attorney: <span id="summary-attorney">Lauren Mitchell — Mitchell Law Group</span>
               </div>
             </div>
             <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 20px;">
               <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Injury Summary</div>
               <div style="font-size: 14px; color: var(--gray-800); line-height: 1.5;">
-                <strong>Type:</strong> Motor Vehicle Accident<br>
-                <strong>Date of incident:</strong> November 15, 2024<br>
-                <strong>Current pain level:</strong> 7/10<br>
-                <strong>Description:</strong> Rear-ended at red light; cervical and lumbar strain; head hit headrest. Seeking chiropractic and pain management.
+                <strong>Type:</strong> <span id="summary-injury-type">Motor Vehicle Accident</span><br>
+                <strong>Date of incident:</strong> <span id="summary-injury-date">November 15, 2024</span><br>
+                <strong>Current pain level:</strong> <span id="summary-pain-level">7</span>/10<br>
+                <strong>Body areas:</strong> <span id="summary-body-areas">Neck, Upper Back, Lower Back, Head</span><br>
+                <strong>Description:</strong> <span id="summary-description">I was stopped at a red light on Congress Ave when another vehicle rear-ended my car at approximately 35 mph. The impact pushed my car into the intersection. I was wearing my seatbelt but my head hit the headrest forcefully.</span>
               </div>
             </div>
           </div>
@@ -2275,26 +2276,26 @@
           <div style="margin-bottom: 24px;">
             <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Medical History Summary</div>
             <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
-              <strong>Pre-existing conditions:</strong> Hypertension (controlled).<br>
-              <strong>Current medications:</strong> Lisinopril 10 mg once daily; Ibuprofen 400 mg as needed.<br>
-              <strong>Allergies:</strong> Penicillin.<br>
-              <strong>Previous surgeries:</strong> Appendectomy (2010).<br>
-              <strong>Primary care:</strong> Dr. Sarah Chen, Austin Primary Care.
+              <strong>Pre-existing conditions:</strong> <span id="summary-conditions">Hypertension</span>.<br>
+              <strong>Current medications:</strong> <span id="summary-medications">Lisinopril 10 mg once daily; Ibuprofen 400 mg as needed</span>.<br>
+              <strong>Allergies:</strong> <span id="summary-allergies">Penicillin</span>.<br>
+              <strong>Previous surgeries:</strong> <span id="summary-surgeries">Appendectomy (2010)</span>.<br>
+              <strong>Primary care:</strong> <span id="summary-pcp">Dr. Sarah Chen, Austin Primary Care</span>.
             </div>
           </div>
 
           <div style="margin-bottom: 24px;">
             <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Provider Summary</div>
-            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
-              <strong>Provider 1:</strong> Austin Spine & Rehab Center (Chiropractor) — First visit 11/18/2024, 3×/week.<br>
-              <strong>Provider 2:</strong> Dr. Michael Torres, MD (Pain Management) — First visit 11/25/2024, monthly.
+            <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;" id="summary-providers">
+              <strong>Provider 1:</strong> <span id="summary-prov1">Austin Spine & Rehab Center (Chiropractor) — First visit 11/18/2024, 3×/week</span>.<br>
+              <strong>Provider 2:</strong> <span id="summary-prov2">Dr. Michael Torres, MD (Pain Management) — First visit 11/25/2024, monthly</span>.
             </div>
           </div>
 
           <div style="margin-bottom: 24px;">
             <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Consent & Key Selections</div>
             <div style="background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--gray-800); line-height: 1.6;">
-              C.A.R.E. Acknowledgment signed; PHI authorization signed; Attorney communication consent signed; Medical emergency disclaimer acknowledged. Preferred language: English.
+              <span id="summary-consents">C.A.R.E. Acknowledgment signed; HIPAA authorization signed; Attorney communication consent signed; Understanding of services (medical emergency disclaimer) acknowledged.</span> Preferred language: <span id="summary-language">English</span>.
             </div>
           </div>
 
@@ -3372,33 +3373,134 @@
       const target = document.getElementById(screenId);
       if (target) {
         target.classList.add('active');
+        if (screenId === 'screen-intake-summary') populateIntakeSummary();
         updateProgress();
         updateNav();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
 
-    // Submit intake (capture data)
+    function getSelectLabel(sel) {
+      if (!sel || !sel.options) return '';
+      const opt = sel.options[sel.selectedIndex];
+      return opt ? opt.textContent : '';
+    }
+
+    function formatDateStr(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr + 'T00:00:00');
+      if (isNaN(d.getTime())) return dateStr;
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+
+    function formatDob(dateStr) {
+      if (!dateStr) return '';
+      const parts = dateStr.split('-');
+      return parts.length === 3 ? parts[1] + '/' + parts[2] + '/' + parts[0] : dateStr;
+    }
+
+    // Submit intake (capture all form data)
     function submitIntake() {
-      // Capture intake data from form fields
       const firstName = document.getElementById('intake-firstName')?.value || 'Maria';
       const lastName = document.getElementById('intake-lastName')?.value || 'Santos';
-      
       intakeData.firstName = firstName;
       intakeData.lastName = lastName;
       intakeData.caseNumber = generateCaseNumber(firstName, lastName);
-      
-      // Update displays
+
+      const dobEl = document.getElementById('intake-dob');
+      const phoneEl = document.getElementById('intake-phone');
+      const emailEl = document.getElementById('intake-email');
+      const addressEl = document.getElementById('intake-address');
+      const attorneyEl = document.getElementById('intake-attorney');
+      const languageEl = document.getElementById('intake-language');
+      intakeData.dob = dobEl?.value || '1985-06-15';
+      intakeData.phone = phoneEl?.value || '(512) 555-0147';
+      intakeData.email = emailEl?.value || 'maria.santos@email.com';
+      intakeData.address = addressEl?.value || '';
+      intakeData.attorney = getSelectLabel(attorneyEl) || 'Lauren Mitchell — Mitchell Law Group';
+      intakeData.language = getSelectLabel(languageEl) || 'English';
+
+      const injuryDateEl = document.getElementById('intake-injuryDate');
+      const injuryTypeEl = document.getElementById('intake-injuryType');
+      const descriptionEl = document.getElementById('intake-description');
+      const painEl = document.getElementById('intake-painLevel');
+      intakeData.injuryDate = injuryDateEl?.value || '2024-11-15';
+      intakeData.injuryType = getSelectLabel(injuryTypeEl) || 'Motor Vehicle Accident';
+      intakeData.description = descriptionEl?.value || '';
+      intakeData.painLevel = painEl?.value || '7';
+
+      const bodyCheckboxes = document.querySelectorAll('input[name="intake-bodyarea"]:checked');
+      intakeData.bodyAreas = Array.from(bodyCheckboxes).map(cb => cb.value).join(', ') || 'None selected';
+
+      const conditionsEl = document.getElementById('intake-conditions');
+      if (conditionsEl) {
+        const selected = Array.from(conditionsEl.selectedOptions).map(o => o.textContent).filter(t => t !== 'None');
+        intakeData.conditions = selected.length ? selected.join('; ') : 'None';
+      } else intakeData.conditions = 'Hypertension';
+
+      const med1Name = document.getElementById('intake-med1-name');
+      const med1Dosage = document.getElementById('intake-med1-dosage');
+      const med1Freq = document.getElementById('intake-med1-freq');
+      const med2Name = document.getElementById('intake-med2-name');
+      const med2Dosage = document.getElementById('intake-med2-dosage');
+      const med2Freq = document.getElementById('intake-med2-freq');
+      const parts = [];
+      if (med1Name && med1Name.value) parts.push(getSelectLabel(med1Name) + ' ' + getSelectLabel(med1Dosage) + ' ' + getSelectLabel(med1Freq).toLowerCase());
+      if (med2Name && med2Name.value) parts.push(getSelectLabel(med2Name) + ' ' + getSelectLabel(med2Dosage) + ' ' + getSelectLabel(med2Freq).toLowerCase());
+      intakeData.medications = parts.length ? parts.join('; ') : 'None';
+
+      intakeData.allergies = document.getElementById('intake-allergies')?.value || 'None';
+      intakeData.surgeries = document.getElementById('intake-surgeries')?.value || 'None';
+      intakeData.pcp = document.getElementById('intake-pcp')?.value || '';
+
+      const p1Name = document.getElementById('intake-prov1-name');
+      const p1Type = document.getElementById('intake-prov1-type');
+      const p1Date = document.getElementById('intake-prov1-date');
+      const p1Freq = document.getElementById('intake-prov1-freq');
+      const p2Name = document.getElementById('intake-prov2-name');
+      const p2Type = document.getElementById('intake-prov2-type');
+      const p2Date = document.getElementById('intake-prov2-date');
+      const p2Freq = document.getElementById('intake-prov2-freq');
+      intakeData.prov1 = (p1Name?.value || '') + ' (' + getSelectLabel(p1Type) + ') — First visit ' + (p1Date?.value ? formatDob(p1Date.value) : '') + ', ' + (getSelectLabel(p1Freq) || '').toLowerCase();
+      intakeData.prov2 = (p2Name?.value || '') + ' (' + getSelectLabel(p2Type) + ') — First visit ' + (p2Date?.value ? formatDob(p2Date.value) : '') + ', ' + (getSelectLabel(p2Freq) || '').toLowerCase();
+
+      intakeData.consents = 'C.A.R.E. Acknowledgment signed; HIPAA authorization signed; Attorney communication consent signed; Understanding of services (medical emergency disclaimer) acknowledged.';
+
       updateAllDisplays();
-      
-      // Navigate to completion
       goToScreen('screen-intake-complete');
     }
 
-    // Download intake summary as text file
+    function populateIntakeSummary() {
+      const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text || '—'; };
+      const fullName = (intakeData.firstName || 'Maria') + ' ' + (intakeData.lastName || 'Santos');
+      set('summary-clientName', fullName);
+      set('summary-clientName-2', fullName);
+      set('summary-caseNumber', intakeData.caseNumber || 'MS04-260115-01F');
+      set('summary-dob', formatDob(intakeData.dob || '1985-06-15'));
+      set('summary-contact', (intakeData.phone || '(512) 555-0147') + (intakeData.email ? ' · ' + (intakeData.email || '') : ''));
+      set('summary-attorney', intakeData.attorney || 'Lauren Mitchell — Mitchell Law Group');
+      set('summary-injury-type', intakeData.injuryType || 'Motor Vehicle Accident');
+      set('summary-injury-date', formatDateStr(intakeData.injuryDate || '2024-11-15'));
+      set('summary-pain-level', intakeData.painLevel || '7');
+      set('summary-body-areas', intakeData.bodyAreas || 'Neck, Upper Back, Lower Back, Head');
+      set('summary-description', intakeData.description || 'I was stopped at a red light on Congress Ave when another vehicle rear-ended my car at approximately 35 mph. The impact pushed my car into the intersection. I was wearing my seatbelt but my head hit the headrest forcefully.');
+      set('summary-conditions', intakeData.conditions || 'Hypertension');
+      set('summary-medications', intakeData.medications || 'Lisinopril 10 mg once daily; Ibuprofen 400 mg as needed');
+      set('summary-allergies', intakeData.allergies || 'Penicillin');
+      set('summary-surgeries', intakeData.surgeries || 'Appendectomy (2010)');
+      set('summary-pcp', intakeData.pcp || 'Dr. Sarah Chen, Austin Primary Care');
+      set('summary-prov1', intakeData.prov1 || 'Austin Spine & Rehab Center (Chiropractor) — First visit 11/18/2024, 3x per week');
+      set('summary-prov2', intakeData.prov2 || 'Dr. Michael Torres, MD (Pain Management) — First visit 11/25/2024, monthly');
+      set('summary-consents', intakeData.consents || 'C.A.R.E. Acknowledgment signed; HIPAA authorization signed; Attorney communication consent signed; Understanding of services (medical emergency disclaimer) acknowledged.');
+      set('summary-language', intakeData.language || 'English');
+    }
+
+    // Download intake summary as text file (uses intakeData)
     function downloadIntakeSummary() {
-      const name = document.getElementById('summary-clientName')?.textContent || intakeData.firstName + ' ' + intakeData.lastName;
-      const caseNum = document.getElementById('summary-caseNumber')?.textContent || intakeData.caseNumber;
+      if (document.getElementById('screen-intake-summary').classList.contains('active')) populateIntakeSummary();
+      const name = (intakeData.firstName || '') + ' ' + (intakeData.lastName || '');
+      const caseNum = intakeData.caseNumber || '';
       const text = [
         'CLIENT INTAKE SUMMARY',
         'Reconcile C.A.R.E.',
@@ -3408,19 +3510,23 @@
         'Intake / Case Number: ' + caseNum,
         '',
         '--- Client Information ---',
-        'DOB: 06/15/1985 | Contact: (512) 555-0147',
-        'Attorney: Lauren Mitchell — Mitchell Law Group',
+        'DOB: ' + formatDob(intakeData.dob) + ' | Contact: ' + (intakeData.phone || '') + (intakeData.email ? ' | ' + intakeData.email : ''),
+        'Attorney: ' + (intakeData.attorney || ''),
         '',
         '--- Injury Summary ---',
-        'Type: Motor Vehicle Accident | Date: November 15, 2024',
-        'Pain level: 7/10',
-        'Description: Rear-ended at red light; cervical and lumbar strain.',
+        'Type: ' + (intakeData.injuryType || '') + ' | Date: ' + formatDateStr(intakeData.injuryDate || ''),
+        'Pain level: ' + (intakeData.painLevel || '') + '/10',
+        'Body areas: ' + (intakeData.bodyAreas || ''),
+        'Description: ' + (intakeData.description || ''),
         '',
         '--- Medical History ---',
-        'Pre-existing: Hypertension (controlled). Medications: Lisinopril 10 mg daily; Ibuprofen 400 mg as needed. Allergies: Penicillin. PCP: Dr. Sarah Chen.',
+        'Pre-existing: ' + (intakeData.conditions || '') + '. Medications: ' + (intakeData.medications || '') + '. Allergies: ' + (intakeData.allergies || '') + '. Surgeries: ' + (intakeData.surgeries || '') + '. PCP: ' + (intakeData.pcp || ''),
         '',
         '--- Providers ---',
-        'Austin Spine & Rehab (Chiropractor) 3x/week; Dr. Michael Torres, MD (Pain Management) monthly.',
+        (intakeData.prov1 || '') + '; ' + (intakeData.prov2 || ''),
+        '',
+        '--- Consents ---',
+        (intakeData.consents || '') + ' Preferred language: ' + (intakeData.language || ''),
         '',
         '--- Next Steps ---',
         'Intake submitted. Attorney must attest within 48 hours. RN oversight begins after confirmation. Clients have 7 days to complete intake.',
