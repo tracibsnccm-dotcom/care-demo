@@ -9,24 +9,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* CARE palette */
-      --primary-bg: #ffffff;
+      /* CARE palette – deep navy + rich gold, premium legal/clinical */
+      --navy: #12345b;
+      --navy-dark: #0f2b4a;
+      --navy-light: #1b416f;
       --gold: #b09837;
-      --gold-hover: #9a8230;
-      --gold-light: #c4a84a;
-      --text: #000000;
+      --gold-dark: #9a842d;
+      --gold-light: #c6b15a;
+      --gold-hover: #9a842d;
       --white: #ffffff;
-      /* Neutrals (no blue/gray scheme) */
-      --neutral-50: #fafafa;
-      --neutral-100: #f0f0f0;
-      --neutral-200: #e0e0e0;
-      --neutral-300: #d0d0d0;
-      --neutral-400: #999999;
-      --neutral-500: #666666;
-      --neutral-600: #555555;
-      --neutral-700: #333333;
-      --neutral-800: #222222;
-      --dark: #000000;
+      --off-white: #f8f7f2;
+      --gray-50: #f8f7f2;
+      --gray-100: #f1eee4;
+      --gray-200: #ddd7c5;
+      --gray-300: #c8bea3;
+      --gray-400: #8a8574;
+      --gray-500: #6b6758;
+      --gray-600: #4a473c;
+      --gray-700: #2b2b2b;
+      --gray-800: #1a1a1a;
+      --dark: #111111;
       --success: #10b981;
       --success-light: #d1fae5;
       --warning: #f59e0b;
@@ -35,10 +37,10 @@
       --error-light: #fee2e2;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
       --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-      --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
-      --shadow-xl: 0 20px 50px rgba(0,0,0,0.2);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+      --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
@@ -57,9 +59,10 @@
 
     body {
       font-family: var(--font-body);
-      background: var(--primary-bg);
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 50%, var(--navy) 100%);
+      background-attachment: fixed;
       min-height: 100vh;
-      color: var(--text);
+      color: var(--gray-800);
       line-height: 1.6;
       padding-bottom: 80px;
     }
@@ -82,7 +85,7 @@
 
     /* ==================== DEMO BANNER ==================== */
     .demo-banner {
-      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-hover) 100%);
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
       color: var(--white);
       text-align: center;
       padding: 12px 20px;
@@ -112,9 +115,9 @@
       left: 0;
       right: 0;
       z-index: 999;
-      background: var(--white);
+      background: var(--navy);
       padding: 8px 20px;
-      border-bottom: 1px solid var(--neutral-200);
+      border-bottom: 1px solid var(--navy-dark);
     }
 
     .progress-steps {
@@ -131,10 +134,10 @@
       align-items: center;
       gap: 6px;
       padding: 5px 12px;
-      background: var(--neutral-100);
+      background: rgba(255,255,255,0.12);
       border-radius: 20px;
       font-size: 11px;
-      color: var(--neutral-600);
+      color: var(--gray-100);
       transition: all 0.3s ease;
       white-space: nowrap;
     }
@@ -154,7 +157,7 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: var(--neutral-200);
+      background: rgba(255,255,255,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -186,13 +189,13 @@
     .card {
       background: var(--white);
       border-radius: var(--radius-lg);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
-      border: 1px solid var(--neutral-200);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--gray-200);
       overflow: hidden;
     }
 
     .card-header {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
       color: var(--white);
       padding: 40px 48px;
     }
@@ -212,11 +215,11 @@
     }
 
     .card-header-orange {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
     }
 
     .card-header-teal {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
     }
 
     .card-body {
@@ -250,7 +253,7 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-hover);
+      background: var(--gold-dark);
       box-shadow: var(--shadow-md);
     }
 
@@ -260,18 +263,18 @@
     }
 
     .btn-orange:hover {
-      background: var(--gold-hover);
+      background: var(--gold-dark);
       box-shadow: var(--shadow-md);
     }
 
     .btn-outline {
       background: transparent;
-      border: 2px solid var(--gold);
-      color: var(--gold);
+      border: 2px solid var(--navy);
+      color: var(--navy);
     }
 
     .btn-outline:hover {
-      background: var(--gold);
+      background: var(--navy);
       color: var(--white);
     }
 
@@ -283,18 +286,18 @@
 
     .btn-outline-white:hover {
       background: var(--white);
-      color: var(--gold);
+      color: var(--navy);
     }
 
     .btn-ghost {
       background: transparent;
-      color: var(--neutral-500);
+      color: var(--gray-500);
       padding: 12px 20px;
     }
 
     .btn-ghost:hover {
-      color: var(--gold);
-      background: var(--neutral-100);
+      color: var(--navy);
+      background: var(--gray-100);
     }
 
     .btn-block {
@@ -325,7 +328,7 @@
       display: block;
       font-size: 14px;
       font-weight: 600;
-      color: var(--neutral-700);
+      color: var(--gray-700);
       margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 0.35px;
@@ -334,7 +337,7 @@
     .form-input {
       width: 100%;
       padding: 14px 18px;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       border-radius: 8px;
       font-family: var(--font-body);
       font-size: 16px;
@@ -350,11 +353,11 @@
     }
 
     .form-input::placeholder {
-      color: var(--neutral-400);
+      color: var(--gray-400);
     }
 
     .form-input:disabled {
-      background: var(--neutral-100);
+      background: var(--gray-100);
       cursor: not-allowed;
     }
 
@@ -368,7 +371,7 @@
       width: 100%;
       padding: 14px 18px;
       padding-right: 44px;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       border-radius: 8px;
       font-family: var(--font-body);
       font-size: 16px;
@@ -383,7 +386,7 @@
     .form-textarea {
       width: 100%;
       padding: 14px 18px;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       border-radius: 8px;
       font-family: var(--font-body);
       font-size: 16px;
@@ -403,10 +406,10 @@
       align-items: flex-start;
       gap: 16px;
       padding: 22px 24px;
-      background: var(--neutral-50);
+      background: var(--gray-50);
       border-radius: 8px;
       margin-bottom: 20px;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
@@ -421,13 +424,13 @@
     .form-checkbox-content strong {
       display: block;
       font-size: 15px;
-      color: var(--neutral-800);
+      color: var(--gray-800);
       margin-bottom: 4px;
     }
 
     .form-checkbox-content span {
       font-size: 14px;
-      color: var(--neutral-600);
+      color: var(--gray-600);
       line-height: 1.55;
     }
 
@@ -445,16 +448,16 @@
       align-items: center;
       gap: 8px;
       padding: 10px 18px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       border-radius: 24px;
       font-size: 13px;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.85);
       font-weight: 500;
     }
 
     .wizard-step-indicator.active {
-      background: rgba(255,255,255,0.95);
-      color: var(--gold-hover);
+      background: var(--gold);
+      color: var(--white);
       font-weight: 600;
     }
 
@@ -477,7 +480,8 @@
 
     /* ==================== INFO BOXES ==================== */
     .info-box {
-      background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%);
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
       border-left: 4px solid var(--gold);
       padding: 24px 28px;
       border-radius: 0 8px 8px 0;
@@ -486,7 +490,7 @@
     }
 
     .info-box-orange {
-      background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%);
+      background: var(--off-white);
       border-left-color: var(--gold);
     }
 
@@ -506,12 +510,12 @@
     }
 
     .info-box-orange .info-box-title {
-      color: var(--gold-hover);
+      color: var(--gold-dark);
     }
 
     .info-box-text {
       font-size: 15px;
-      color: var(--neutral-700);
+      color: var(--gray-700);
       line-height: 1.6;
     }
 
@@ -524,16 +528,16 @@
     }
 
     .data-item {
-      background: var(--neutral-50);
+      background: var(--gray-50);
       padding: 18px;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
     }
 
     .data-label {
       font-size: 11px;
       font-weight: 700;
-      color: var(--neutral-500);
+      color: var(--gray-500);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 6px;
@@ -542,7 +546,7 @@
     .data-value {
       font-size: 16px;
       font-weight: 600;
-      color: var(--neutral-800);
+      color: var(--gray-800);
     }
 
     /* ==================== BADGES ==================== */
@@ -581,7 +585,7 @@
     .table-container {
       overflow-x: auto;
       margin-bottom: 28px;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       border-radius: var(--radius-sm);
     }
 
@@ -593,20 +597,20 @@
     th {
       text-align: left;
       padding: 14px 18px;
-      background: var(--neutral-50);
+      background: var(--gray-50);
       font-size: 11px;
       font-weight: 700;
-      color: var(--neutral-500);
+      color: var(--gray-500);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--neutral-200);
+      border-bottom: 1px solid var(--gray-200);
     }
 
     td {
       padding: 16px 18px;
-      border-bottom: 1px solid var(--neutral-100);
+      border-bottom: 1px solid var(--gray-100);
       font-size: 14px;
-      color: var(--neutral-700);
+      color: var(--gray-700);
     }
 
     tr:last-child td {
@@ -614,7 +618,7 @@
     }
 
     tr:hover {
-      background: var(--neutral-50);
+      background: var(--gray-50);
     }
 
     /* ==================== ATTESTATION CARD ==================== */
@@ -641,15 +645,15 @@
     }
 
     .attestation-legal {
-      background: var(--neutral-50);
+      background: var(--gray-50);
       padding: 20px;
       border-radius: var(--radius-sm);
       font-size: 13px;
-      color: var(--neutral-600);
+      color: var(--gray-600);
       margin-bottom: 24px;
       max-height: 160px;
       overflow-y: auto;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       line-height: 1.6;
     }
 
@@ -661,7 +665,7 @@
 
     /* ==================== CARE PLAN SECTIONS ==================== */
     .care-plan-section {
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       border-radius: var(--radius-md);
       margin-bottom: 20px;
       overflow: hidden;
@@ -669,14 +673,14 @@
     }
 
     .care-plan-header {
-      background: var(--neutral-50);
+      background: var(--gray-50);
       padding: 16px 22px;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--navy);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--neutral-200);
+      border-bottom: 1px solid var(--gray-200);
       font-size: 15px;
     }
 
@@ -688,7 +692,7 @@
       display: flex;
       gap: 14px;
       padding: 14px 0;
-      border-bottom: 1px solid var(--neutral-100);
+      border-bottom: 1px solid var(--gray-100);
       align-items: flex-start;
     }
 
@@ -705,7 +709,7 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: var(--gold);
+      background: var(--navy);
       color: var(--white);
       display: flex;
       align-items: center;
@@ -717,13 +721,13 @@
 
     .care-plan-item-content strong {
       display: block;
-      color: var(--neutral-800);
+      color: var(--gray-800);
       margin-bottom: 3px;
     }
 
     .care-plan-item-content span {
       font-size: 13px;
-      color: var(--neutral-500);
+      color: var(--gray-500);
     }
 
     /* ==================== 4Ps WELLNESS GRID ==================== */
@@ -747,8 +751,8 @@
     }
 
     .four-ps-psychological {
-      background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%);
-      border-color: var(--gold);
+      background: var(--off-white);
+      border-color: var(--navy);
     }
 
     .four-ps-psychosocial {
@@ -765,7 +769,7 @@
       font-weight: 700;
       font-size: 14px;
       margin-bottom: 6px;
-      color: var(--neutral-800);
+      color: var(--gray-800);
     }
 
     .four-ps-score {
@@ -782,7 +786,7 @@
 
     .four-ps-label {
       font-size: 11px;
-      color: var(--neutral-500);
+      color: var(--gray-500);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -796,13 +800,13 @@
       font-family: var(--font-display);
       font-size: 26px;
       font-weight: 600;
-      color: var(--gold);
+      color: var(--navy);
       margin-bottom: 6px;
     }
 
     .section-subtitle {
       font-size: 14px;
-      color: var(--neutral-500);
+      color: var(--gray-500);
     }
 
     /* ==================== OVERSIGHT GRID ==================== */
@@ -814,16 +818,16 @@
     }
 
     .oversight-card {
-      background: var(--neutral-50);
+      background: var(--gray-50);
       border-radius: var(--radius-md);
       padding: 28px;
       text-align: center;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       transition: all 0.2s ease;
     }
 
     .oversight-card:hover {
-      border-color: var(--gold);
+      border-color: var(--navy);
       box-shadow: var(--shadow-md);
     }
 
@@ -831,7 +835,7 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
       color: var(--white);
       display: flex;
       align-items: center;
@@ -842,14 +846,14 @@
 
     .oversight-title {
       font-weight: 700;
-      color: var(--gold);
+      color: var(--navy);
       margin-bottom: 8px;
       font-size: 15px;
     }
 
     .oversight-text {
       font-size: 13px;
-      color: var(--neutral-600);
+      color: var(--gray-600);
       line-height: 1.5;
     }
 
@@ -863,7 +867,7 @@
 
     .resource-card {
       background: var(--white);
-      border: 2px solid var(--neutral-200);
+      border: 2px solid var(--gray-200);
       border-radius: var(--radius-md);
       padding: 24px;
       text-align: center;
@@ -882,7 +886,7 @@
     }
 
     .resource-card.coming-soon:hover {
-      border-color: var(--neutral-200);
+      border-color: var(--gray-200);
       box-shadow: none;
     }
 
@@ -893,19 +897,19 @@
 
     .resource-title {
       font-weight: 700;
-      color: var(--neutral-800);
+      color: var(--gray-800);
       margin-bottom: 6px;
     }
 
     .resource-desc {
       font-size: 12px;
-      color: var(--neutral-500);
+      color: var(--gray-500);
     }
 
     .resource-badge {
       display: inline-block;
-      background: var(--neutral-200);
-      color: var(--neutral-600);
+      background: var(--gray-200);
+      color: var(--gray-600);
       padding: 3px 10px;
       border-radius: 10px;
       font-size: 10px;
@@ -928,7 +932,7 @@
       top: 4px;
       bottom: 4px;
       width: 2px;
-      background: var(--neutral-200);
+      background: var(--gray-200);
     }
 
     .timeline-item {
@@ -956,7 +960,7 @@
     .timeline-date {
       font-size: 11px;
       font-weight: 700;
-      color: var(--neutral-500);
+      color: var(--gray-500);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 4px;
@@ -964,12 +968,12 @@
 
     .timeline-content {
       font-size: 14px;
-      color: var(--neutral-700);
+      color: var(--gray-700);
       line-height: 1.5;
     }
 
     .timeline-content strong {
-      color: var(--neutral-800);
+      color: var(--gray-800);
     }
 
     /* ==================== INTRO SCREEN ==================== */
@@ -982,41 +986,41 @@
       font-family: var(--font-display);
       font-size: 52px;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--white);
       margin-bottom: 8px;
       line-height: 1.1;
     }
 
     .intro-logo span {
-      color: var(--gold);
+      color: var(--gold-light);
     }
 
     .intro-tagline {
       font-size: 20px;
-      color: var(--neutral-600);
+      color: var(--gray-100);
       margin-bottom: 40px;
       font-weight: 300;
     }
 
     .intro-message {
-      background: linear-gradient(135deg, #faf8f0 0%, #f5f0e0 100%);
+      background: var(--off-white);
       border-radius: var(--radius-md);
       padding: 32px;
       text-align: left;
       margin-bottom: 40px;
-      border: 1px solid rgba(176, 152, 55, 0.2);
+      border: 1px solid var(--gray-200);
     }
 
     .intro-message h2 {
       font-family: var(--font-display);
       font-size: 24px;
-      color: var(--gold);
+      color: var(--navy);
       margin-bottom: 18px;
     }
 
     .intro-message p {
       font-size: 15px;
-      color: var(--neutral-700);
+      color: var(--gray-700);
       margin-bottom: 14px;
       line-height: 1.6;
     }
@@ -1034,12 +1038,12 @@
     }
 
     .intro-flow-step {
-      background: var(--neutral-50);
+      background: var(--gray-50);
       padding: 18px 24px;
       border-radius: var(--radius-sm);
       text-align: center;
       min-width: 130px;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
     }
 
     .intro-flow-step-number {
@@ -1059,13 +1063,13 @@
     .intro-flow-step-label {
       font-size: 13px;
       font-weight: 600;
-      color: var(--neutral-700);
+      color: var(--gray-700);
     }
 
     .intro-flow-arrow {
       display: flex;
       align-items: center;
-      color: var(--neutral-300);
+      color: var(--gray-300);
       font-size: 24px;
       font-weight: 300;
     }
@@ -1078,7 +1082,7 @@
       min-height: 100vh;
       text-align: center;
       padding: 100px 24px 60px;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
     }
 
     .transition-content {
@@ -1118,7 +1122,7 @@
     .cta-section {
       text-align: center;
       padding: 60px 24px;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
       color: var(--white);
       margin: 0 -24px;
       border-radius: var(--radius-lg);
@@ -1199,7 +1203,7 @@
       width: 70px;
       height: 70px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
       color: var(--white);
       display: flex;
       align-items: center;
@@ -1211,12 +1215,12 @@
     .resume-modal-title {
       font-family: var(--font-display);
       font-size: 28px;
-      color: var(--gold);
+      color: var(--navy);
       margin-bottom: 12px;
     }
 
     .resume-modal-text {
-      color: var(--neutral-600);
+      color: var(--gray-600);
       margin-bottom: 32px;
       font-size: 15px;
       line-height: 1.5;
@@ -1235,7 +1239,7 @@
       left: 0;
       right: 0;
       background: var(--white);
-      border-top: 1px solid var(--neutral-200);
+      border-top: 1px solid var(--gray-200);
       padding: 14px 24px;
       display: flex;
       justify-content: space-between;
@@ -1246,7 +1250,7 @@
 
     .demo-nav-info {
       font-size: 13px;
-      color: var(--neutral-500);
+      color: var(--gray-500);
       font-weight: 500;
     }
 
@@ -1259,13 +1263,13 @@
     .rn-care-plan {
       background: var(--white);
       border-radius: var(--radius-md);
-      border: 2px solid var(--gold);
+      border: 2px solid var(--navy);
       overflow: hidden;
       margin-bottom: 28px;
     }
 
     .rn-care-plan-header {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
       color: var(--white);
       padding: 20px 24px;
       display: flex;
@@ -1290,16 +1294,16 @@
     }
 
     .rn-care-plan-block {
-      background: var(--neutral-50);
+      background: var(--gray-50);
       border-radius: var(--radius-sm);
       padding: 20px;
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
     }
 
     .rn-care-plan-block-title {
       font-size: 12px;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--navy);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 10px;
@@ -1310,7 +1314,7 @@
 
     .rn-care-plan-block-content {
       font-size: 14px;
-      color: var(--neutral-700);
+      color: var(--gray-700);
       line-height: 1.6;
     }
 
@@ -1330,7 +1334,7 @@
     /* ==================== REPORT PREVIEW CARDS ==================== */
     .report-preview {
       background: var(--white);
-      border: 1px solid var(--neutral-200);
+      border: 1px solid var(--gray-200);
       border-radius: var(--radius-md);
       overflow: hidden;
       margin-bottom: 18px;
@@ -1338,23 +1342,23 @@
     }
 
     .report-preview-header {
-      background: var(--neutral-50);
+      background: var(--gray-50);
       padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--neutral-200);
+      border-bottom: 1px solid var(--gray-200);
     }
 
     .report-preview-title {
       font-weight: 700;
-      color: var(--neutral-800);
+      color: var(--gray-800);
       font-size: 14px;
     }
 
     .report-preview-date {
       font-size: 12px;
-      color: var(--neutral-500);
+      color: var(--gray-500);
     }
 
     .report-preview-body {
@@ -1365,7 +1369,7 @@
       display: flex;
       justify-content: space-between;
       padding: 10px 0;
-      border-bottom: 1px solid var(--neutral-100);
+      border-bottom: 1px solid var(--gray-100);
       font-size: 14px;
     }
 
@@ -1374,12 +1378,12 @@
     }
 
     .report-preview-stat-label {
-      color: var(--neutral-600);
+      color: var(--gray-600);
     }
 
     .report-preview-stat-value {
       font-weight: 600;
-      color: var(--neutral-800);
+      color: var(--gray-800);
     }
 
     /* ==================== RESPONSIVE ==================== */
@@ -1455,7 +1459,7 @@
     .mt-6 { margin-top: 24px !important; }
     .mt-8 { margin-top: 32px !important; }
     .text-center { text-align: center !important; }
-    .text-muted { color: var(--neutral-500) !important; }
+    .text-muted { color: var(--gray-500) !important; }
     .text-sm { font-size: 14px !important; }
     .text-xs { font-size: 12px !important; }
     .font-bold { font-weight: 700 !important; }
@@ -1572,7 +1576,7 @@
           </button>
         </div>
       </div>
-      <p class="text-center text-sm mt-6" style="color: var(--neutral-600);">
+      <p class="text-center text-sm mt-6" style="color: var(--gray-100);">
         © Reconcile Care Management Services
       </p>
     </div>
@@ -1604,7 +1608,7 @@
 
           <button class="btn btn-primary btn-block mb-4" disabled style="opacity: 0.4;">Sign In (Disabled for Demo)</button>
           
-          <div style="text-align: center; color: var(--neutral-400); margin-bottom: 16px; font-size: 13px;">— or —</div>
+          <div style="text-align: center; color: var(--gray-400); margin-bottom: 16px; font-size: 13px;">— or —</div>
           
           <button class="btn btn-orange btn-block btn-lg" onclick="goToScreen('screen-intake-1')">
             Continue as New Client →
@@ -1755,22 +1759,22 @@
           </div>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 24px;">
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--neutral-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--neutral-200);">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
               <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Neck</span>
             </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--neutral-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--neutral-200);">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
               <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Upper Back</span>
             </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--neutral-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--neutral-200);">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
               <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Lower Back</span>
             </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--neutral-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--neutral-200);">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
               <input type="checkbox" checked style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Head</span>
             </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--neutral-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--neutral-200);">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
               <input type="checkbox" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Left Shoulder</span>
             </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--neutral-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--neutral-200);">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--gray-50); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--gray-200);">
               <input type="checkbox" style="accent-color: var(--gold); width: 18px; height: 18px;"> <span style="font-size: 14px;">Right Shoulder</span>
             </label>
           </div>
@@ -1885,7 +1889,7 @@
             <div class="info-box-text">Understanding your care team allows us to coordinate documentation and ensure nothing falls through the cracks during your recovery.</div>
           </div>
 
-          <div style="border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--neutral-50);">
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--gray-50);">
             <div style="font-weight: 700; color: var(--gold); margin-bottom: 16px; font-size: 14px;">Provider #1</div>
             <div class="form-row">
               <div class="form-group mb-2">
@@ -1916,7 +1920,7 @@
             </div>
           </div>
 
-          <div style="border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--neutral-50);">
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 24px; margin-bottom: 18px; background: var(--gray-50);">
             <div style="font-weight: 700; color: var(--gold); margin-bottom: 16px; font-size: 14px;">Provider #2</div>
             <div class="form-row">
               <div class="form-group mb-2">
@@ -2084,29 +2088,29 @@
         <div class="card-body">
 
           <!-- Primary Case Card -->
-          <div style="background: var(--neutral-50); border: 2px solid var(--gold); border-radius: 10px; padding: 24px 28px; margin-bottom: 28px;">
+          <div style="background: var(--gray-50); border: 2px solid var(--gold); border-radius: 10px; padding: 24px 28px; margin-bottom: 28px;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 18px;">
               <div>
-                <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Primary Demo Case</div>
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Primary Demo Case</div>
                 <div style="font-size: 26px; font-weight: 700; color: var(--gold);">Maria Santos</div>
               </div>
               <span class="badge badge-pending" style="font-size: 13px; padding: 8px 18px;">Awaiting Attorney Confirmation</span>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Client Name</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--neutral-800);">Maria Santos</div>
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Client Name</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800);">Maria Santos</div>
               </div>
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Case Number</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--neutral-800); font-family: monospace;">MS04-260115-01F</div>
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Case Number</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800); font-family: monospace;">MS04-260115-01F</div>
               </div>
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Incident Type</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--neutral-800);">Motor Vehicle Accident</div>
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Incident Type</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--gray-800);">Motor Vehicle Accident</div>
               </div>
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 6px; padding: 14px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Current Status</div>
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Current Status</div>
                 <div style="font-size: 14px; font-weight: 600; color: var(--warning);">Intake Submitted – Awaiting Attorney Confirmation</div>
               </div>
             </div>
@@ -2118,7 +2122,7 @@
           <!-- ============================================ -->
           <!-- SECTION 1: CASE SNAPSHOT (Key Metrics) -->
           <!-- ============================================ -->
-          <div style="background: linear-gradient(135deg, var(--gold) 0%, #1e2d4d 100%); border-radius: 12px; padding: 36px; margin-bottom: 32px; color: var(--white); box-shadow: 0 8px 32px rgba(30,58,138,0.25);">
+          <div style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%); border-radius: 12px; padding: 36px; margin-bottom: 32px; color: var(--white); box-shadow: 0 8px 32px rgba(18,52,91,0.35);">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px;">
               <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.6; font-weight: 700;">Case Snapshot — Maria Santos</div>
               <div style="font-size: 11px; opacity: 0.5; letter-spacing: 0.5px;">All scores: 1 (critical) → 5 (optimal)</div>
@@ -2212,7 +2216,7 @@
             
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
               <!-- Provider Sequencing Concern -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--warning);">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--warning);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                   <div style="display: flex; align-items: center; gap: 8px;">
                     <span style="font-size: 18px;">⚠️</span>
@@ -2220,11 +2224,11 @@
                   </div>
                   <span style="font-size: 11px; font-weight: 700; background: var(--warning-light); color: #92400e; padding: 3px 10px; border-radius: 12px;">Action Needed</span>
                 </div>
-                <div style="font-size: 14px; color: var(--neutral-700); line-height: 1.6;">Initial provider sequence may affect documentation strength. Neurologist referral pending 3+ weeks.</div>
+                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">Initial provider sequence may affect documentation strength. Neurologist referral pending 3+ weeks.</div>
               </div>
 
               <!-- Treatment Gap Indicator -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--error);">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--error);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                   <div style="display: flex; align-items: center; gap: 8px;">
                     <span style="font-size: 18px;">🔴</span>
@@ -2232,11 +2236,11 @@
                   </div>
                   <span style="font-size: 11px; font-weight: 700; background: var(--error-light); color: #991b1b; padding: 3px 10px; border-radius: 12px;">Flagged</span>
                 </div>
-                <div style="font-size: 14px; color: var(--neutral-700); line-height: 1.6;">Follow-up care delay detected. 12-day gap between physical therapy sessions.</div>
+                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">Follow-up care delay detected. 12-day gap between physical therapy sessions.</div>
               </div>
 
               <!-- Barrier to Care Indicators -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--gold);">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px 24px; border-left: 4px solid var(--gold);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                   <div style="display: flex; align-items: center; gap: 8px;">
                     <span style="font-size: 18px;">🚧</span>
@@ -2244,7 +2248,7 @@
                   </div>
                   <span style="font-size: 11px; font-weight: 700; background: #ccfbf1; color: #0f766e; padding: 3px 10px; border-radius: 12px;">3 Active</span>
                 </div>
-                <div style="font-size: 14px; color: var(--neutral-700); line-height: 1.6;">
+                <div style="font-size: 14px; color: var(--gray-700); line-height: 1.6;">
                   <div style="margin-bottom: 5px;">• Transportation limitations to appointments</div>
                   <div style="margin-bottom: 5px;">• Work schedule conflicts with therapy</div>
                   <div>• Financial strain affecting treatment access</div>
@@ -2252,7 +2256,7 @@
               </div>
 
               <!-- RN Clinical Oversight Status -->
-              <div style="background: linear-gradient(135deg, var(--gold) 0%, #1e6070 100%); border-radius: 8px; padding: 22px 24px; color: var(--white);">
+              <div style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%); border-radius: 8px; padding: 22px 24px; color: var(--white);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                   <div style="display: flex; align-items: center; gap: 8px;">
                     <span style="font-size: 18px;">⚕️</span>
@@ -2274,56 +2278,56 @@
             
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
               <!-- RN Care Plan -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
                 <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
                   <div style="font-size: 15px; font-weight: 700;">RN Care Plan</div>
                 </div>
                 <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--neutral-600); margin-bottom: 12px;">Comprehensive clinical care plan with goals, interventions, and recommendations.</div>
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Comprehensive clinical care plan with goals, interventions, and recommendations.</div>
                   <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
                 </div>
               </div>
 
               <!-- Functional Capacity Index Report -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
                 <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
                   <div style="font-size: 15px; font-weight: 700;">Functional Capacity Index Report</div>
                 </div>
                 <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--neutral-600); margin-bottom: 12px;">Detailed assessment of functional limitations and daily living impact.</div>
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Detailed assessment of functional limitations and daily living impact.</div>
                   <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
                 </div>
               </div>
 
               <!-- Clinical Recovery Documentation -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
                 <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
                   <div style="font-size: 15px; font-weight: 700;">Clinical Recovery Documentation</div>
                 </div>
                 <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--neutral-600); margin-bottom: 12px;">Ongoing recovery progress, treatment compliance, and clinical observations.</div>
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Ongoing recovery progress, treatment compliance, and clinical observations.</div>
                   <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
                 </div>
               </div>
 
               <!-- Provider Sequencing Insight -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
                 <div style="background: var(--gold); padding: 16px 20px; color: var(--white);">
                   <div style="font-size: 15px; font-weight: 700;">Provider Sequencing Insight</div>
                 </div>
                 <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--neutral-600); margin-bottom: 12px;">Analysis of treatment timeline and provider order for documentation integrity.</div>
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Analysis of treatment timeline and provider order for documentation integrity.</div>
                   <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Document →</div>
                 </div>
               </div>
 
               <!-- Attorney Clinical Guidance Resources -->
-              <div style="background: var(--white); border: 1px solid var(--neutral-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+              <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
                 <div style="background: var(--warning); padding: 16px 20px; color: var(--gold);">
                   <div style="font-size: 15px; font-weight: 700;">Attorney Clinical Guidance</div>
                 </div>
                 <div style="padding: 20px;">
-                  <div style="font-size: 14px; color: var(--neutral-600); margin-bottom: 12px;">Resources and guidance for understanding clinical documentation in injury cases.</div>
+                  <div style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">Resources and guidance for understanding clinical documentation in injury cases.</div>
                   <div style="font-size: 13px; color: var(--gold); font-weight: 600;">View Resources →</div>
                 </div>
               </div>
@@ -2442,34 +2446,34 @@
           </div>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 36px;">
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V1:</strong> Verify Identity
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V2:</strong> Validate Injury
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V3:</strong> Verify Providers
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V4:</strong> Validate Treatment
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V5:</strong> Verify Compliance
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V6:</strong> Validate Progress
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V7:</strong> Verify Documentation
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V8:</strong> Validate Barriers
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V9:</strong> Verify Communication
             </div>
-            <div style="background: var(--neutral-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--neutral-200);">
+            <div style="background: var(--gray-50); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">V10:</strong> Validate Outcomes
             </div>
           </div>
@@ -2831,12 +2835,12 @@
             <div class="section-title">Frequently Asked Questions</div>
           </div>
 
-          <div style="border: 1px solid var(--neutral-200); border-radius: var(--radius-md); overflow: hidden;">
-            <div style="padding: 18px 22px; border-bottom: 1px solid var(--neutral-200);">
+          <div style="border: 1px solid var(--gray-200); border-radius: var(--radius-md); overflow: hidden;">
+            <div style="padding: 18px 22px; border-bottom: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">How quickly are care plans generated after intake?</strong>
               <div class="text-sm text-muted mt-2">Initial care plans are typically generated within 24-48 hours of attorney confirmation. Rush processing available for urgent cases.</div>
             </div>
-            <div style="padding: 18px 22px; border-bottom: 1px solid var(--neutral-200);">
+            <div style="padding: 18px 22px; border-bottom: 1px solid var(--gray-200);">
               <strong style="color: var(--gold);">What if my client doesn't complete diary entries?</strong>
               <div class="text-sm text-muted mt-2">After 28 days of inactivity, the case enters "hibernation." You'll be notified, and the client receives reminders. Cases can be reactivated anytime.</div>
             </div>
@@ -2872,7 +2876,7 @@
       <div class="cta-card">
         <div class="text-center mb-8">
           <div class="intro-logo" style="font-size: 38px;">Reconcile <span>C.A.R.E.</span></div>
-          <div style="color: var(--neutral-600); margin-top: 8px;">Clinical Oversight & Recovery Evidence</div>
+          <div style="color: var(--gray-600); margin-top: 8px;">Clinical Oversight & Recovery Evidence</div>
         </div>
 
         <div class="data-grid mb-8">
@@ -2910,7 +2914,7 @@
         </div>
       </div>
 
-      <p class="text-center text-sm mt-8" style="color: var(--neutral-600);">
+      <p class="text-center text-sm mt-8" style="color: var(--gray-100);">
         © Reconcile Care Management Services<br>
         <span style="font-size: 11px;">4Ps of Wellness™ | 10-Vs of Care Management™ | 7 Rights of Injury Management™</span>
       </p>
