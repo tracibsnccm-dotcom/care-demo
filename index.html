@@ -2356,6 +2356,22 @@
       padding-top: 12px;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
+
+    .guidance-overlay.intro-notice {
+      max-width: 460px;
+    }
+
+    .guidance-overlay.intro-notice .guidance-overlay-step {
+      display: none;
+    }
+
+    .guidance-overlay-text p {
+      margin: 0 0 12px 0;
+    }
+
+    .guidance-overlay-text p:last-child {
+      margin-bottom: 0;
+    }
   </style>
 </head>
 <body>
@@ -4105,8 +4121,9 @@
       }
     }
 
-    // Timed guidance overlays (screenId -> { heading, text })
+    // Timed guidance overlays (screenId -> { heading, text, step })
     var guidanceTimeoutId = null;
+    var INTRO_NOTICE_KEY = 'care_demo_intro_notice_shown';
     var guidanceMessages = {
       'screen-intro': { step: 1, heading: 'Demo Overview', text: 'This demonstration shows how Reconcile C.A.R.E. organizes client recovery information, identifies clinical risks, and supports documentation integrity throughout the life of an injury case.' },
       'screen-intake-1': { step: 2, heading: 'Client Intake', text: 'The intake captures structured recovery information across physical, psychological, psychosocial, and professional domains to establish a clinically informed starting point for the case.' },
@@ -4115,6 +4132,33 @@
       'screen-documentation': { step: 5, heading: 'Documentation Integrity', text: 'Structured clinical documentation connects symptoms, functional limitations, treatment patterns, and recovery progression in a defensible format.' },
       'screen-cta': { step: 6, heading: 'Next Steps', text: 'You can download the Clinical Oversight & Documentation Guidance or continue evaluating cases using the Clinical Sequencing Auditor and Functional Capacity Index.' }
     };
+
+    function showIntroNotice() {
+      if (guidanceTimeoutId) {
+        clearTimeout(guidanceTimeoutId);
+        guidanceTimeoutId = null;
+      }
+      var el = document.getElementById('guidanceOverlay');
+      var headingEl = document.getElementById('guidanceOverlayHeading');
+      var textEl = document.getElementById('guidanceOverlayText');
+      var stepEl = document.getElementById('guidanceOverlayStep');
+      if (!el || !headingEl || !textEl) return;
+      el.classList.remove('visible');
+      el.classList.add('intro-notice');
+      headingEl.textContent = 'Demo Environment Notice';
+      textEl.innerHTML = '<p>This demonstration provides a guided walkthrough of the C.A.R.E. workflow.</p><p>Certain proprietary clinical methodologies and internal RN operational tools are not displayed in the public demonstration environment.</p><p>The purpose of this demo is to illustrate how clinical oversight integrates with attorney case strategy, client intake, and documentation integrity.</p>';
+      if (stepEl) stepEl.style.display = 'none';
+      requestAnimationFrame(function() {
+        el.classList.add('visible');
+      });
+      sessionStorage.setItem(INTRO_NOTICE_KEY, '1');
+      guidanceTimeoutId = setTimeout(function() {
+        el.classList.remove('visible');
+        el.classList.remove('intro-notice');
+        if (stepEl) stepEl.style.display = '';
+        guidanceTimeoutId = null;
+      }, 10400);
+    }
 
     function showGuidanceForScreen(screenId) {
       if (guidanceTimeoutId) {
@@ -4126,6 +4170,11 @@
       var textEl = document.getElementById('guidanceOverlayText');
       var stepEl = document.getElementById('guidanceOverlayStep');
       if (!el || !headingEl || !textEl) return;
+      if (screenId === 'screen-intro' && !sessionStorage.getItem(INTRO_NOTICE_KEY)) {
+        showIntroNotice();
+        return;
+      }
+      el.classList.remove('intro-notice');
       var msg = guidanceMessages[screenId];
       if (!msg) {
         el.classList.remove('visible');
@@ -4133,7 +4182,7 @@
       }
       headingEl.textContent = msg.heading;
       textEl.textContent = msg.text;
-      if (stepEl) stepEl.textContent = 'Step ' + msg.step + ' of 6';
+      if (stepEl) { stepEl.style.display = ''; stepEl.textContent = 'Step ' + msg.step + ' of 6'; }
       el.classList.remove('visible');
       requestAnimationFrame(function() {
         el.classList.add('visible');
