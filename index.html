@@ -2372,9 +2372,123 @@
     .guidance-overlay-text p:last-child {
       margin-bottom: 0;
     }
+
+    /* ==================== DEMO GATE ==================== */
+    .care-demo-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 50%, var(--navy) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .care-demo-gate.gate-passed {
+      display: none !important;
+    }
+    .care-demo-gate-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--gray-300);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+    }
+    .care-demo-gate-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      color: var(--white);
+      padding: 32px 36px;
+    }
+    .care-demo-gate-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: var(--weight-semibold);
+      margin-bottom: 6px;
+      line-height: var(--leading-tight);
+    }
+    .care-demo-gate-title span { color: var(--gold-light); }
+    .care-demo-gate-subtitle {
+      font-size: var(--text-body);
+      opacity: 0.95;
+      font-weight: var(--weight-regular);
+    }
+    .care-demo-gate-form {
+      padding: 32px 36px 36px;
+    }
+    .care-demo-gate-form .form-group { margin-bottom: 20px; }
+    .care-demo-gate-form .form-group:last-of-type { margin-bottom: 0; }
+    .care-demo-gate-error {
+      font-size: 13px;
+      color: var(--error);
+      margin-top: 8px;
+      min-height: 20px;
+    }
+    .care-demo-gate-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: var(--text-body);
+      color: var(--gray-700);
+      cursor: pointer;
+    }
+    .care-demo-gate-checkbox {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .care-demo-gate-actions {
+      margin-top: 28px;
+    }
+    .care-demo-gate-actions .btn { width: 100%; }
   </style>
 </head>
 <body>
+
+  <!-- ==================== DEMO GATE (before demo access) ==================== -->
+  <div class="care-demo-gate" id="careDemoGate" aria-label="Demo access form">
+    <div class="care-demo-gate-card">
+      <div class="care-demo-gate-header">
+        <h1 class="care-demo-gate-title">Reconcile <span>C.A.R.E.</span></h1>
+        <p class="care-demo-gate-subtitle">Attorney Demonstration — Request Access</p>
+      </div>
+      <form class="care-demo-gate-form" id="careDemoGateForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="gate-fullName">Full Name</label>
+          <input type="text" class="form-input" id="gate-fullName" name="fullName" required placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="gate-firmName">Law Firm Name</label>
+          <input type="text" class="form-input" id="gate-firmName" name="firmName" required placeholder="Firm or company name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="gate-email">Professional Email</label>
+          <input type="email" class="form-input" id="gate-email" name="email" required placeholder="you@firm.com">
+          <div class="care-demo-gate-error" id="gate-email-error" role="alert" aria-live="polite"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="gate-role">Role / Position</label>
+          <input type="text" class="form-input" id="gate-role" name="role" required placeholder="e.g. Attorney, Partner">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="gate-phone">Phone Number</label>
+          <input type="tel" class="form-input" id="gate-phone" name="phone" required placeholder="Phone number">
+        </div>
+        <div class="form-group">
+          <label class="care-demo-gate-checkbox-label">
+            <input type="checkbox" class="care-demo-gate-checkbox" id="gate-agreement" name="agreement" required>
+            <span>I agree to the terms for accessing this demonstration.</span>
+          </label>
+        </div>
+        <div class="care-demo-gate-actions">
+          <button type="submit" class="btn btn-primary btn-lg">Continue to Demo</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- ==================== DEMO BANNER ==================== -->
   <div class="demo-banner">
@@ -3996,6 +4110,38 @@
 
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
+    // Demo gate: session flag and blocked personal email domains
+    var CARE_DEMO_GATE_KEY = 'careDemoGatePassed';
+    var BLOCKED_EMAIL_DOMAINS = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'aol.com', 'proton.me', 'protonmail.com', 'mail.com', 'gmx.com', 'msn.com', 'live.com', 'me.com', 'att.net', 'comcast.net', 'verizon.net', 'sbcglobal.net', 'ymail.com'];
+
+    function isBlockedEmailDomain(email) {
+      if (!email || typeof email !== 'string') return true;
+      var parts = email.trim().toLowerCase().split('@');
+      if (parts.length !== 2 || !parts[1]) return true;
+      var domain = parts[1];
+      return BLOCKED_EMAIL_DOMAINS.indexOf(domain) !== -1;
+    }
+
+    function handleGateSubmit(e) {
+      e.preventDefault();
+      var form = document.getElementById('careDemoGateForm');
+      var emailInput = document.getElementById('gate-email');
+      var errorEl = document.getElementById('gate-email-error');
+      errorEl.textContent = '';
+      var email = (emailInput && emailInput.value) ? emailInput.value.trim() : '';
+      if (isBlockedEmailDomain(email)) {
+        errorEl.textContent = 'Access is available only to verified professional or firm email addresses. Please enter your law firm or company email to continue.';
+        if (emailInput) emailInput.focus();
+        return;
+      }
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      sessionStorage.setItem(CARE_DEMO_GATE_KEY, '1');
+      document.getElementById('careDemoGate').classList.add('gate-passed');
+    }
+
     // Screen configuration with step mapping
     const screens = [
       { id: 'screen-intro', step: 1, label: 'Introduction' },
@@ -4040,6 +4186,17 @@
 
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
+      var gate = document.getElementById('careDemoGate');
+      var gateForm = document.getElementById('careDemoGateForm');
+      if (gateForm) gateForm.addEventListener('submit', handleGateSubmit);
+      var gateEmailInput = document.getElementById('gate-email');
+      var gateEmailError = document.getElementById('gate-email-error');
+      if (gateEmailInput && gateEmailError) {
+        gateEmailInput.addEventListener('input', function() { gateEmailError.textContent = ''; });
+      }
+      if (sessionStorage.getItem(CARE_DEMO_GATE_KEY) && gate) {
+        gate.classList.add('gate-passed');
+      }
       checkAuthorizations();
       checkForSavedProgress();
     });
